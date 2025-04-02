@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "chmod +x node_modules/.bin/vite && npx vite build",
+    "prebuild": "chmod +x node_modules/.bin/vite",
+    "build": "npx vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
