@@ -1,0 +1,186 @@
+/* Contenedor general */
+.generalContainer {
+  max-width: 100%;
+  width: 100%;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+/* Form Container */
+.formContainer {
+  background: linear-gradient(135deg, #ffffff 0%, #e8fafd 100%);
+  border-radius: 8px;
+  padding: 20px 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto;
+}
+
+/* Título */
+.formTitle {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Estructura general del formulario */
+.formContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Cada fila (ej. 4 inputs en la primera fila, 3 en la segunda, etc.) */
+.formRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+/* Campo individual */
+.formField {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 100px; /* para que no se encoja demasiado */
+}
+
+/* Etiquetas arriba del input */
+.fieldLabel {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+/* Inputs */
+.formInput {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.formInput:hover {
+  border-color: #1caee7;
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: #38b2ac;
+  box-shadow: 0 0 0 2px rgba(56, 178, 172, 0.2);
+}
+
+/* Sección de turnos */
+.turnoSection {
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 15px;
+  border: 1px solid #e0f2f1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.turnoHeaderRow,
+.formRowLabels {
+  display: flex;
+  gap: 10px;
+}
+
+.turnoHeader {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+/* Columna de acciones */
+.actionColumn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 80px;
+}
+
+/* Botones */
+.deleteButton {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+.deleteButton:hover {
+  background: #c0392b;
+}
+.addButton {
+  background: #38b2ac;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+.addButton:hover {
+  background: #2f928e;
+}
+
+/* Footer del formulario */
+.formFooter {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.submitButton {
+  background: #1caee7;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.submitButton:hover {
+  background: #168cb8;
+}
+
+/* Responsivo: 
+   En pantallas pequeñas, 2 columnas por fila 
+   (en lugar de 3 o 4 que veas en desktop).
+   Así evitas hacer zoom manual. 
+*/
+@media (max-width: 600px) {
+  .formRow {
+    flex-wrap: wrap;
+  }
+  /* Cada campo ocupa 50% del ancho */
+  .formField {
+    flex: 1 1 calc(50% - 10px);
+  }
+  /* Si quieres forzar 1 columna, cambia a 100% en lugar de 50%. */
+  
+  .actionColumn {
+    flex: 1 1 calc(50% - 10px);
+    display: flex;
+    justify-content: flex-end;
+  }
+}

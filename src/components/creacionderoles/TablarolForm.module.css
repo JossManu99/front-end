@@ -1,0 +1,261 @@
+/* Contenedor principal (fondo azul claro) */
+.mainContainer {
+  max-width: 100%;
+  width: 100%;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.formContainer {
+  max-width: 90%;
+  margin: 0.5rem auto;
+  background: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Título del formulario */
+.formTitle {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+/* Información de fecha */
+.dateInfo {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #666666;
+  margin-bottom: 0.5rem;
+}
+
+/* Grupo de formulario */
+.formGroup {
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  margin-bottom: 0.2rem;
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: #003366;
+}
+
+/* Select general */
+.select {
+  padding: 0.3rem;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Contenedor de información del cambio */
+.cambioInfo {
+  margin-bottom: 0.5rem;
+  background-color: #e0f3ff; /* Azul muy suave */
+  border: 1px solid #99ddff;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+/* Filas de información del cambio */
+.infoRow {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.infoItem {
+  margin: 0.2rem 0.4rem;
+  font-size: 0.8rem;
+  color: #004d80;
+}
+
+.infoItem label {
+  font-weight: 600;
+  margin-right: 0.2rem;
+}
+
+/* Contenedor de cada ruta */
+.routeContainer {
+  margin-bottom: 0.5rem;
+  background-color: #f9fcff;
+  border: 1px solid #cce7ff;
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+/* Título de cada ruta */
+.routeTitle {
+  margin-bottom: 0.3rem;
+  color: #003366;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Contenedor de la tabla */
+.tableContainer {
+  overflow-x: auto;
+  margin-bottom: 0.2rem;
+  /* Si prefieres centrar la tabla en pantallas grandes, 
+     podrías mantener el display:flex; justify-content:center; 
+     pero en móviles puede “encogerla” demasiado. 
+     Lo retiramos para que sea 100% fluida. */
+}
+
+/* Tabla en sí */
+.table {
+  width: 100%; /* Ajuste clave para pantallas pequeñas */
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.6rem;
+  margin-top: 0.2rem;
+  background-color: #fff;
+}
+
+/* Encabezados y celdas de la tabla */
+.table th,
+.table td {
+  font-size: 0.65rem;
+  line-height: 1.2;
+  padding: 0.2rem 0.1rem;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  color: #333;
+}
+
+/* Color de encabezado */
+.table th {
+  background-color: #2c6e91;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* Filas pares con color diferente */
+.table tr:nth-child(even) {
+  background-color: #f2f9ff;
+}
+
+/* Select para autobuses/operadores */
+.selectSmall {
+  width: 60px;
+  padding: 0.05rem;
+  font-size: 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Inputs pequeños */
+.inputSmall {
+  width: 60px;
+  padding: 0.05rem;
+  font-size: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Botón pequeño (Reset, Eliminar) */
+.smallButton {
+  background-color: #e53935;
+  color: white;
+  font-size: 0.55rem;
+  padding: 0.1rem 0.3rem;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  margin: 0.1rem auto;
+  display: block;
+  width: 45px;
+  text-align: center;
+}
+
+.smallButton:hover {
+  background-color: #c62828;
+}
+
+/* Contenedor para centrar los botones (Guardar, Agregar Fila, etc.) */
+.buttonsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;        /* Espacio horizontal entre botones */
+  margin-top: 1rem;
+}
+
+/* Botón de guardar / agregar (cuadrado 2cm x 2cm) */
+.submitButton {
+  display: flex;            /* Para alinear texto internamente */
+  justify-content: center;
+  align-items: center;
+  width: 2cm;
+  height: 1cm;
+  background-color: #007bff; /* Azul */
+  color: #fff;               /* Texto blanco */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.6rem;         /* Texto pequeño */
+  text-align: center;
+  line-height: 1;            /* Altura de línea para que no se descuadre */
+  font-weight: 500;
+}
+
+.submitButton:hover {
+  background-color: #0069d9;
+}
+
+/* Contenedor de extras */
+.extrasContainer {
+  margin-top: 0.5rem;
+  border: 1px solid #cce7ff;
+  border-radius: 6px;
+  background-color: #f9fcff;
+  padding: 0.5rem;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .formContainer {
+    padding: 0.3rem;
+  }
+
+  .table {
+    font-size: 0.55rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.05rem 0.1rem;
+  }
+
+  .selectSmall,
+  .inputSmall {
+    width: 45px;
+    font-size: 0.55rem;
+  }
+
+  .smallButton {
+    font-size: 0.5rem;
+    padding: 0.05rem 0.1rem;
+    width: 40px;
+  }
+
+  .submitButton {
+    width: 60px;       /* Usa píxeles en móvil para no desajustar demasiado */
+    height: 60px;      
+    font-size: 0.6rem;
+    margin: 0.3rem auto;
+  }
+}

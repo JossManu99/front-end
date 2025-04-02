@@ -1,0 +1,240 @@
+/* Contenedor principal */
+.mainContainer {
+  max-width: 100%;
+  width: 100%;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+/* Contenedor extra (por si necesitas un layout adicional) */
+.Container {
+  width: 100%;
+  max-width: 1200px; /* ancho máximo del contenido */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto; /* Centra horizontalmente el contenedor */
+}
+
+/* Contenedor del formulario */
+.formContainer {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px; /* ancho máximo del formulario */
+  margin: 0 auto; /* Para centrar en caso de que .Container no sea flex */
+}
+
+/* Encabezado del formulario */
+.formHeader {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.formHeader h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+.formHeader p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Fila de formulario (para agrupar campos) */
+.formRow {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* Grupo de formulario */
+.formGroup {
+  flex: 1;
+  min-width: 250px;
+  margin-bottom: 15px;
+}
+
+.formGroup label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.formControl {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+/* Encabezado de la recarga */
+.recargaHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.litrosRestantes {
+  font-weight: bold;
+  color: #d9534f;
+}
+
+/* Tabla */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table th, .table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.table th {
+  background: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+/* Botones */
+.addButton,
+.removeButton,
+.submitButton {
+  display: inline-block;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.addButton {
+  background: #28a745;
+  color: white;
+  margin-top: 10px;
+}
+
+.removeButton {
+  background: #dc3545;
+  color: white;
+}
+
+.submitButton {
+  background: #007bff;
+  color: white;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.addButton:hover {
+  background: #218838;
+}
+
+.removeButton:hover {
+  background: #c82333;
+}
+
+.submitButton:hover {
+  background: #0056b3;
+}
+
+/* Contenedor del gráfico */
+.chartContainer {
+  margin-top: 20px;
+  text-align: center;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+/* =========================
+   MEDIA QUERIES RESPONSIVE
+   ========================= */
+
+/* Para tablets y dispositivos móviles medianos (max-width: 768px) */
+@media (max-width: 768px) {
+  /* Ajuste en el contenedor del formulario para reducir padding */
+  .formContainer {
+    padding: 20px; /* Menor padding en pantallas medianas */
+  }
+  
+  /* La fila del formulario se apila verticalmente */
+  .formRow {
+    flex-direction: column;
+    gap: 10px; /* Menor separación */
+  }
+  
+  /* Reducir tamaño de fuente en encabezados */
+  .formHeader h2 {
+    font-size: 20px;
+  }
+  
+  /* Reducir el ancho mínimo de formGroup */
+  .formGroup {
+    min-width: 200px;
+  }
+}
+
+/* Para dispositivos móviles pequeños (max-width: 480px) */
+@media (max-width: 480px) {
+  /* Ajuste en el contenedor extra para reducir el padding global */
+  .Container {
+    padding: 10px; /* Menor padding en contenedor extra */
+  }
+  
+  /* Ajuste en el contenedor del formulario para ocupar todo el ancho y reducir padding */
+  .formContainer {
+    padding: 15px; /* Menor padding en formularios */
+    max-width: 100%; /* El formulario ocupa todo el ancho disponible */
+  }
+  
+  /* Reducir tamaño de fuente en encabezados */
+  .formHeader h2 {
+    font-size: 18px; /* Fuente un poco más pequeña */
+  }
+  
+  .formHeader p {
+    font-size: 12px;
+  }
+  
+  /* Reducir padding y tamaño de fuente en los campos de formulario */
+  .formControl {
+    padding: 8px; /* Menor padding */
+    font-size: 14px; /* Menor tamaño de fuente */
+  }
+  
+  /* Ajuste en la tabla para mejorar visualización en móviles */
+  .table th, .table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+  
+  /* Botones más pequeños */
+  .addButton,
+  .removeButton,
+  .submitButton {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  
+  /* Ajuste en el contenedor del gráfico */
+  .chartContainer {
+    padding: 10px;
+  }
+}

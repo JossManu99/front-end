@@ -1,0 +1,116 @@
+.operador-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegúrate de que el modal esté encima del resto del contenido */
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-height: 80%;
+  overflow: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column; /* Para mostrar los elementos en columna */
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #aaa;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+.modal-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.operador-details {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los detalles se acomoden si es necesario */
+  gap: 20px; /* Espacio entre los elementos */
+  justify-content: space-between;
+}
+
+.operador-photo {
+  flex: 1 1 150px; /* Asegura que la foto no ocupe más de lo necesario */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.photo-img {
+  width: 150px; /* Ancho fijo */
+  height: 150px; /* Alto fijo para que sea cuadrada */
+  object-fit: cover; /* Ajusta la imagen al contenedor sin deformarse */
+  border-radius: 50%; /* Hace que la imagen sea circular */
+  border: 2px solid #ddd; /* Añade un borde decorativo */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Añade un pequeño sombreado */
+}
+
+.details-section {
+  flex: 1 1 200px; /* Establece un tamaño mínimo para las secciones */
+}
+
+.details-section p {
+  margin: 5px 0; /* Agrega margen entre los párrafos */
+}
+
+.details-section a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.details-section a:hover {
+  text-decoration: underline;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.update-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.update-btn:hover {
+  background-color: #0056b3;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #a71d2a;
+}

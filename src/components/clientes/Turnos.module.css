@@ -1,0 +1,245 @@
+/* Estilos generales */
+.turnosContainer {
+  padding: 20px 0 20px 20px;
+  background-color: #f5f5f5;
+  width: 100%;
+  box-sizing: border-box;
+  height: 100vh; /* Garantiza que el contenedor ocupe todo el alto de la ventana */
+  scrollbar-width: y;
+}
+
+.turnosWrapper {
+  margin: 0 20px 30px 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-height: 400px;
+  max-width: 1000px;
+  overflow-y: auto;
+  padding-bottom: 60px; /* Aquí agregamos el espacio */
+}
+
+.turnosWrapper h2 {
+  color: #2c3e50;
+  padding: 15px 0;
+  margin: 0;
+  background-color: #ecf0f1;
+  border-bottom: 2px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.turnosTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
+
+.turnosTable th,
+.turnosTable td {
+  padding: 12px 15px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.turnosTable th {
+  background-color: #3498db;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+  position: sticky;
+  top: 49px;
+  z-index: 1;
+}
+
+.turnosTable tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.turnosTable tr:hover {
+  background-color: #f2f2f2;
+}
+
+.turnosTable td {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Estilos para el scroll */
+.turnosWrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.turnosWrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.turnosWrapper::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.turnosWrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Estilos para los botones de acción de la empresa */
+.empresaActions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.editBtn,
+.deleteBtn {
+  padding: 5px 10px;
+  font-size: 12px; /* Tamaño más pequeño */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.editBtn:hover,
+.deleteBtn:hover {
+  background-color: #0056b3;
+}
+
+.deleteBtn {
+  background-color: #dc3545;
+}
+
+.deleteBtn:hover {
+  background-color: #c82333;
+}
+
+/* Estilos responsivos */
+@media screen and (max-width: 1024px) {
+  .turnosContainer {
+    padding: 10px 0 10px 10px;
+  }
+
+  .turnosWrapper {
+    margin-right: 10px;
+  }
+
+  .turnosTable th,
+  .turnosTable td {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .turnosTable th,
+  .turnosTable td {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+
+  .turnosWrapper h2 {
+    font-size: 16px;
+    padding: 10px 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .turnosContainer {
+    padding: 5px 0 5px 5px;
+  }
+
+  .turnosWrapper {
+    margin-right: 5px;
+  }
+
+  .turnosTable th,
+  .turnosTable td {
+    padding: 4px 6px;
+    font-size: 11px;
+  }
+
+  .turnosWrapper h2 {
+    font-size: 14px;
+    padding: 8px 0;
+  }
+}
+
+/* Estilos para la edición de turno */
+.turnoEdit {
+  margin-bottom: 20px;
+}
+
+.turnoHeader {
+  font-weight: bold;
+}
+
+.turnoInput {
+  margin: 0 5px;
+  padding: 5px;
+  width: 100px;
+}
+
+.horarios {
+  margin-top: 10px;
+}
+
+.horarios label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.horarios input {
+  margin-bottom: 5px;
+}
+
+.deleteTurnoBtn {
+  background-color: #dc3545;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.deleteTurnoBtn:hover {
+  background-color: #c82333;
+}
+
+.saveBtn {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.saveBtn:hover {
+  background-color: #218838;
+}
+
+.cancelBtn {
+  background-color: #6c757d;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancelBtn:hover {
+  background-color: #5a6268;
+}
+
+.noEmpresas {
+  color: #333;
+  font-size: 16px;
+}

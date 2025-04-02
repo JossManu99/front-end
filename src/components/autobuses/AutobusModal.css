@@ -1,0 +1,128 @@
+/* Estilo para el modal y su contenido */
+.autobus-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.update-btn,
+.delete-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.update-btn {
+  background-color: #4CAF50; /* Verde */
+  color: white;
+}
+
+.delete-btn {
+  background-color: #f44336; /* Rojo */
+  color: white;
+}
+
+.update-btn:hover {
+  background-color: #45a049;
+}
+
+.delete-btn:hover {
+  background-color: #e53935;
+}
+
+/* Estilo para las secciones de los detalles del autobús */
+.autobus-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.details-section {
+  width: 100%;
+}
+
+.details-section p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.details-section a {
+  color: #2196F3;
+  text-decoration: none;
+}
+
+.details-section a:hover {
+  text-decoration: underline;
+}
+
+/* Estilo para la foto del autobús */
+.autobus-photo,
+.preview-photo {
+  width: 100px;         /* Tamaño fijo para la imagen */
+  height: 100px;        /* Mantenerla cuadrada */
+  object-fit: cover;    /* Asegura que la imagen se recorte correctamente para que sea cuadrada */
+  border-radius: 8px;   /* Bordes redondeados */
+  margin-top: 10px;     /* Separación superior */
+}
+
+/* Estilo para la subida de la foto */
+.photo-upload {
+  margin-top: 20px;
+}
+
+.photo-upload label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.photo-upload input[type="file"] {
+  font-size: 16px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.photo-upload input[type="file"]:hover {
+  background-color: #f0f0f0;
+}

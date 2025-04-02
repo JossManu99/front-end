@@ -1,0 +1,247 @@
+/* Estilos generales */
+.mainContainer {
+  max-width: 100%;
+  width: 100%;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  height: 100vh; /* Considera remover este height si quieres que crezca según el contenido */
+  padding: 0;
+  margin: 0;
+}
+
+.Container {
+  background-color: #f9f9f9;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  color: #333;
+  height: 100vh; /* Igual que arriba, podrías remover este height para un mejor scroll en pantallas pequeñas */
+}
+
+/* Encabezado y filtros */
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
+}
+
+.filterContainer {
+  display: flex;
+  align-items: center;
+}
+
+.filterContainer label {
+  margin-right: 1rem;
+}
+
+.formControl {
+  padding: 0.3rem;
+  font-size: 0.9rem;
+}
+
+/* Estados de carga o sin datos */
+.loading,
+.noData {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}
+
+/* Contenido principal y contenedores */
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.summaryContainer {
+  margin-bottom: 2rem;
+}
+
+.summaryCard {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.summaryCard h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+/* Sección que agrupa la lista y el detalle */
+.tablesContainer {
+  display: flex;
+  gap: 2rem;
+}
+
+/* Lista de recargas */
+.recargasListContainer {
+  flex: 1;
+}
+
+.recargasListContainer h3 {
+  margin: 0 0 0.5rem 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.table thead {
+  background: #f0f0f0;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.table th {
+  font-weight: 600;
+}
+
+.selectedRow {
+  background-color: #daf1ff;
+}
+
+.viewButton {
+  background: #0088FE;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.viewButton:hover {
+  background: #006db3;
+}
+
+/* Detalles de una recarga */
+.recargaDetailContainer {
+  flex: 2;
+}
+
+.detailCard {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.detailHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.detailRow {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.detailRow > div {
+  flex: 1;
+}
+
+.tableDetail {
+  width: 100%;
+  margin-top: 1rem;
+  border-collapse: collapse;
+}
+
+.tableDetail thead {
+  background: #f0f0f0;
+}
+
+.tableDetail th,
+.tableDetail td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+/* Gráfico */
+.chartContainer {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+/* =========================
+   MEDIA QUERIES RESPONSIVE
+   ========================= */
+
+/* Tablet en adelante (max-width 992px) */
+@media (max-width: 992px) {
+  .tablesContainer {
+    flex-direction: column;
+  }
+  
+  .recargasListContainer {
+    margin-bottom: 2rem;
+  }
+}
+
+/* Móviles (max-width 768px) */
+@media (max-width: 768px) {
+  .headerContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .summaryItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tablesContainer {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .detailRow {
+    flex-direction: column;
+  }
+}
+
+/* Móviles más pequeños (max-width 480px) */
+@media (max-width: 480px) {
+  .Container {
+    padding: 1rem;
+  }
+
+  .table th,
+  .table td,
+  .tableDetail th,
+  .tableDetail td {
+    font-size: 0.6rem;
+    padding: 0.5rem;
+  }
+
+  .viewButton {
+    font-size: 0.7rem;
+    padding: 0.4rem;
+  }
+
+  .detailCard {
+    padding: 0.75rem;
+  }
+}

@@ -1,0 +1,459 @@
+/* ============================= */
+/* ESTILOS BASE                  */
+/* ============================= */
+
+.maincontainer {
+  max-width: 100%;
+  width: 100%;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  height: 100px;
+  padding: 0;
+  margin: 0;
+}
+
+.formContainer {
+  background-color: #B2D8D8;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;  /* Ancho máximo del contenedor */
+  margin: 20px auto; /* Espaciado centrado en pantallas grandes */
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+/* Imagen de fondo sutil */
+.formContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/path-to-your-background-image.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.formHeader {
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.formTitle {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.formInstructions {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #9cbaba;
+  margin: 15px 0;
+}
+
+.formRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.formGroup {
+  flex: 1;
+  min-width: 200px;
+}
+
+.formGroupFull {
+  flex: 1 0 100%; /* Para campos que deban ocupar todo el ancho */
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #444;
+}
+
+.formControl {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+}
+
+.textArea {
+  width: 100%;
+  height: 80px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  resize: vertical;
+  background-color: white;
+}
+
+/* ============================= */
+/* INPUTS CON ÍCONOS             */
+/* ============================= */
+.inputWithIcon {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.inputWithIconControl {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  padding-right: 40px; /* Espacio para el ícono */
+}
+
+.iconOverlay {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+/* ============================= */
+/* INPUTS TIPO TIME              */
+/* ============================= */
+.timeInputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.timeInputWithIcon {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.timeInput {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  padding-right: 40px; /* Espacio para el ícono */
+}
+
+.timeIconOverlay {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  color: black;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+/* ============================= */
+/* TABLA                         */
+/* ============================= */
+.tableContainer {
+  margin: 20px 0;
+  overflow-x: auto; /* Permite scroll horizontal en pantallas pequeñas */
+  position: relative;
+  z-index: 1;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #4c8c8c;
+  color: white;
+  font-weight: normal;
+}
+
+.table tr {
+  background-color: #fff;
+}
+
+/* ============================= */
+/* BOTONES                       */
+/* ============================= */
+.buttonGroup {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.registerButton,
+.cancelButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  flex: 1;
+  max-width: 200px;
+  text-align: center;
+}
+
+.registerButton {
+  background-color: #8e44ad;
+}
+
+.cancelButton {
+  background-color: #7f8c8d;
+}
+
+.registerButton:hover {
+  background-color: #7d3c98;
+}
+
+.cancelButton:hover {
+  background-color: #6c7a7a;
+}
+
+/* ============================= */
+/* SECCIÓN DE REFACCIONES        */
+/* ============================= */
+.refaccionesCard {
+  background-color: #e6f2f2;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 15px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.refaccionesTitle {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: 500;
+}
+
+.refaccionesGrid {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.refaccionesHeader {
+  display: grid;
+  grid-template-columns: 30% 15% 45% 10%;
+  background-color: rgba(255, 255, 255, 0.4);
+  padding: 10px;
+  font-weight: 500;
+  color: #555;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  font-size: 14px;
+}
+
+.refaccionesHeaderItem {
+  padding: 0 8px;
+}
+
+.refaccionesRow {
+  display: grid;
+  grid-template-columns: 30% 15% 45% 10%;
+  border-top: 1px solid #dde6e6;
+  padding: 4px 0;
+}
+
+.refaccionesCell {
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+}
+
+.refaccionInput {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.descripcionTextarea {
+  width: 100%;
+  height: 60px;
+  resize: vertical;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.removeRefaccionButton {
+  background-color: #f0c5c5;
+  color: #e74c3c;
+  border: none;
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  font-size: 12px;
+  margin: 0 auto;
+}
+
+.removeRefaccionButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.addRefaccionButton {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+}
+
+.addRefaccionButton:hover {
+  background-color: #45a049;
+}
+
+/* ============================= */
+/* MEDIA QUERIES PARA RESPONSIVE */
+/* ============================= */
+
+/*
+   De 768px para abajo vamos a 2 columnas:
+   Cada .formGroup ocupa 50% (menos el gap).
+   Si tu contenedor es más angosto que ~340-380px, 
+   forzosamente se apilará en 1 columna por falta de espacio real.
+*/
+@media (max-width: 768px) {
+  .formContainer {
+    margin: 10px auto;
+    padding: 15px;
+    max-width: 80%;
+  }
+
+  .formRow {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+  }
+
+  .formGroup {
+    flex: 0 0 calc(50% - 15px) !important;
+    min-width: 150px !important;  /* Reducido a 150px para que quepan en ~340px */
+  }
+
+  .table th,
+  .table td {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .refaccionesHeader,
+  .refaccionesRow {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .refaccionesCell {
+    display: block;
+    margin-bottom: 8px;
+  }
+}
+
+/* Ajustes para pantallas de hasta 576px (móviles pequeños).
+   Si tú quieres 2 columnas también en estas pantallas,
+   borra o sobrescribe la parte que vuelve a 1 columna.
+*/
+@media (max-width: 576px) {
+  .formTitle {
+    font-size: 18px;
+  }
+  
+  .table th,
+  .table td {
+    font-size: 12px;
+    padding: 6px;
+  }
+  
+  .registerButton,
+  .cancelButton {
+    font-size: 12px;
+    padding: 8px 10px;
+    max-width: 100%;
+  }
+
+  /* Por defecto, tu código hace 1 columna en refacciones: */
+  .refaccionesHeader,
+  .refaccionesRow {
+    grid-template-columns: 1fr;
+  }
+  .refaccionesCell {
+    margin-bottom: 6px;
+  }
+
+  /*
+    Si quieres MANTENER 2 columnas por debajo de 576px,
+    borra o comenta las reglas anteriores y deja 
+    grid-template-columns: 1fr 1fr;
+  */
+}

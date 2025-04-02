@@ -1,0 +1,143 @@
+/* Contenedor principal */
+.mainContainer {
+  max-width: 100%;
+  width: 100%;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Barra de búsqueda */
+.searchContainer {
+  width: 100%;
+  max-width: 600px; /* Más reducido */
+  margin: 0.5rem auto;
+  padding: 0 10px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 8px; /* Reducido */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem; /* Reducido */
+}
+
+/* Contenedor del formulario */
+.Container {
+  max-width: 500px; /* Más pequeño que antes */
+  width: 100%;
+  margin: 0.5rem auto;
+  padding: 1rem; /* Reducido */
+  font-family: Arial, sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 6px; /* Menos redondeado */
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.formTitle {
+  text-align: center;
+  margin-bottom: 0.8rem;
+  font-size: 1rem; /* Reducido */
+  color: #333;
+  font-weight: 600;
+}
+
+/* Contenedor de campos */
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Menor espacio vertical */
+}
+
+/* Cada campo */
+.formField {
+  display: flex;
+  flex-direction: column;
+}
+
+.fieldLabel {
+  margin-bottom: 4px;
+  font-weight: normal;
+  font-size: 0.9rem; /* Reducido */
+  color: #333;
+}
+
+.textInput {
+  padding: 6px; /* Más pequeño */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem; /* Reducido */
+  width: 100%;
+}
+
+/* Mensaje de error */
+.errorMessage {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+}
+
+/* Botones */
+.buttonRow {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.submitButton {
+  cursor: pointer;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 4px;
+  background: #333;
+  color: #fff;
+  width: 100%;
+  transition: background 0.3s ease;
+}
+
+.submitButton:hover {
+  background: #555;
+}
+
+.submitButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .Container {
+    margin: 0.3rem auto;
+    padding: 0.8rem;
+    border: none;     
+    border-radius: 0; 
+    box-shadow: none; 
+    width: 90%;       
+  }
+  
+  .formTitle {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .textInput {
+    padding: 5px;
+    font-size: 0.85rem;
+  }
+
+  .submitButton {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+}

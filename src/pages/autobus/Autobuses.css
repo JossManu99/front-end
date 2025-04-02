@@ -1,0 +1,350 @@
+/* Contenedor principal */
+.autobuses-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f4f4f4;
+  padding: 40px 20px;
+  min-height: 100vh;
+  
+}
+
+.container {
+  padding: 0;
+  width: 90%;
+  max-width: 1200px;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  
+}
+
+/* Título */
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+  text-align: center;
+  
+}
+
+.autobuses-page p {
+  margin-bottom: 20px;
+  color: #666;
+  text-align: center;
+  
+}
+
+/* Cuadro de búsqueda */
+.search-input {
+  width: 80%;
+  max-width: 500px;
+  padding: 10px 16px;
+  margin-bottom: 30px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  outline: none;
+  
+}
+
+.search-input:focus {
+  border-color: #3498db;
+  box-shadow: 0 1px 4px rgba(52, 152, 219, 0.3);
+  
+}
+
+/* Mensaje de error */
+.error-message {
+  color: #e74c3c;
+  margin: 10px 0;
+  font-weight: bold;
+  
+}
+
+/* Encabezado de la lista */
+.autobuses-list-header {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 0.8fr 0.8fr 1.5fr 0.5fr;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #eee;
+  font-weight: 500;
+  color: #555;
+  font-size: 14px;
+  
+}
+
+.header-item {
+  padding: 0 10px;
+  
+}
+
+/* Lista de autobuses */
+.autobuses-list {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+/* Fila de autobús */
+.autobus-row {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 0.8fr 0.8fr 1.5fr 0.5fr;
+  align-items: center;
+  padding: 1px;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s ease;
+  margin-bottom: 1px;
+  background-color: #fff;
+  
+}
+
+.autobus-row:hover {
+  background-color: #f5f9ff;
+}
+
+.autobus-row:last-child {
+  border-bottom: none;
+}
+
+/* Información del autobús */
+.autobus-info {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.autobus-avatar {
+  margin-right: 15px;
+}
+
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #3498db;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.autobus-details h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.autobus-details p {
+  margin: 5px 0 0;
+  font-size: 13px;
+  color: #777;
+  text-align: left;
+}
+
+/* Columnas de datos */
+.autobus-serie, 
+.autobus-tipo-placa, 
+.autobus-placa {
+  padding: 0 10px;
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  align-items: center;
+}
+
+/* Estilos para la columna de vigencia de documentos */
+.vigencia-docs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 10px;
+}
+
+.documento-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.documento-label {
+  font-size: 12px;
+  color: #666;
+  min-width: 60px;
+}
+
+.documento-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ccc;
+  flex-shrink: 0;
+}
+
+.fecha-vencimiento {
+  font-size: 12px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Columna de acciones */
+.actions {
+  display: flex;
+  justify-content: center;
+  padding: 0 10px;
+}
+
+.view-details-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.view-details-btn:hover {
+  opacity: 1;
+}
+
+.details-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #999;
+  border-radius: 50%;
+}
+
+/* Mensaje de no resultados */
+.no-results {
+  padding: 20px;
+  text-align: center;
+  color: #777;
+}
+
+/* Agregar una línea sutil entre cada fila */
+.autobuses-list {
+  background-color: #f9f9f9;
+}
+
+/* Estilos para el botón "ver más" */
+.acciones {
+  text-align: center;
+}
+
+/* Estilos responsivos */
+@media (max-width: 992px) {
+  .autobuses-list-header, .autobus-row {
+    grid-template-columns: 2fr 1.2fr 0.8fr 1.5fr 0.5fr;
+  }
+  
+  /* Ocultar la columna del tipo de placa en pantallas medianas */
+  .autobus-tipo-placa {
+    display: none;
+  }
+  
+  .fecha-vencimiento {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+  }
+  
+  .autobuses-list-header, .autobus-row {
+    grid-template-columns: 2fr 1.2fr 1.5fr 0.5fr;
+  }
+  
+  /* Ocultar la columna del número de placa también en pantallas pequeñas */
+  .autobus-placa {
+    display: none;
+  }
+  
+  .documento-label {
+    min-width: 50px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 576px) {
+  .autobuses-list-header, .autobus-row {
+    grid-template-columns: 2fr 1.5fr 0.5fr;
+  }
+  
+  /* Ocultar la columna del número de serie en pantallas muy pequeñas */
+  .autobuses-list-header .header-item:nth-child(2),
+  .autobus-row .autobus-serie {
+    display: none;
+  }
+  
+  .vigencia-docs {
+    gap: 4px;
+  }
+  
+  .documento-status {
+    gap: 4px;
+  }
+  
+  .documento-label {
+    min-width: 40px;
+    font-size: 10px;
+  }
+  
+  .fecha-vencimiento {
+    display: none; /* Ocultar las fechas en pantallas pequeñas */
+  }
+  
+  .autobus-info {
+    padding-right: 0;
+  }
+  
+  .autobus-avatar {
+    margin-right: 10px;
+  }
+  
+  .avatar-circle {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .autobus-details h3 {
+    font-size: 14px;
+  }
+  
+  .autobus-details p {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .autobuses-list-header, .autobus-row {
+    grid-template-columns: 3fr 0.5fr;
+    padding: 15px 10px;
+  }
+  
+  /* Ocultar la columna de vigencia en pantallas extremadamente pequeñas */
+  .vigencia-docs {
+    display: none;
+  }
+  
+  .search-input {
+    width: 95%;
+  }
+  
+  .container {
+    width: 98%;
+  }
+}

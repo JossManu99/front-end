@@ -1,0 +1,150 @@
+/* Contenedor general */
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f0f2f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100vh;
+}
+
+/* Contenedor principal de la lista */
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Encabezado de la página */
+.heading {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+/* Mensajes de carga, error o datos vacíos */
+.loadingText,
+.errorText,
+.emptyText {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 2rem;
+}
+
+/* Tarjeta que contiene cada tablarol */
+.tableCard {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  background-color: #fafafa;
+  transition: box-shadow 0.3s ease;
+}
+
+.tableCard:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Encabezado de cada tarjeta */
+.tableHeader {
+  background: linear-gradient(135deg, #4b8bf4, #367ad0);
+  padding: 1rem;
+}
+
+.tableTitle {
+  color: #fff;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+/* Contenedor de cada ruta */
+.routeContainer {
+  padding: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.routeTitle {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #444;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+}
+
+/* Contenedor para la tabla (para scroll horizontal en pantallas pequeñas) */
+.tableContainer {
+  overflow-x: auto;
+}
+
+/* Estilos para la tabla */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.table th {
+  background-color: #f7f9fc;
+  font-weight: 600;
+  color: #333;
+}
+
+.emptyCell {
+  text-align: center;
+  padding: 1rem;
+  color: #888;
+}
+
+/* Grupo de botones de edición y eliminación */
+.buttonGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #f7f9fc;
+  border-top: 1px solid #e0e0e0;
+}
+
+.editButton,
+.deleteButton {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.editButton {
+  background-color: #4b8bf4;
+  color: #fff;
+}
+
+.editButton:hover {
+  background-color: #367ad0;
+}
+
+.deleteButton {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.deleteButton:hover {
+  background-color: #d32f2f;
+}

@@ -1,0 +1,237 @@
+:root {
+  --main-bg-color: #9cccc9;
+  --form-bg-color: rgba(156, 204, 201, 0.9);
+  --dark-text: #444;
+  --lighter-text: #666;
+  --divider-color: #ccc;
+  --cancel-button-bg: #7e8588;
+  --register-button-bg: #4a95a3;
+  --input-border: #ccc;
+  --required-color: red;
+}
+
+.maincontainer {
+  max-width: 100%;
+  width: 100%;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  height: 100vh; /* Se mantiene para respetar la altura fija */
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.formContainer {
+  max-width: 960px;
+  width: 100%;
+  margin: 20px auto;
+  background-color: var(--form-bg-color);
+  padding: 30px;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.formHeader {
+  font-size: 24px;
+  color: var(--dark-text);
+  margin-bottom: 20px;
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.keyboardIcon {
+  font-size: 22px;
+  color: var(--dark-text);
+}
+
+.formInstructions {
+  color: var(--lighter-text);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.required {
+  color: var(--required-color);
+}
+
+.divider {
+  border: none;
+  height: 1px;
+  background-color: var(--divider-color);
+  margin: 20px 0;
+}
+
+.successMessage {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+
+.errorMessage {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+
+.formFields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px 10px;
+  margin-bottom: 20px;
+}
+
+/* Cada input+label */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Para que ocupe el espacio disponible */
+  min-width: 200px; /* Evita que sean demasiado estrechos en pantallas muy grandes */
+}
+
+.formGroup label {
+  font-size: 14px;
+  color: var(--dark-text);
+  margin-bottom: 5px;
+}
+
+.formGroup input {
+  padding: 8px 12px;
+  border: 1px solid var(--input-border);
+  border-radius: 3px;
+  font-size: 14px;
+  color: var(--dark-text);
+}
+
+.formGroup input::placeholder {
+  color: #aaa;
+}
+
+.formButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.cancelButton,
+.registerButton {
+  padding: 10px 25px;
+  border: none;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.cancelButton {
+  background-color: var(--cancel-button-bg);
+  color: white;
+}
+
+.registerButton {
+  background-color: var(--register-button-bg);
+  color: white;
+}
+
+/* =========================
+   MEDIA QUERIES RESPONSIVE
+   ========================= */
+
+/* 1) Entre 481px y 768px: 2 columnas */
+@media (max-width: 768px) and (min-width: 481px) {
+  .formContainer {
+    padding: 20px;
+    margin: 15px auto;
+    
+  }
+  .formHeader {
+    font-size: 20px;
+  }
+  .keyboardIcon {
+    font-size: 18px;
+  }
+  .formInstructions {
+    font-size: 13px;
+  }
+  .formGroup label {
+    font-size: 13px;
+  }
+  .formGroup input {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+  .cancelButton,
+  .registerButton {
+    padding: 8px 20px;
+    font-size: 13px;
+  }
+
+  .formFields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* 2 columnas: calculamos 50% del ancho - 10px del gap */
+  .formGroup {
+    flex: 1 1 calc(50% - 10px);
+    min-width: auto;
+  }
+}
+
+/* 2) Hasta 480px (móviles muy pequeños): 1 sola columna */
+@media (max-width: 480px) {
+  .formContainer {
+    margin: 10px auto;
+    padding: 15px;
+  }
+  .formHeader {
+    font-size: 18px;
+  }
+  .keyboardIcon {
+    font-size: 16px;
+  }
+  .formInstructions {
+    font-size: 12px;
+  }
+  .formGroup label {
+    font-size: 12px;
+  }
+  .formGroup input {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+  .cancelButton,
+  .registerButton {
+    padding: 8px 15px;
+    font-size: 12px;
+  }
+
+  .formFields {
+    flex-direction: column;
+  }
+  .formGroup {
+    width: 100%;
+  }
+  .formContainer {
+    max-width: 960px;
+    width: 80%;
+    margin: 20px auto;
+    background-color: var(--form-bg-color);
+    padding: 30px;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+  
+}

@@ -1,0 +1,42 @@
+/* Aplicar a toda la página */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f4; /* Fondo neutro */
+  font-family: Arial, sans-serif;
+}
+
+/* Contenedor principal */
+.operador-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Ocupa todo el ancho */
+  height: 100%; /* Ocupa todo el alto */
+  box-sizing: border-box;
+  flex-direction: column; /* Para que el título y el formulario estén alineados verticalmente */
+}
+
+/* Título */
+h1 {
+  margin-bottom: 20px; /* Espacio debajo del título */
+  font-size: 24px;
+  color: #3498db;
+  text-align: center;
+}
+
+/* Formulario */
+.operador-form {
+  width: 100%;
+  max-width: 600px; /* Tamaño máximo */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para destacar el formulario */
+}

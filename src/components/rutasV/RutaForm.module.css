@@ -1,0 +1,65 @@
+.rutaForm {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.errorMessage {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.formGroup {
+    margin-bottom: 15px;
+}
+
+.formControl {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    -ms-border-radius: 9px;
+    -o-border-radius: 9px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 10px; /* Aumenta el espacio dentro de cada celda */
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.table input {
+    width: 100%;
+    padding: 6px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Evita que el padding afecte el tamaño */
+    text-align: center; /* Centra el texto dentro del input */
+}
+
+.table td {
+    position: relative; /* Asegura que el input se mantenga dentro de la celda */
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btnPrimary { background: blue; color: white; }
+.btnSecondary { background: gray; color: white; }
+.btnDanger { background: red; color: white; }
+.btnOutlineSecondary { background: transparent; border: 1px solid gray; }

@@ -1,0 +1,275 @@
+.mainContainer{
+  max-width: 100%;
+  width: 100%;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f5f5f5;
+  min-height: 101vh;
+  height: 100px;
+  padding: 0;
+  margin: 0;
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #e0eef5;
+}
+
+.container {
+  background-color: #f5f9ff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container h2 {
+  text-align: center;
+  margin: 0 0 25px 0;
+  padding-bottom: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #2c5282;
+  border-bottom: 1px solid #c5d8e8;
+  position: relative;
+}
+
+.container h2::before {
+  content: '📋';
+  margin-right: 10px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formRow {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 5px;
+  width: 100%;
+  flex-wrap: wrap; /* Añadido para permitir que los elementos se ajusten correctamente */
+}
+
+/* Section headers */
+.form::before {
+  content: 'Información general';
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: #4a7ba6;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #c5d8e8;
+}
+
+.fieldColumn {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 200px; /* Ancho mínimo para evitar campos demasiado estrechos */
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.fieldHeader {
+  font-size: 13px;
+  color: #4a7ba6;
+  margin-bottom: 6px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.fieldHeader::after {
+  content: '*';
+  color: #e53e3e;
+  margin-left: 2px;
+  display: inline-block;
+}
+
+.fieldInput input[type="text"],
+.fieldInput input[type="number"],
+.fieldInput input[type="date"],
+.fieldInput select {
+  width: 100%;
+  height: 38px;
+  border: 1px solid #c5d8e8;
+  border-radius: 4px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  background-color: white;
+  font-size: 14px;
+}
+
+.fieldInput textarea {
+  width: 100%;
+  min-height: 80px;
+  border: 1px solid #c5d8e8;
+  border-radius: 4px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  resize: vertical;
+  font-size: 14px;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 20px;
+  padding: 8px 0;
+}
+
+/* Corregido para mejor alineación */
+.radioLabel {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.radioLabel input[type="radio"] {
+  margin-right: 8px;
+  accent-color: #4a7ba6;
+}
+
+.radioText {
+  font-size: 14px;
+  color: #4a5568;
+}
+
+/* Estilos heredados que podrían estar causando problemas - ajustados */
+.radioOption {
+  display: flex;
+  align-items: center;
+}
+
+.radioOption input[type="radio"] {
+  margin-right: 8px;
+  accent-color: #4a7ba6;
+}
+
+.radioOption label {
+  font-size: 14px;
+  color: #4a5568;
+}
+
+.fileInput {
+  width: 100%;
+}
+
+.fileInput input[type="file"] {
+  font-size: 13px;
+  width: 100%;
+  padding:.8px 0;
+  color: #4a5568;
+}
+
+.dateInput {
+  position: relative;
+  width: 100%;
+}
+
+.dateInput input {
+  width: 100%;
+  padding-right: 30px;
+}
+
+.dateIcon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 14px;
+  color: #4a7ba6;
+}
+
+.error {
+  color: #e53e3e;
+  margin: 10px 0;
+  font-size: 14px;
+  text-align: center;
+  background-color: #fed7d7;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.form button {
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  padding: 12px 0;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  width: 100%;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.form button:hover {
+  background-color: #2b6cb0;
+}
+
+.form button:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+/* Split the form into sections */
+.form::after {
+  content: '';
+  display: block;
+  margin: 15px 0;
+  border-top: 1px dashed #c5d8e8;
+}
+
+/* Add section titles */
+.formRow:nth-of-type(3)::before {
+  content: 'Información de licencias';
+  display: block;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  color: #4a7ba6;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #c5d8e8;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .formRow {
+    flex-direction: column;
+  }
+  
+  .fieldColumn {
+    width: 100%;
+  }
+}
+
+/* Estilos específicos para la sección de licencias para evitar sobreposición */
+.licenseSection {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 15px;
+  gap: 15px;
+}
+
+.licenseRow {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .licenseRow {
+    flex-direction: column;
+  }
+}

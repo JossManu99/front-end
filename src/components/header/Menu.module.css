@@ -1,0 +1,136 @@
+.menuWrapper {
+    position: relative;
+  }
+  
+  /* Botón hamburguesa (inicialmente oculto en pantallas grandes) */
+  .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 15px;
+  }
+  
+  /* Lista del menú */
+  .menuList {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Cada elemento */
+  .menuList li {
+    margin-right: 5px;
+    position: relative;
+  }
+  
+  /* Enlaces del menú */
+  .menuList a {
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Íconos dentro del enlace */
+  .icon {
+    margin-right: 8px;
+  }
+  
+  /* Dropdown icon */
+  .dropdownIcon {
+    margin-left: 5px;
+    font-size: 10px;
+  }
+  
+  /* Hover */
+  .menuList a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Submenú */
+  .menuList ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #15617a;
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    border-radius: 4px;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .menuList li:hover > ul {
+    display: block;
+    animation: fadeIn 0.2s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .menuList ul li {
+    width: 100%;
+    margin: 0;
+  }
+  
+  .menuList ul a {
+    padding: 10px 15px;
+    border-radius: 0;
+    width: 100%;
+    display: block;
+  }
+  
+  .menuList ul a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+  }
+  
+  /* Clases para mostrar/ocultar submenú */
+  .show {
+    display: block !important;
+  }
+  
+  /* Clases para elemento activo (dropdown abierto) */
+  .active > a {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Enlaces deshabilitados */
+  .disabledLink {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  
+  /* Responsive: para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .hamburger {
+      display: block;
+    }
+    .menuList {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      background-color: #15617a;
+    }
+    .menuList.open {
+      display: flex;
+    }
+    .menuList li {
+      width: 100%;
+    }
+  }
+  

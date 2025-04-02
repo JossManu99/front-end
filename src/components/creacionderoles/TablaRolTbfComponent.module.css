@@ -1,0 +1,196 @@
+
+.mainContainer {
+  max-width: 100%;
+  width: 100%;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+/* Contenedor principal */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  /* Antes: padding: 1.5rem; */
+  /* Quita o reduce el padding superior */
+  padding: 0 1.5rem 1.5rem 1.5rem; /* sin espacio arriba */
+}
+
+
+/* Estado de carga y error */
+.loading, .error {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.error {
+  color: #d9534f;
+}
+
+/* LISTA DE TABLAS */
+.listaContainer {
+  margin-top: 2rem;
+}
+
+.listTitle {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #222;
+}
+
+/* Cambiado: grid para mostrar tarjetas en filas horizontales */
+.tablaGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Tarjeta de cada tabla en la lista */
+.tablaCard {
+  width: 300px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.tablaCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.tablaCard h3 {
+  margin-top: 0;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.tablaCard p {
+  margin: 0.2rem 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.btnVerDetalle {
+  width: 100%;
+  margin-top: 0.8rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.btnVerDetalle:hover {
+  background-color: #0056b3;
+}
+
+/* DETALLE DE UNA TABLA */
+.detalleTablaRol {
+  margin-top: 1rem;
+}
+
+.btnVolver {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.btnVolver:hover {
+  text-decoration: underline;
+}
+
+.tablaHeader {
+  background-color: #f8f8f8;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  border: 1px solid #eee;
+}
+
+.tablaHeader h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  color: #333;
+}
+
+.tablaInfo {
+  margin: 0.3rem 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* RUTAS */
+.rutasContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Cada "card" de ruta dentro del detalle */
+.rutaCard {
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+/* Título y subtítulos de la ruta */
+.rutaTitle {
+  margin: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.rutaSubinfo {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+/* Tabla de turnos */
+.turnosTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.turnosTable th {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.turnosTable td {
+  border: 1px solid #eee;
+  padding: 0.5rem;
+  vertical-align: middle;
+}
+
+.turnosTable tr:nth-child(even) td {
+  background-color: #f9f9f9;
+}
