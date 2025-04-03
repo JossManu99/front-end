@@ -7,7 +7,7 @@ import {
   obtenerRefacciones,
   crearRefaccion,
   actualizarRefaccion, // Función que espera un objeto con _id y datos a actualizar
-} from '../../services/RefaccionService';
+} from '../../services/refaccionService';
 
 import styles from './MaintenanceForm.module.css';
 import Menu from '../../components/header/DashboardHeader';
