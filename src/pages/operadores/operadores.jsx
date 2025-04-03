@@ -11,7 +11,7 @@ import {
   getOperadores,
   deleteOperador,
   updateOperador,
-} from '../../services/operadorService';
+} from '../../services/OperadorService';
 
 const Operadores = () => {
   const [operadores, setOperadores] = useState([]);

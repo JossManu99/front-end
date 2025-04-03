@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getOperadorById, updateOperador } from '../../services/operador/operadorService'; // Suponiendo que tienes estos servicios
+import { getOperadorById, updateOperador } from '../../services/operador/OperadorService'; // Suponiendo que tienes estos servicios
 import FormOperador from '../../components/operador/FormOperador'; // Formulario reutilizado
 
 const UpdateOperadorPage = () => {
