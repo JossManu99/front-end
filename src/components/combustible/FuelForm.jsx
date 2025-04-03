@@ -8,7 +8,7 @@ import Menu from '../../components/header/DashboardHeader';
 
 // Servicios
 import { getAutobuses } from '../../services/AutobusesService';
-import { getRecargas, updateRecarga } from '../../services/RecargaService';
+import { getRecargas, updateRecarga } from '../../services/recargaService';
 
 const FuelForm = () => {
   // ============================
