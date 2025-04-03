@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-   "prebuild": "chmod +x node_modules/.bin/vite || echo 'No se pudo cambiar permisos' && ls -la node_modules/.bin",
-    "build": "npx vite build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

@@ -89,7 +89,7 @@ const AutobusModal = ({ autobus, onClose, onUpdate, onDelete }) => {
                 {/* Nuevos campos agregados */}
                 <p><strong>Número de Asientos:</strong> {autobus.numeroAsientos || 'N/A'}</p>
                 <p><strong>Usos del Autobús:</strong> {autobus.usos?.join(', ') || 'N/A'}</p>
-                <p><strong>Tipo de Propietario:</strong> {autobus.tipoPropietario || 'N/A'}</p>
+                <p><strong>Nombre de Propietario:</strong> {autobus.nombrepropietario || 'N/A'}</p>
               </div>
             </div>
           </div>

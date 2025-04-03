@@ -130,10 +130,10 @@ const ViajePage = () => {
                         <div key={viaje._id} className="viaje-card">
                           <h3>{viaje.numeroViaje}</h3>
                           <p>
-                            <strong>Origen:</strong> {viaje.origen}
+                            <strong>Origen:</strong> {viaje.saleDe}
                           </p>
                           <p>
-                            <strong>Destino:</strong> {viaje.destino}
+                            <strong>Destino:</strong> {viaje.llegaA}
                           </p>
                           <button
                             className="ver-info"
