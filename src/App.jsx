@@ -33,7 +33,7 @@ import FormularioPropietario from './components/autobuses/propietarioform';
 import RecargarCombustible from './components/combustible/RecargarCombustible';
 import VerRecargas from './components/combustible/VerRecargas';
 import TablaRolTbfComponent from './components/creacionderoles/TablaRolTbfComponent';
-import Utilidades from './components/utilidades/utilidades';
+import Utilidades from './components/utilidades/Utilidades';
 import Nomina from './components/Nominas/Nominas';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
