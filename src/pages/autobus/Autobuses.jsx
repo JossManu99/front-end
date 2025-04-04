@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Menu from '../../components/header/DashboardHeader';
 import das from '../../components/header/Dashboard.module.css';
 import AutobusModal from '../../components/autobuses/AutobusModal';
-// Import the service methods
+// Importa los métodos del servicio
 import {
   getAutobuses,
   deleteAutobus,
@@ -20,7 +20,7 @@ const Autobuses = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    // Fetch all autobuses using our service
+    // Obtiene todos los autobuses mediante el servicio
     const fetchAllAutobuses = async () => {
       try {
         const data = await getAutobuses();
@@ -49,12 +49,12 @@ const Autobuses = () => {
 
   // Función para determinar el color del punto de vencimiento
   const getVencimientoStatusColor = (fechaVencimiento) => {
-    if (!fechaVencimiento) return '#ccc'; // Si no hay fecha, mostramos gris
+    if (!fechaVencimiento) return '#ccc';
 
     const now = new Date();
     const vencimiento = new Date(fechaVencimiento);
     const diffTime = vencimiento - now;
-    const diffDays = diffTime / (1000 * 3600 * 24); // Diferencia en días
+    const diffDays = diffTime / (1000 * 3600 * 24);
 
     if (diffDays < 16) {
       return '#e74c3c'; // Vencido o próximo a vencer (menos de 16 días) - rojo
@@ -93,7 +93,7 @@ const Autobuses = () => {
         autobusActualizado
       );
 
-      // Actualiza la lista de autobuses con el autobús que viene del response
+      // Actualiza la lista de autobuses con el autobús actualizado
       setAutobuses((prevAutobuses) =>
         prevAutobuses.map((autobus) =>
           autobus._id === updatedBus._id ? updatedBus : autobus
@@ -114,7 +114,7 @@ const Autobuses = () => {
   );
 
   return (
-    <div className='mainContainer'>
+    <div className="mainContainer">
       <div className={das.menuContainer}>
         <Menu />
       </div>
@@ -123,13 +123,13 @@ const Autobuses = () => {
         <h2>Listado de flotillas</h2>
         <p>Marzo 2025</p>
 
-        {/* Input de búsqueda (si lo necesitas) */}
+        {/* Input de búsqueda */}
         <input
           type="text"
+          className="search-input"
           placeholder="Buscar autobuses..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style={{ marginBottom: '20px' }}
         />
 
         {error && <p className="error-message">{error}</p>}
@@ -153,14 +153,23 @@ const Autobuses = () => {
               ) : (
                 filteredAutobuses.map((autobus) => (
                   <div key={autobus._id} className="autobus-row">
-                    {/* Columna 1: Info con número económico */}
+                    {/* Columna 1: Información con número económico y foto */}
                     <div className="autobus-info">
                       <div className="autobus-avatar">
-                        <div className="avatar-circle"></div>
+                        <div
+                          className="avatar-circle"
+                          style={{
+                            backgroundImage: `url(${
+                              autobus.foto || 'https://via.placeholder.com/150'
+                            })`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                          }}
+                        />
                       </div>
                       <div className="autobus-details">
                         <h3>No. {autobus.numeroEconomico || '1234'}</h3>
-                        <p>{autobus.tipoPropietario || ''} </p>
+                        <p>{autobus.tipoPropietario || ''}</p>
                       </div>
                     </div>
 
@@ -179,7 +188,7 @@ const Autobuses = () => {
                       {autobus.numeroPlaca || '632025T'}
                     </div>
 
-                    {/* Columna 5: Indicador de vigencia */}
+                    {/* Columna 5: Indicador de vigencia de documentos */}
                     <div className="vigencia-docs">
                       <div className="documento-status">
                         <div className="documento-label">Permiso:</div>

@@ -110,7 +110,7 @@
   color: #6c757d;
   pointer-events: none;
 }
-
+/*
 .fileInputContainer {
   display: flex;
   flex-direction: column;
@@ -120,10 +120,13 @@
   padding: 10px;
   min-height: 38px;
 }
-
+*/
 .fileInput {
   margin-bottom: 5px;
+  border: 1px solid #a3a7ac; /* borde azul */
+  border-radius: 4px; /* esquinas redondeadas */
 }
+
 
 .fileStatus {
   font-size: 12px;
