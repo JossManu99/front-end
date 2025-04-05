@@ -3,47 +3,29 @@
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
   background-color: #f5f7fb;
   min-height: 100vh;
-  padding: 1rem;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-  padding: 0;
-  margin: 0;
 }
 
 .container {
   width: 95%;
   max-width: 1000px;
-  background-color: white;
+  background-color: #fff;
   padding: 1rem;
   border-radius: 0.3rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   margin-top: 1rem;
-  
 }
 
-/* Encabezado principal */
-.sectionTitle {
+/* Título principal */
+.title {
   font-size: 1.3rem;
   font-weight: 600;
   color: #2a7d8b;
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
-  
-}
-
-.sectionTitle .icon {
-  margin-right: 0.5rem; /* Separación del ícono */
-  
-}
-
-/* Subtítulo para los detalles de la ruta */
-.routeDetails {
-  font-size: 0.95rem;
-  color: #555;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 
 /* Filas del formulario */
@@ -53,7 +35,6 @@
   gap: 0.8rem;
   justify-content: space-between;
   margin-bottom: 0.1rem;
-  
 }
 
 .formGroup {
@@ -74,8 +55,8 @@
   padding: 0.4rem;
   border: 1px solid #ccc;
   border-radius: 0.3rem;
-  font-size: 0.9rem; /* Fuente un poco más pequeña */
-  background-color: white;
+  font-size: 0.9rem;
+  background-color: #fff;
 }
 
 .select:focus,
@@ -85,44 +66,80 @@
   box-shadow: 0 0 4px rgba(42, 125, 139, 0.5);
 }
 
+/* Subtítulo */
+.subTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2a7d8b;
+  margin: 1rem 0 0.5rem;
+}
+
+/* Contenedor de cada ruta (Header + Tabla) */
+.routeCard {
+  margin-bottom: 2rem; /* AUMENTA el espacio entre bloques de ruta */
+}
+
+/* Encabezado de la ruta */
+.routeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem;
+  background-color: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 0.5rem; /* Espacio entre header y la tabla */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.routeTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2a7d8b;
+}
+
+.routeDetails {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.3rem;
+}
+
+.routeCost {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #35dc59;
+  display: flex;
+  align-items: center;
+}
+
+/* Tabla de turnos */
 .tableContainer {
   margin-top: 1rem;
 }
 
-/* Título de la tabla (opcional) */
-.tableTitle {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #2a7d8b;
-  text-align: center;
-  margin-bottom: 0.8rem;
-}
-
-/* Tabla más compacta y centrada */
 .table {
   width: 50%;
-  margin: 0 auto; /* Centrar la tabla automáticamente */
+  margin: 0 auto;
   border-collapse: collapse;
-  font-size: 0.9rem; /* Tamaño de fuente más pequeño */
+  font-size: 0.9rem;
+  background-color: #fff;
 }
 
-/* Encabezados de columna */
 .table th {
   background-color: #2a7d8b;
-  color: white;
-  padding: 0.5rem;     /* Menos padding */
+  color: #fff;
+  padding: 0.5rem;
   font-weight: 600;
   text-align: center;
-  line-height: 1.2;    /* Control de altura de línea */
+  line-height: 1.2;
 }
 
-/* Celdas */
 .table td {
-  padding: 0.4rem;     /* Menos padding */
+  padding: 0.4rem;
   color: #333;
   text-align: center;
   border-bottom: 1px solid #e1e5eb;
-  line-height: 1.2;    /* Control de altura de línea */
+  line-height: 1.2;
 }
 
 .table tr:hover {
@@ -136,9 +153,10 @@
   margin-top: 1rem;
 }
 
-.guardarBtn {
+.submitButton,
+.cancelButton {
   background-color: #4f9cf9;
-  color: white;
+  color: #fff;
   border: none;
   padding: 0.6rem 1.2rem;
   border-radius: 0.3rem;
@@ -146,13 +164,24 @@
   font-size: 0.95rem;
   cursor: pointer;
   transition: background-color 0.2s;
+  margin: 0 0.3rem;
 }
 
-.guardarBtn:hover {
+.submitButton:hover {
   background-color: #3d8df8;
 }
 
-.guardarBtn:disabled {
+.cancelButton {
+  background-color: #ccc; /* Cambia el color para diferenciar Cancelar */
+  color: #333;
+}
+
+.cancelButton:hover {
+  background-color: #b3b3b3;
+}
+
+.submitButton:disabled,
+.cancelButton:disabled {
   background-color: #a0c3ff;
   cursor: not-allowed;
 }

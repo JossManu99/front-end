@@ -13,26 +13,28 @@ const turnoHorarios = {
   '5°': { inicio: '21:30', fin: '07:20' }
 };
 
-const FormViaje = ({ onViajeCreated, viaje, onCancel }) => {
-  const [formData, setFormData] = useState({
-    numeroRuta: '',
-    nombreCliente: '',
-    saleDe: '',
-    llegaA: '',
-    distancia: '',
-    costoPorKm: '',
-    costo: '',
-    turnos: [
-      {
-        turno: '1°',
-        horario1: '',
-        horario2: '',
-        horarioPredefinidoInicio: turnoHorarios['1°'].inicio,
-        horarioPredefinidoFin: turnoHorarios['1°'].fin
-      }
-    ]
-  });
+// Define el estado inicial en una constante
+const initialFormData = {
+  numeroRuta: '',
+  nombreCliente: '',
+  saleDe: '',
+  llegaA: '',
+  distancia: '',
+  costoPorKm: '',
+  costo: '',
+  turnos: [
+    {
+      turno: '1°',
+      horario1: '',
+      horario2: '',
+      horarioPredefinidoInicio: turnoHorarios['1°'].inicio,
+      horarioPredefinidoFin: turnoHorarios['1°'].fin
+    }
+  ]
+};
 
+const FormViaje = ({ onViajeCreated, viaje, onCancel }) => {
+  const [formData, setFormData] = useState(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -68,7 +70,6 @@ const FormViaje = ({ onViajeCreated, viaje, onCancel }) => {
     const { name, value } = e.target;
     setFormData((prev) => {
       const updated = { ...prev, [name]: value };
-
       // Recalcular costoPorKm si cambian "costo" o "distancia"
       if (name === 'costo' || name === 'distancia') {
         const costo = parseFloat(updated.costo);
@@ -144,6 +145,11 @@ const FormViaje = ({ onViajeCreated, viaje, onCancel }) => {
       }
       if (onViajeCreated) onViajeCreated(result);
       alert(dataToSubmit._id ? 'Viaje actualizado con éxito' : 'Viaje creado con éxito');
+      
+      // Si es creación (no edición), limpiamos el formulario
+      if (!dataToSubmit._id) {
+        setFormData(initialFormData);
+      }
     } catch (error) {
       console.error('Error al guardar viaje:', error);
       alert('Error al guardar viaje');
@@ -154,7 +160,7 @@ const FormViaje = ({ onViajeCreated, viaje, onCancel }) => {
 
   return (
     <div className={styles.generalContainer}>
-      {/* Se muestra el menú solo si NO se está en modo edición (crear) */}
+      {/* Se muestra el menú solo si NO se está en modo edición */}
       {(!viaje || !viaje._id) && (
         <div className={das.menuContainer}>
           <Menu />

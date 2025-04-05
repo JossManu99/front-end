@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { getViajes } from '../../services/viaje/viajeService';
-import { crearTablarol, obtenerTablarol, actualizarTablarol } from '../../services/tablarol';
+import { crearTablarol, actualizarTablarol } from '../../services/tablarol';
 import styles from './ViajeFormT.module.css'; 
-import das from '../header/Dashboard.module.css'; // <-- Ajusta si no lo usas
-import Menu from '../../components/header/DashboardHeader'; // <-- Ajusta si no lo usas
+import das from '../header/Dashboard.module.css'; // Ajusta si no lo usas
+import Menu from '../../components/header/DashboardHeader'; // Ajusta si no lo usas
 import { useNavigate } from 'react-router-dom';
 
 const ViajeFormT = ({ tablarolEdit, setEditTablarol }) => {
@@ -143,7 +143,7 @@ const ViajeFormT = ({ tablarolEdit, setEditTablarol }) => {
 
   return (
     <div className={styles.mainContainer}>
-      {/* Encabezado con el menú (ajusta o elimina si no lo usas) */}
+      {/* Menú superior (opcional) */}
       <div className={das.menuContainer}>
         <Menu />
       </div>
@@ -247,12 +247,10 @@ const ViajeFormT = ({ tablarolEdit, setEditTablarol }) => {
             </div>
           </div>
 
-          {/* ENCABEZADO PARA LA SECCIÓN DE RUTAS Y TURNOS */}
           <h3 className={styles.subTitle}>📍 Selecciona las Rutas y Turnos</h3>
 
           {rutas.map((ruta) => (
             <div key={ruta.numeroRuta} className={styles.routeCard}>
-              {/* Encabezado/Resumen de la ruta */}
               <div className={styles.routeHeader}>
                 <div>
                   <span className={styles.routeTitle}>
@@ -268,7 +266,6 @@ const ViajeFormT = ({ tablarolEdit, setEditTablarol }) => {
                 </div>
               </div>
 
-              {/* Tabla de turnos */}
               <div className={styles.tableContainer}>
                 <table className={styles.table}>
                   <thead>
@@ -288,9 +285,7 @@ const ViajeFormT = ({ tablarolEdit, setEditTablarol }) => {
                         <td>
                           <input
                             type="checkbox"
-                            checked={
-                              turnosActivos[`${ruta.numeroRuta}-${index}`] || false
-                            }
+                            checked={turnosActivos[`${ruta.numeroRuta}-${index}`] || false}
                             onChange={() =>
                               setTurnosActivos(prev => ({
                                 ...prev,

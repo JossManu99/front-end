@@ -1,4 +1,6 @@
 /* UsersList.module.css - Diseño profesional mejorado */
+
+/* Contenedor principal */
 .mainContainer {
   max-width: 100%;
   width: 100%;
@@ -9,23 +11,26 @@
   padding: 0;
   margin: 0;
 }
+
+/* Contenedor interno */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #ffffff;
   min-height: 100vh;
-  padding: 2rem;
+  padding: 1.5rem; /* reducido de 2rem a 1.5rem */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
 }
 
+/* Título */
 .title {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem; /* reducido de 1.5rem a 1rem */
   color: #2c3e50;
   font-weight: 600;
-  font-size: 1.8rem;
-  padding-bottom: 0.8rem;
+  font-size: 1.4rem; /* reducido de 1.8rem a 1.4rem */
+  padding-bottom: 0.6rem; /* reducido de 0.8rem a 0.6rem */
   border-bottom: 2px solid #3498db;
 }
 
@@ -34,20 +39,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem; /* reducido de 1.5rem a 1rem */
 }
 
+/* Contenedor de búsqueda */
 .searchContainer {
   position: relative;
-  width: 300px;
+  width: 280px; /* reducido de 300px a 280px */
 }
 
+/* Input de búsqueda */
 .searchInput {
   width: 100%;
-  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  padding: 0.6rem 2rem 0.6rem 0.8rem; /* reducido un poco */
   border: 1px solid #e0e0e0;
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: 0.8rem; /* reducido de 0.9rem a 0.8rem */
   transition: all 0.3s;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
 }
@@ -58,15 +65,16 @@
   outline: none;
 }
 
+/* Botón para limpiar búsqueda */
 .clearSearch {
   position: absolute;
-  right: 10px;
+  right: 8px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
   color: #7f8c8d;
-  font-size: 1.2rem;
+  font-size: 1rem; /* un poco más pequeño si deseas */
   cursor: pointer;
   padding: 0;
   width: 20px;
@@ -80,15 +88,15 @@
   color: #e74c3c;
 }
 
-/* Botones */
+/* Botones generales */
 .button {
-  padding: 0.5rem 0.9rem;
-  margin-right: 0.5rem;
+  padding: 0.4rem 0.8rem; /* reducido de 0.5rem 0.9rem */
+  margin-right: 0.3rem;   /* reducido un poco */
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: 500;
-  font-size: 0.85rem;
+  font-size: 0.75rem; /* reducido de 0.85rem */
   color: #fff;
   transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -106,18 +114,20 @@
   transform: translateY(0);
 }
 
+/* Botón eliminar */
 .delete {
   background-color: #e74c3c;
   margin-left: 0.5rem;
   display: inline-block;
   width: auto;
-  min-width: 70px;
+  min-width: 60px; /* reducido de 70px */
 }
 
 .delete:hover {
   background-color: #c0392b;
 }
 
+/* Botón refresh */
 .refresh {
   background-color: #2ecc71;
   width: 100%;
@@ -129,32 +139,39 @@
 
 /* Contenedor de tabla con scroll horizontal */
 .tableContainer {
+  max-width: 800px; 
+  margin: 0 auto;
   overflow-x: auto;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem; /* reducido de 1.5rem */
 }
 
-.table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  text-align: left;
-}
-
+/* Ajustes generales para th/td */
 .table th, 
 .table td {
-  padding: 0.85rem 1rem;
+  font-size: 0.75rem; /* reducido de 0.85rem */
   border: none;
   border-bottom: 1px solid #e9ecef;
 }
 
+/* Reduce el padding para hacer las celdas más compactas */
+.table th, 
+.table td {
+  padding: 0.4rem 0.6rem; /* reducido */
+}
+
+/* Opcional: reducir la altura de las filas de manera fija */
+.table tr {
+  height: 26px; /* Ajusta a tu gusto, reducido de 30px */
+}
+
+/* Estilo del encabezado */
 .table th {
   background-color: #3498db;
   color: #fff;
   font-weight: 500;
   text-transform: uppercase;
-  font-size: 0.85rem;
   letter-spacing: 0.5px;
   position: sticky;
   top: 0;
@@ -166,18 +183,22 @@
   background-color: #2980b9;
 }
 
+/* Hover en filas */
 .table tr:hover {
   background-color: #f8f9fa;
 }
 
+/* Filas pares con color distinto */
 .table tr:nth-child(even) {
   background-color: #f7fbfe;
 }
 
+/* Última fila sin borde */
 .table tr:last-child td {
   border-bottom: none;
 }
 
+/* Acciones en la tabla */
 .actions {
   white-space: nowrap;
   display: flex;
@@ -188,20 +209,20 @@
 /* Loading spinner */
 .loading {
   text-align: center;
-  padding: 3rem;
+  padding: 2rem; /* reducido de 3rem */
   color: #7f8c8d;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  height: 300px;
+  height: 200px; /* reducido de 300px */
 }
 
 .spinner {
   border: 4px solid rgba(0, 0, 0, 0.1);
-  width: 40px;
-  height: 40px;
+  width: 30px;  /* reducido de 40px */
+  height: 30px; /* reducido de 40px */
   border-radius: 50%;
   border-left-color: #3498db;
   animation: spin 1s ease infinite;
@@ -219,10 +240,10 @@
 /* Mensaje de no resultados */
 .noResults {
   text-align: center;
-  padding: 2rem;
+  padding: 1.5rem; /* reducido de 2rem */
   border-radius: 8px;
   background-color: #f7f9fc;
-  margin: 1rem 0;
+  margin: 0.8rem 0; /* reducido de 1rem */
   color: #7f8c8d;
 }
 
@@ -236,7 +257,7 @@
 
 .totalCount {
   color: #7f8c8d;
-  font-size: 0.9rem;
+  font-size: 0.8rem; /* reducido */
 }
 
 /* Responsive */
@@ -257,13 +278,13 @@
   
   .table th,
   .table td {
-    padding: 0.6rem 0.8rem;
-    font-size: 0.9rem;
+    padding: 0.4rem 0.5rem;
+    font-size: 0.7rem;
   }
   
   .button {
-    padding: 0.4rem 0.7rem;
-    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
   }
   
   .actions {

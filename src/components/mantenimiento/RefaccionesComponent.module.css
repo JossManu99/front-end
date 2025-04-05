@@ -8,147 +8,165 @@
   padding: 0;
   margin: 0;
 }
+
 .container {
-    width: 100%;
-    padding: 1.5rem;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* Mantienes el 50% y centras el contenedor */
+  width: 50%;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto; /* <-- Asegura que la .container esté centrada */
+}
+
+.header {
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 0.75rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  color: #3b5998;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Contenedor de la tabla */
+.tableContainer {
+  overflow-x: auto;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  /* Centra el contenedor de la tabla dentro de .container */
+  margin: 0 auto 1rem;
+  /* Opcionalmente, puedes darle un ancho máximo para evitar que sea muy grande */
+  /* max-width: 600px; */
+}
+
+/* Tabla */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.7rem;
+  background-color: white;
+}
+
+/* Encabezados y celdas */
+.table th,
+.table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.table th {
+  background-color: #4b6cb7;
+  color: white;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+/* Quitar borde en la última fila */
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Filas pares con color distinto */
+.table tr:nth-child(even) {
+  background-color: #f7f9fc;
+}
+
+/* Hover en filas */
+.table tr:hover {
+  background-color: #f1f4f9;
+}
+
+/* Inputs */
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #4b6cb7;
+  box-shadow: 0 0 0 2px rgba(75, 108, 183, 0.25);
+}
+
+/* Contenedor de acciones */
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+/* Botones */
+.button {
+  padding: 0.1rem 0.1rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.editButton {
+  background-color: #4b6cb7;
+  color: white;
+}
+.editButton:hover {
+  background-color: #3b5998;
+}
+
+.saveButton {
+  background-color: #28a745;
+  color: white;
+}
+.saveButton:hover {
+  background-color: #218838;
+}
+
+.deleteButton {
+  background-color: #dc3545;
+  color: white;
+}
+.deleteButton:hover {
+  background-color: #c82333;
+}
+
+/* Mensaje vacío */
+.emptyMessage {
+  text-align: center;
+  padding: 2rem;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    /* Asegura que la .container ocupe todo el ancho en pantallas pequeñas */
+    width: 90%;
+    margin: 1rem auto;
   }
-  
-  .header {
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid #dee2e6;
-    padding-bottom: 0.75rem;
-  }
-  
-  .title {
-    font-size: 1.5rem;
-    color: #3b5998;
-    font-weight: 600;
-    margin: 0;
-  }
-  
-  .tableContainer {
-    overflow-x: auto;
-    margin-bottom: 1rem;
-    border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-  }
-  
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
-    background-color: white;
-  }
-  
+
   .table th,
   .table td {
-    padding: 0.75rem 1rem;
-    text-align: left;
-    border-bottom: 1px solid #e9ecef;
-  }
-  
-  .table th {
-    background-color: #4b6cb7;
-    color: white;
-    font-weight: 500;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 0.5px;
-  }
-  
-  .table tr:last-child td {
-    border-bottom: none;
-  }
-  
-  .table tr:nth-child(even) {
-    background-color: #f7f9fc;
-  }
-  
-  .table tr:hover {
-    background-color: #f1f4f9;
-  }
-  
-  .input {
-    width: 100%;
     padding: 0.5rem;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    font-size: 0.9rem;
   }
-  
-  .input:focus {
-    outline: none;
-    border-color: #4b6cb7;
-    box-shadow: 0 0 0 2px rgba(75, 108, 183, 0.25);
-  }
-  
+
   .actions {
-    display: flex;
-    gap: 0.5rem;
-    white-space: nowrap;
+    flex-direction: column;
   }
-  
-  .button {
-    padding: 0.4rem 0.8rem;
-    border: none;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-weight: 500;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .editButton {
-    background-color: #4b6cb7;
-    color: white;
-  }
-  
-  .editButton:hover {
-    background-color: #3b5998;
-  }
-  
-  .saveButton {
-    background-color: #28a745;
-    color: white;
-  }
-  
-  .saveButton:hover {
-    background-color: #218838;
-  }
-  
-  .deleteButton {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  .deleteButton:hover {
-    background-color: #c82333;
-  }
-  
-  .emptyMessage {
-    text-align: center;
-    padding: 2rem;
-    color: #6c757d;
-    font-style: italic;
-  }
-  
-  @media (max-width: 768px) {
-    .container {
-      padding: 1rem;
-    }
-    
-    .table th,
-    .table td {
-      padding: 0.5rem;
-    }
-    
-    .actions {
-      flex-direction: column;
-    }
-  }
+}

@@ -1,4 +1,4 @@
-
+/* Contenedor principal */
 .mainContainer {
   max-width: 100%;
   width: 100%;
@@ -9,115 +9,130 @@
   padding: 0;
   margin: 0;
 }
+
+/* Contenedor central */
 .container {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .title {
-    text-align: center;
-    color: #333;
-    margin-bottom: 1.5rem;
-    font-size: 1.8rem;
-    font-weight: 600;
-  }
-  
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  
-  .tableHeader {
-    background-color: #1976d2;
-    color: #fff;
-  }
-  
-  .tableHeader th {
-    padding: 12px 15px;
-    text-align: left;
-    font-weight: 500;
-    font-size: 1rem;
-    text-transform: uppercase;
-  }
-  
-  .tableBody tr {
-    border-bottom: 1px solid #eee;
-    transition: background-color 0.2s;
-  }
-  
-  .tableBody tr:hover {
-    background-color: #f9f9f9;
-  }
-  
-  .tableBody td {
-    padding: 12px 15px;
-    text-align: left;
-  }
-  
-  .noData {
-    text-align: center;
-    padding: 20px;
-    color: #666;
-    font-style: italic;
-  }
-  
-  .input {
-    width: 100%;
-    padding: 8px 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 0.9rem;
-  }
-  
-  .input:focus {
-    outline: none;
-    border-color: #1976d2;
-    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
-  }
-  
-  .btnContainer {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-  }
-  
-  .btnEdit, .btnSave, .btnDelete {
-    padding: 6px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.2s;
-  }
-  
-  .btnEdit {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  .btnEdit:hover {
-    background-color: #3d8b40;
-  }
-  
-  .btnSave {
-    background-color: #2196f3;
-    color: white;
-  }
-  
-  .btnSave:hover {
-    background-color: #0b7dda;
-  }
-  
-  .btnDelete {
-    background-color: #f44336;
-    color: white;
-  }
-  
-  .btnDelete:hover {
-    background-color: #d32f2f;
-  }
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Título */
+.title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* Tabla */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+  table-layout: fixed; /* Asegura que se respeten los anchos fijos */
+}
+
+/* Encabezado de la tabla */
+.tableHeader {
+  background-color: #1976d2;
+  color: #fff;
+}
+
+.tableHeader th {
+  width: 70px !important;      /* Ancho fijo forzado para cada columna */
+  min-width: 70px !important;  /* Forzar ancho mínimo */
+  max-width: 70px !important;  /* Forzar ancho máximo */
+  overflow: hidden;            /* Oculta contenido que exceda el ancho */
+  white-space: nowrap;         /* Evita que el texto salte de línea */
+  text-overflow: ellipsis;     /* Muestra "..." si el texto se excede */
+  padding: 4px 2px;            /* Padding reducido */
+  text-align: left;
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  box-sizing: border-box;
+}
+
+/* Cuerpo de la tabla */
+.tableBody tr {
+  height: 24px;                /* Altura fija de las filas */
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s;
+}
+
+.tableBody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.tableBody td {
+  width: 70px !important;      /* Forzar el ancho para cada celda */
+  min-width: 70px !important;
+  max-width: 70px !important;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 4px 2px;
+  text-align: left;
+  font-size: 0.8rem;
+  box-sizing: border-box;
+}
+
+/* Mensaje sin datos */
+.noData {
+  text-align: center;
+  padding: 10px;
+  color: #666;
+  font-style: italic;
+}
+
+/* Botones de acción */
+.btnContainer {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+.btnEdit,
+.btnSave,
+.btnDelete {
+  padding: 2px 4px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.7rem;
+  line-height: 1;
+  transition: background-color 0.2s;
+}
+
+.btnEdit {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btnEdit:hover {
+  background-color: #3d8b40;
+}
+
+.btnSave {
+  background-color: #2196f3;
+  color: white;
+}
+
+.btnSave:hover {
+  background-color: #0b7dda;
+}
+
+.btnDelete {
+  background-color: #f44336;
+  color: white;
+}
+
+.btnDelete:hover {
+  background-color: #d32f2f;
+}

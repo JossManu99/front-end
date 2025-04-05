@@ -1,191 +1,175 @@
-
+/* Contenedor principal */
 .mainContainer {
-  max-width: 100%;
-  width: 100%;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  height: 100vh;
-  padding: 0;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  font-family: 'Segoe UI', Arial, sans-serif;
   margin: 0;
+  padding: 0;
 }
+
+/* Contenedor central */
 .container {
-    padding: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
+  background-color: #fff;
+  border-radius: 8px;
+  max-width: 800px; /* Ajusta según desees */
+  width: 90%;
+  margin: 2rem auto;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem; /* Se redujo un poco */
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background-color: #3498db;
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+/* Contenedor de la tabla */
+.tableContainer {
+  max-width: 700px; /* Ajusta según desees */
+  margin: 0 auto 1.5rem;
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+/* Tabla compacta */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.7rem; /* Tamaño base reducido */
+}
+
+.tableHeader {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.tableHeader th {
+  padding: 8px 10px;
+  text-align: left;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.65rem; /* Más pequeño */
+}
+
+.tableBody tr {
+  border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.2s ease;
+}
+
+.tableBody tr:hover {
+  background-color: #f2f6fa;
+}
+
+.tableBody td {
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* Aumentar solo la columna de FECHA (asumiendo que es la 1ª) */
+.tableHeader th:first-child,
+.tableBody td:first-child {
+  font-size: 0.8rem;    /* Se mantiene ligeramente mayor */
+  padding: 10px 14px;   /* Más espacio para la fecha */
+  min-width: 130px;     /* Ancho mínimo */
+  white-space: nowrap;
+}
+
+/* Sin datos */
+.noData {
+  text-align: center;
+  padding: 20px;
+  color: #64748b;
+  font-style: italic;
+  background-color: #f8fafc;
+}
+
+/* Botones */
+.btnContainer {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.btnEdit,
+.btnDelete {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  font-size: 0.7rem; /* Reducido */
+}
+
+.btnEdit {
+  background-color: #10b981;
+  color: #fff;
+}
+
+.btnEdit:hover {
+  background-color: #059669;
+  transform: translateY(-2px);
+}
+
+.btnDelete {
+  background-color: #ef4444;
+  color: #fff;
+}
+
+.btnDelete:hover {
+  background-color: #dc2626;
+  transform: translateY(-2px);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
   }
-  
+
   .title {
-    text-align: center;
-    color: #2c3e50;
-    margin-bottom: 1.5rem;
-    font-size: 1.8rem;
-    font-weight: 600;
-    position: relative;
+    font-size: 1.3rem;
   }
-  
-  .title::after {
-    content: '';
-    display: block;
-    width: 80px;
-    height: 3px;
-    background-color: #1976d2;
-    margin: 10px auto 0;
-  }
-  
-  .tableContainer {
-    overflow-x: auto;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: white;
-    font-size: 0.95rem;
-  }
-  
-  .tableHeader {
-    background-color: #1976d2;
-    color: #fff;
-  }
-  
-  .tableHeader th {
-    padding: 14px 16px;
-    text-align: left;
-    font-weight: 500;
-    white-space: nowrap;
-    letter-spacing: 0.5px;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-  }
-  
-  .tableBody tr {
-    border-bottom: 1px solid #edf2f7;
-    transition: all 0.2s ease;
-  }
-  
-  .tableBody tr:last-child {
-    border-bottom: none;
-  }
-  
-  .tableBody tr:hover {
-    background-color: #f8fafc;
-  }
-  
+
+  .tableHeader th,
   .tableBody td {
-    padding: 12px 16px;
-    text-align: left;
-    vertical-align: middle;
+    padding: 6px 8px;
+    font-size: 0.65rem;
   }
-  
-  .noData {
-    text-align: center;
-    padding: 30px;
-    color: #64748b;
-    font-style: italic;
-    background-color: #f8fafc;
-  }
-  
-  .fecha, .hora {
-    white-space: nowrap;
-    min-width: 90px;
-  }
-  
-  .input {
-    width: 100%;
+
+  /* Ajuste para la 1ª columna */
+  .tableHeader th:first-child,
+  .tableBody td:first-child {
+    font-size: 0.75rem;
     padding: 8px 10px;
-    border: 1px solid #cbd5e1;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    background-color: #fff;
-    transition: all 0.2s;
+    min-width: 100px;
   }
-  
-  .input:focus {
-    outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-  }
-  
-  .btnContainer {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    white-space: nowrap;
-  }
-  
-  .btnEdit, .btnSave, .btnDelete {
-    padding: 6px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.2s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .btnEdit {
-    background-color: #10b981;
-    color: white;
-  }
-  
-  .btnEdit:hover {
-    background-color: #059669;
-    transform: translateY(-1px);
-  }
-  
-  .btnSave {
-    background-color: #3b82f6;
-    color: white;
-  }
-  
-  .btnSave:hover {
-    background-color: #2563eb;
-    transform: translateY(-1px);
-  }
-  
+
+  .btnEdit,
   .btnDelete {
-    background-color: #ef4444;
-    color: white;
+    padding: 5px 10px;
+    font-size: 0.65rem;
   }
-  
-  .btnDelete:hover {
-    background-color: #dc2626;
-    transform: translateY(-1px);
-  }
-  
-  .money {
-    font-weight: 500;
-    color: #047857;
-  }
-  
-  .kilometerCell {
-    text-align: right;
-    font-family: 'Courier New', monospace;
-    font-weight: 500;
-  }
-  
-  .totalCell {
-    text-align: right;
-    font-weight: 600;
-    color: #047857;
-  }
-  
-  @media (max-width: 1024px) {
-    .container {
-      padding: 1rem;
-    }
-    
-    .title {
-      font-size: 1.5rem;
-    }
-    
-    .tableHeader th,
-    .tableBody td {
-      padding: 10px 12px;
-    }
-  }
+}
