@@ -1,3 +1,4 @@
+// src/components/viaje/ViajeModal.jsx
 import React, { useState, useEffect } from 'react';
 import FormViaje from './FormViaje'; 
 import './ViajeModal.css';
@@ -18,7 +19,7 @@ const ViajeModal = ({ viaje, onClose, onUpdate, onDelete }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Cargar los turnos cuando el componente se monta o cuando la empresa cambia
+  // Cargar los turnos cuando el componente se monta o cuando cambia la empresa del viaje
   useEffect(() => {
     const fetchTurnos = async () => {
       if (viaje.empresa) {
@@ -49,9 +50,11 @@ const ViajeModal = ({ viaje, onClose, onUpdate, onDelete }) => {
     setIsEditing(true);
   };
 
+  // Al actualizar, se llama a onUpdate y luego se cierra el modal con onClose
   const handleUpdate = (updatedViaje) => {
     onUpdate(updatedViaje);
     setIsEditing(false);
+    onClose();
   };
 
   const handleDelete = () => {
@@ -64,7 +67,6 @@ const ViajeModal = ({ viaje, onClose, onUpdate, onDelete }) => {
     }
   };
 
-  // Mostrar los turnos del objeto viaje con sus horarios
   const renderTurnos = () => {
     if (!viaje.turnos || viaje.turnos.length === 0) {
       return <p><strong>Turnos:</strong> No hay turnos asignados.</p>;
@@ -97,7 +99,7 @@ const ViajeModal = ({ viaje, onClose, onUpdate, onDelete }) => {
         {isEditing ? (
           <FormViaje
             viaje={viaje}
-            onSave={handleUpdate}
+            onViajeCreated={handleUpdate}
             onCancel={() => setIsEditing(false)}
           />
         ) : (

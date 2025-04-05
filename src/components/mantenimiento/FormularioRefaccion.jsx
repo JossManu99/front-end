@@ -1,21 +1,38 @@
-import { useState } from 'react';
-import { crearRefaccion } from '../../services/refaccionService';
+import { useState, useEffect } from 'react';
+import { crearRefaccion, actualizarRefaccion } from '../../services/refaccionService';
 import styles from './RefactionForm.module.css';
 import Menu from '../../components/header/DashboardHeader';
 import das from '../header/Dashboard.module.css';
 
-const RefactionForm = ({ isEditing = false, refaccionId = null }) => {
+const RefactionForm = ({ isEditing = false, refaccionId = null, initialData = null, onEditComplete = () => {} }) => {
   const [userData, setUserData] = useState({ role: 'admin' });
   const [formData, setFormData] = useState({
     cantidad: '',
     codigo: '',
     nombreRefaccion: '',
     nombreProveedor: '',
-    costoTotal: ''
+    costoIndividual: '',
+    costoTotal: '',
+    descripcion: ''
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+
+  // Prepopular el formulario si estamos en modo edición
+  useEffect(() => {
+    if (isEditing && initialData) {
+      setFormData({
+        cantidad: initialData.cantidad || '',
+        codigo: initialData.codigo || '',
+        nombreRefaccion: initialData.nombreRefaccion || '',
+        nombreProveedor: initialData.nombreProveedor || '',
+        costoIndividual: initialData.costoIndividual || '',
+        costoTotal: initialData.costoTotal || '',
+        descripcion: initialData.descripcion || ''
+      });
+    }
+  }, [isEditing, initialData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,38 +49,70 @@ const RefactionForm = ({ isEditing = false, refaccionId = null }) => {
     setSuccess(false);
 
     try {
-      const response = await crearRefaccion(formData);
-      console.log('Refacción creada:', response);
-
-      if (response.exito) {
-        setSuccess(true);
-        setFormData({
-          cantidad: '',
-          codigo: '',
-          nombreRefaccion: '',
-          nombreProveedor: '',
-          costoTotal: ''
-        });
+      let response;
+      
+      if (isEditing) {
+        // Actualizar refacción existente
+        response = await actualizarRefaccion({ _id: refaccionId, ...formData });
+        console.log('Refacción actualizada:', response);
       } else {
-        setError(response.error || 'Error al crear la refacción.');
+        // Crear nueva refacción
+        response = await crearRefaccion(formData);
+        console.log('Refacción creada:', response);
+      }
+
+      if (response.exito || response._id) {
+        setSuccess(true);
+        
+        // Si estamos editando, notificar al componente padre
+        if (isEditing) {
+          setTimeout(() => {
+            onEditComplete();
+          }, 1500); // Pequeño retraso para mostrar el mensaje de éxito
+        } else {
+          // Limpiar el formulario solo si es creación
+          setFormData({
+            cantidad: '',
+            codigo: '',
+            nombreRefaccion: '',
+            nombreProveedor: '',
+            costoIndividual: '',
+            costoTotal: '',
+            descripcion: ''
+          });
+        }
+      } else {
+        setError(response.error || 'Error al procesar la refacción.');
       }
     } catch (err) {
-      console.error('Error al crear la refacción:', err);
-      setError('Error al crear la refacción. Por favor, intente de nuevo.');
+      console.error('Error al procesar la refacción:', err);
+      setError('Error al procesar la refacción. Por favor, intente de nuevo.');
     } finally {
       setLoading(false);
     }
   };
 
   const handleCancel = () => {
-    if (window.confirm('¿Está seguro que desea cancelar? Los datos no guardados se perderán.')) {
-      setFormData({
-        cantidad: '',
-        codigo: '',
-        nombreRefaccion: '',
-        nombreProveedor: '',
-        costoTotal: ''
-      });
+    const message = isEditing 
+      ? '¿Está seguro que desea cancelar la edición? Los cambios no se guardarán.'
+      : '¿Está seguro que desea cancelar? Los datos no guardados se perderán.';
+      
+    if (window.confirm(message)) {
+      if (isEditing) {
+        // Regresar a la lista de refacciones
+        onEditComplete();
+      } else {
+        // Limpiar el formulario
+        setFormData({
+          cantidad: '',
+          codigo: '',
+          nombreRefaccion: '',
+          nombreProveedor: '',
+          costoIndividual: '',
+          costoTotal: '',
+          descripcion: ''
+        });
+      }
       setError(null);
       setSuccess(false);
     }
@@ -83,16 +132,23 @@ const RefactionForm = ({ isEditing = false, refaccionId = null }) => {
       {/* Contenedor del formulario */}
       <div className={styles.formContainer}>
         <div className={styles.formHeader}>
-          <span className={styles.keyboardIcon}>⌨</span> Registro de nueva refacción
+          <span className={styles.keyboardIcon}>⌨</span> 
+          {isEditing ? 'Editar refacción' : 'Registro de nueva refacción'}
         </div>
 
         <p className={styles.formInstructions}>
-          Llene el siguiente formulario, los campos obligatorios están marcados{' '}
+          {isEditing 
+            ? 'Modifique los campos necesarios, los campos obligatorios están marcados' 
+            : 'Llene el siguiente formulario, los campos obligatorios están marcados'} 
           <span className={styles.required}>*</span>:
         </p>
 
         {/* Mensajes de éxito o error */}
-        {success && <div className={styles.successMessage}>Refacción registrada exitosamente.</div>}
+        {success && (
+          <div className={styles.successMessage}>
+            {isEditing ? 'Refacción actualizada exitosamente.' : 'Refacción registrada exitosamente.'}
+          </div>
+        )}
         {error && <div className={styles.errorMessage}>{error}</div>}
 
         <hr className={styles.divider} />
@@ -160,6 +216,21 @@ const RefactionForm = ({ isEditing = false, refaccionId = null }) => {
             </div>
 
             <div className={styles.formGroup}>
+              <label htmlFor="costoIndividual">
+                Costo individual <span className={styles.required}>*</span>
+              </label>
+              <input
+                type="text"
+                id="costoIndividual"
+                name="costoIndividual"
+                placeholder="Ej: 00.00"
+                value={formData.costoIndividual}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className={styles.formGroup}>
               <label htmlFor="costoTotal">
                 Costo total <span className={styles.required}>*</span>
               </label>
@@ -171,6 +242,20 @@ const RefactionForm = ({ isEditing = false, refaccionId = null }) => {
                 value={formData.costoTotal}
                 onChange={handleChange}
                 required
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="descripcion">
+                Descripción
+              </label>
+              <input
+                type="text"
+                id="descripcion"
+                name="descripcion"
+                placeholder="Descripción opcional"
+                value={formData.descripcion}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -185,7 +270,7 @@ const RefactionForm = ({ isEditing = false, refaccionId = null }) => {
               CANCELAR
             </button>
             <button type="submit" className={styles.registerButton} disabled={loading}>
-              {loading ? 'PROCESANDO...' : 'REGISTRAR'}
+              {loading ? 'PROCESANDO...' : isEditing ? 'ACTUALIZAR' : 'REGISTRAR'}
             </button>
           </div>
         </form>

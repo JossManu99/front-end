@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-import { createPropietario } from '../../services/propietarioService';
+import React, { useState, useEffect } from 'react';
+import { createPropietario, updatePropietario } from '../../services/propietarioService';
 import styles from './FormularioPropietario.module.css';
 import Menu from '../../components/header/DashboardHeader';
 
-function FormularioPropietario() {
+function FormularioPropietario({ initialData, onClose }) {
+  // Se define el modo edición según si se pasó información inicial
+  const isEditing = initialData ? true : false;
+
   const [formData, setFormData] = useState({
     nombrePropietario: '',
     rfc: '',
@@ -12,6 +15,17 @@ function FormularioPropietario() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // Si se está editando, se carga la información del propietario
+  useEffect(() => {
+    if (isEditing && initialData) {
+      setFormData({
+        nombrePropietario: initialData.nombrePropietario || '',
+        rfc: initialData.rfc || '',
+        solicitudComentarios: initialData.solicitudComentarios || '',
+      });
+    }
+  }, [isEditing, initialData]);
 
   const manejarCambio = (e) => {
     const { name, value } = e.target;
@@ -27,38 +41,46 @@ function FormularioPropietario() {
     setError(null);
 
     try {
-      const response = await createPropietario(formData);
-      console.log('Propietario creado:', response);
+      if (isEditing) {
+        // Actualiza el propietario existente
+        const response = await updatePropietario(initialData._id, formData);
+        console.log('Propietario actualizado:', response);
+        alert('Propietario actualizado con éxito');
+      } else {
+        // Crea un nuevo propietario
+        const response = await createPropietario(formData);
+        console.log('Propietario creado:', response);
+        alert('Propietario guardado con éxito');
+      }
+      
+      // Reinicia el formulario y cierra el modo edición
       setFormData({
         nombrePropietario: '',
         rfc: '',
         solicitudComentarios: '',
       });
-      alert('Propietario guardado con éxito');
+      
+      if (onClose) onClose();
     } catch (error) {
-      console.error('Error al guardar el propietario:', error);
+      console.error(`Error al ${isEditing ? 'actualizar' : 'guardar'} el propietario:`, error);
       setError(error.message);
     } finally {
       setLoading(false);
     }
   };
 
+  const handleCancel = () => {
+    if (onClose) onClose();
+  };
+
   return (
     <div className={styles.mainContainer}>
-      <div>
-        <Menu />
-      </div>
-
-      <div className={styles.searchContainer}>
-        <input
-          type="text"
-          placeholder="Buscar por nombre en SCDD | Navarrete"
-          className={styles.searchInput}
-        />
-      </div>
-
+      {/* Se renderiza el header solo si no se está en modo edición */}
+      {!isEditing && <Menu />}
       <div className={styles.Container}>
-        <h2 className={styles.formTitle}>Crear propietario</h2>
+        <h2 className={styles.formTitle}>
+          {isEditing ? 'Editar propietario' : 'Crear propietario'}
+        </h2>
         <form onSubmit={manejarEnvio} className={styles.formContainer}>
           {error && (
             <div className={styles.errorMessage}>
@@ -99,8 +121,17 @@ function FormularioPropietario() {
               disabled={loading}
               className={styles.submitButton}
             >
-              {loading ? 'Guardando...' : 'Guardar'}
+              {loading ? 'Guardando...' : isEditing ? 'Actualizar' : 'Guardar'}
             </button>
+            {isEditing && (
+              <button
+                type="button"
+                onClick={handleCancel}
+                className={styles.cancelButton || styles.submitButton}
+              >
+                Cancelar
+              </button>
+            )}
           </div>
         </form>
       </div>

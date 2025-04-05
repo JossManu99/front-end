@@ -4,7 +4,6 @@ import styles from './OperadorForm.module.css';
 import Menu from '../../components/header/DashboardHeader';
 import das from '../header/Dashboard.module.css';
 
-
 const OperadorForm = ({ operador = null, onSave }) => {
   const [formData, setFormData] = useState({
     numeroOperador: '',
@@ -26,7 +25,6 @@ const OperadorForm = ({ operador = null, onSave }) => {
     foto: null,
   });
 
-
   const [userData, setUserData] = useState({ role: 'admin' });
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,12 +35,24 @@ const OperadorForm = ({ operador = null, onSave }) => {
       setFormData(prevData => ({
         ...prevData,
         ...operador,
-        fechaNacimiento: operador.fechaNacimiento ? new Date(operador.fechaNacimiento).toISOString().split('T')[0] : '',
-        fechaIngreso: operador.fechaIngreso ? new Date(operador.fechaIngreso).toISOString().split('T')[0] : '',
-        fechaVencimientoLicenciaEstatal: operador.fechaVencimientoLicenciaEstatal ? new Date(operador.fechaVencimientoLicenciaEstatal).toISOString().split('T')[0] : '',
-        fechaVencimientoLicenciaFederal: operador.fechaVencimientoLicenciaFederal ? new Date(operador.fechaVencimientoLicenciaFederal).toISOString().split('T')[0] : '',
-        fechaVencimientoExamenMedico: operador.fechaVencimientoExamenMedico ? new Date(operador.fechaVencimientoExamenMedico).toISOString().split('T')[0] : '',
-        fechaVencimientoTarjeton: operador.fechaVencimientoTarjeton ? new Date(operador.fechaVencimientoTarjeton).toISOString().split('T')[0] : '',
+        fechaNacimiento: operador.fechaNacimiento
+          ? new Date(operador.fechaNacimiento).toISOString().split('T')[0]
+          : '',
+        fechaIngreso: operador.fechaIngreso
+          ? new Date(operador.fechaIngreso).toISOString().split('T')[0]
+          : '',
+        fechaVencimientoLicenciaEstatal: operador.fechaVencimientoLicenciaEstatal
+          ? new Date(operador.fechaVencimientoLicenciaEstatal).toISOString().split('T')[0]
+          : '',
+        fechaVencimientoLicenciaFederal: operador.fechaVencimientoLicenciaFederal
+          ? new Date(operador.fechaVencimientoLicenciaFederal).toISOString().split('T')[0]
+          : '',
+        fechaVencimientoExamenMedico: operador.fechaVencimientoExamenMedico
+          ? new Date(operador.fechaVencimientoExamenMedico).toISOString().split('T')[0]
+          : '',
+        fechaVencimientoTarjeton: operador.fechaVencimientoTarjeton
+          ? new Date(operador.fechaVencimientoTarjeton).toISOString().split('T')[0]
+          : '',
       }));
     }
   }, [operador]);
@@ -99,6 +109,7 @@ const OperadorForm = ({ operador = null, onSave }) => {
     setError('');
     setIsSubmitting(true);
 
+    // Convertir fechas a ISO string
     const updatedFormData = {
       ...formData,
       fechaNacimiento: formData.fechaNacimiento ? new Date(formData.fechaNacimiento).toISOString() : '',
@@ -119,8 +130,10 @@ const OperadorForm = ({ operador = null, onSave }) => {
     try {
       let response;
       if (operador) {
+        // Actualización
         response = await updateOperador(operador._id, form);
       } else {
+        // Creación
         response = await createOperador(form);
       }
 
@@ -147,9 +160,11 @@ const OperadorForm = ({ operador = null, onSave }) => {
           foto: null,
         });
         setIsSubmitting(false);
-        if (onSave) onSave();
+        // Envía el objeto actualizado o la respuesta para que el padre lo procese
+        if (onSave) onSave(response.operador || updatedFormData);
       } else {
         alert('Error: ' + (response?.message || 'Desconocido'));
+        setIsSubmitting(false);
       }
     } catch (err) {
       alert('Hubo un error al procesar la solicitud');
@@ -214,10 +229,6 @@ const OperadorForm = ({ operador = null, onSave }) => {
 
   return (
     <div className={styles.mainContainer}>
-      {/* 
-        Si autobus._id existe, estamos editando, entonces NO mostramos el menú.
-        Si NO existe autobus._id, estamos creando, entonces mostramos el menú.
-      */}
       {(!operador || !operador._id) && (
         <div className={das.menuContainer}>
           <Menu />
@@ -226,12 +237,12 @@ const OperadorForm = ({ operador = null, onSave }) => {
 
       <div className={styles.formContainer}>
         <div className={styles.container}>
-          <h2>Crear Operador</h2>
+          <h2>{operador ? 'Editar Operador' : 'Crear Operador'}</h2>
 
           <form onSubmit={handleSubmit} ref={formRef} className={styles.form}>
             {/* Primera fila: Datos básicos */}
             <div className={styles.formRow}>
-              {renderTextInput("numero-operador", "numeroOperador", formData.numeroOperador, "Número de Operador:") }
+              {renderTextInput("numero-operador", "numeroOperador", formData.numeroOperador, "Número de Operador:")}
               {renderTextInput("nombre", "nombre", formData.nombre, "Nombre:")}
               {renderDateInput("fecha-nacimiento", "fechaNacimiento", formData.fechaNacimiento, "Fecha de Nacimiento:")}
               {renderTextInput("edad", "edad", formData.edad, "Edad:", "number", true)}
@@ -241,7 +252,6 @@ const OperadorForm = ({ operador = null, onSave }) => {
             <div className={styles.formRow}>
               {renderDateInput("fecha-ingreso", "fechaIngreso", formData.fechaIngreso, "Fecha de Ingreso:")}
               
-              {/* Tipo de Licencia con layout mejorado */}
               <div className={styles.fieldColumn}>
                 <div className={styles.fieldHeader}>Tipo de Licencia:</div>
                 <div className={styles.fieldInput}>
@@ -277,17 +287,17 @@ const OperadorForm = ({ operador = null, onSave }) => {
 
             {/* Licencia Estatal y fecha de vencimiento */}
             <div className={styles.formRow}>
-              {formData.tipoLicencia === 'estatal' || formData.tipoLicencia === 'federal' ? (
+              {(formData.tipoLicencia === 'estatal' || formData.tipoLicencia === 'federal') && (
                 renderFileInput("documento-licencia-estatal", "documentoLicenciaEstatal", ".pdf", "Licencia Estatal:")
-              ) : null}
+              )}
               
-              {formData.tipoLicencia === 'estatal' || formData.tipoLicencia === 'federal' ? (
+              {(formData.tipoLicencia === 'estatal' || formData.tipoLicencia === 'federal') && (
                 renderDateInput("fecha-vencimiento-licencia-estatal", "fechaVencimientoLicenciaEstatal", formData.fechaVencimientoLicenciaEstatal, "Vencimiento Licencia Estatal:")
-              ) : null}
+              )}
               
-              {formData.tipoLicencia === 'federal' ? (
+              {formData.tipoLicencia === 'federal' && (
                 renderFileInput("documento-licencia-federal", "documentoLicenciaFederal", ".pdf", "Licencia Federal:")
-              ) : null}
+              )}
             </div>
 
             {/* Vencimiento Licencia Federal - solo visible si es federal */}
@@ -311,7 +321,7 @@ const OperadorForm = ({ operador = null, onSave }) => {
 
             {/* Observaciones */}
             <div className={styles.formRow}>
-              <div className={styles.fieldColumn} style={{width: '100%'}}>
+              <div className={styles.fieldColumn} style={{ width: '100%' }}>
                 <div className={styles.fieldHeader}>Observaciones:</div>
                 <div className={styles.fieldInput}>
                   <textarea
@@ -328,7 +338,7 @@ const OperadorForm = ({ operador = null, onSave }) => {
             {error && <div className={styles.error}>{error}</div>}
 
             <button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'Creando Operador...' : 'Guardar'}
+              {isSubmitting ? (operador ? 'Actualizando Operador...' : 'Creando Operador...') : 'Guardar'}
             </button>
           </form>
         </div>

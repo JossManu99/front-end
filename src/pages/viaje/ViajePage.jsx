@@ -1,12 +1,9 @@
-// src/pages/viajes/ViajePage.js
+// src/pages/viajes/ViajePage.jsx
 import React, { useEffect, useState } from 'react';
-// Remove this line: import axios from 'axios'; // We won't need axios here
 import ViajeModal from '../../components/viaje/ViajeModal';
-import './ViajePage.css';
 import Menu from '../../components/header/DashboardHeader';
-import das from '../../components/header/DashboardHeader';
-
-// Import the service functions
+import das from '../../components/header/Dashboard.module.css';
+import './ViajePage.css';
 import { getViajes, deleteViaje, updateViaje } from '../../services/viaje/viajeService';
 
 const ViajePage = () => {
@@ -15,79 +12,72 @@ const ViajePage = () => {
   const [error, setError] = useState(null);
   const [selectedViaje, setSelectedViaje] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [refreshKey, setRefreshKey] = useState(0); // clave para forzar re-render
+
+  const fetchAllViajes = async () => {
+    try {
+      const data = await getViajes();
+      setViajes(data);
+    } catch (err) {
+      setError('Error al obtener los viajes');
+      console.error('Error al obtener viajes:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchAllViajes = async () => {
-      try {
-        const data = await getViajes(); // Use service
-        setViajes(data);
-      } catch (err) {
-        setError('Error al obtener los viajes');
-        console.error('Error al obtener viajes:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchAllViajes();
   }, []);
 
-  // Manejo del botón "Ver información del viaje"
   const handleViewDetails = (viaje) => {
     setSelectedViaje(viaje);
   };
 
-  // Cerrar el modal
   const handleCloseModal = () => {
     setSelectedViaje(null);
   };
 
-  // Eliminar un viaje usando la función del servicio
   const handleDelete = async (id) => {
     try {
-      await deleteViaje(id); // Use service
+      await deleteViaje(id);
       setViajes((prev) => prev.filter((viaje) => viaje._id !== id));
       setSelectedViaje(null);
+      setRefreshKey((prev) => prev + 1);
     } catch (err) {
       console.error('Error al eliminar viaje:', err);
       setError('Error al eliminar el viaje.');
     }
   };
 
-  // Actualizar un viaje usando la función del servicio
   const handleUpdate = async (viajeActualizado) => {
     try {
-      const updated = await updateViaje(viajeActualizado); // Use service
-      // Actualizar lista de viajes en el estado
-      setViajes((prev) =>
-        prev.map((v) => (v._id === updated._id ? updated : v))
-      );
+      // Puedes optar por usar la respuesta del update o recargar la lista completa
+      await updateViaje(viajeActualizado);
+      await fetchAllViajes();
       setSelectedViaje(null);
+      setRefreshKey((prev) => prev + 1);
     } catch (err) {
       console.error('Error al actualizar viaje:', err);
       setError('Error al actualizar el viaje.');
     }
   };
 
-  // Filtrar viajes con el término de búsqueda
   const filteredViajes = viajes.filter((viaje) =>
-    Object.values(viaje)
-      .join(' ')
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase())
+    Object.values(viaje).join(' ').toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Agrupar viajes por nombreCliente
+  // Agrupar viajes por cliente
   const groupViajesByClient = (viajes) => {
-    const groupedViajes = {};
+    const grouped = {};
     viajes.forEach((viaje) => {
       const clientName = viaje.nombreCliente || 'Sin cliente';
-      if (!groupedViajes[clientName]) {
-        groupedViajes[clientName] = [];
+      if (!grouped[clientName]) {
+        grouped[clientName] = [];
       }
-      groupedViajes[clientName].push(viaje);
+      grouped[clientName].push(viaje);
     });
-    return groupedViajes;
+    return grouped;
   };
 
   const groupedViajes = groupViajesByClient(filteredViajes);
@@ -100,8 +90,6 @@ const ViajePage = () => {
 
       <div className="viajes-page">
         <h2>Lista de Viajes</h2>
-
-        {/* Input de búsqueda */}
         <input
           type="text"
           placeholder="Buscar viaje..."
@@ -110,11 +98,9 @@ const ViajePage = () => {
           className="search-input"
         />
 
-        <div className="Container">
-          {/* Mostrar error si existe */}
+        <div className="Container" key={refreshKey}>
           {error && <p className="error-message">{error}</p>}
 
-          {/* Mostrar indicador de carga o la lista de viajes agrupados */}
           {loading ? (
             <p>Cargando viajes...</p>
           ) : (
@@ -149,17 +135,16 @@ const ViajePage = () => {
               )}
             </div>
           )}
-
-          {/* Modal de información del viaje */}
-          {selectedViaje && (
-            <ViajeModal
-              viaje={selectedViaje}
-              onClose={handleCloseModal}
-              onDelete={handleDelete}
-              onUpdate={handleUpdate}
-            />
-          )}
         </div>
+
+        {selectedViaje && (
+          <ViajeModal
+            viaje={selectedViaje}
+            onClose={handleCloseModal}
+            onDelete={handleDelete}
+            onUpdate={handleUpdate}
+          />
+        )}
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+// src/components/viaje/FormViaje.jsx
 import React, { useState, useEffect } from 'react';
 import { createViaje, updateViaje } from '../../services/viaje/viajeService';
 import Menu from '../../components/header/DashboardHeader';
@@ -12,7 +13,7 @@ const turnoHorarios = {
   '5°': { inicio: '21:30', fin: '07:20' }
 };
 
-const FormViaje = ({ onViajeCreated, viaje, onDeleteViaje }) => {
+const FormViaje = ({ onViajeCreated, viaje, onCancel }) => {
   const [formData, setFormData] = useState({
     numeroRuta: '',
     nombreCliente: '',
@@ -142,26 +143,6 @@ const FormViaje = ({ onViajeCreated, viaje, onDeleteViaje }) => {
         result = await createViaje(dataToSubmit);
       }
       if (onViajeCreated) onViajeCreated(result);
-
-      // Reset form
-      setFormData({
-        numeroRuta: '',
-        nombreCliente: '',
-        saleDe: '',
-        llegaA: '',
-        distancia: '',
-        costoPorKm: '',
-        costo: '',
-        turnos: [
-          {
-            turno: '1°',
-            horario1: '',
-            horario2: '',
-            horarioPredefinidoInicio: turnoHorarios['1°'].inicio,
-            horarioPredefinidoFin: turnoHorarios['1°'].fin
-          }
-        ]
-      });
       alert(dataToSubmit._id ? 'Viaje actualizado con éxito' : 'Viaje creado con éxito');
     } catch (error) {
       console.error('Error al guardar viaje:', error);
@@ -173,9 +154,12 @@ const FormViaje = ({ onViajeCreated, viaje, onDeleteViaje }) => {
 
   return (
     <div className={styles.generalContainer}>
-      <div className={das.menuContainer}>
-        <Menu />
-      </div>
+      {/* Se muestra el menú solo si NO se está en modo edición (crear) */}
+      {(!viaje || !viaje._id) && (
+        <div className={das.menuContainer}>
+          <Menu />
+        </div>
+      )}
 
       <div className={styles.formContainer}>
         <h2 className={styles.formTitle}>
@@ -367,6 +351,15 @@ const FormViaje = ({ onViajeCreated, viaje, onDeleteViaje }) => {
             >
               {isSubmitting ? 'CREANDO...' : formData._id ? 'ACTUALIZAR VIAJE' : 'CREAR VIAJE'}
             </button>
+            {onCancel && (
+              <button
+                type="button"
+                className={styles.cancelButton}
+                onClick={onCancel}
+              >
+                Cancelar
+              </button>
+            )}
           </div>
         </form>
       </div>

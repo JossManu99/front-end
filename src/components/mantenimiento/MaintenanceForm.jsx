@@ -1,8 +1,7 @@
-// MaintenanceForm.jsx
 import { useState, useEffect } from 'react';
 import { getOperadores } from '../../services/OperadorService';
 import { getAutobuses } from '../../services/AutobusesService';
-import { createMantenimiento, updateMantenimiento } from '../../services/manttoService';
+import { createMantenimiento, updateMantenimiento, getMantenimientoById } from '../../services/manttoService';
 import {
   obtenerRefacciones,
   crearRefaccion,
@@ -13,7 +12,7 @@ import styles from './MaintenanceForm.module.css';
 import Menu from '../../components/header/DashboardHeader';
 import das from '../header/Dashboard.module.css';
 
-const MaintenanceForm = ({ isEditing = false, mantenimientoId = null }) => {
+const MaintenanceForm = ({ isEditing = false, mantenimientoId = null, onCancel, onSuccess }) => {
   // Fecha y hora actuales
   const today = new Date();
   const formattedDate = today.toLocaleDateString('es-ES', {
@@ -27,7 +26,7 @@ const MaintenanceForm = ({ isEditing = false, mantenimientoId = null }) => {
     minute: '2-digit',
   });
 
-  // Datos principales del formulario
+  // Estado principal del formulario
   const [formData, setFormData] = useState({
     fecha: formattedDate,
     hora: formattedTime,
@@ -42,10 +41,8 @@ const MaintenanceForm = ({ isEditing = false, mantenimientoId = null }) => {
 
   // Lista de refacciones que se usarán en este mantenimiento
   const [refaccionesList, setRefaccionesList] = useState([]);
-
   // Lista de refacciones existentes en la BD
   const [allRefacciones, setAllRefacciones] = useState([]);
-
   // Total calculado
   const [total, setTotal] = useState('0.00');
 
@@ -54,7 +51,7 @@ const MaintenanceForm = ({ isEditing = false, mantenimientoId = null }) => {
   const [autobuses, setAutobuses] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Control de errores y éxito
+  // Control de errores, éxito y envío
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -92,15 +89,58 @@ const MaintenanceForm = ({ isEditing = false, mantenimientoId = null }) => {
   }, []);
 
   // ─────────────────────────────────────────
+  // Si se está editando, obtener el mantenimiento existente para prepopular el formulario
+  // ─────────────────────────────────────────
+  useEffect(() => {
+    if (isEditing && mantenimientoId) {
+      const fetchMaintenance = async () => {
+        try {
+          const response = await getMantenimientoById(mantenimientoId);
+          if (response?.success && response.data) {
+            const mto = response.data;
+            setFormData({
+              fecha: mto.fecha || formattedDate,
+              hora: mto.hora || formattedTime,
+              numeroEconomico: mto.numeroEconomico || '',
+              nombreOperador: mto.nombreOperador || '',
+              kilometraje: mto.kilometraje || '',
+              falla: mto.falla || '',
+              solucion: mto.solucion || '',
+              horasUsadas: mto.horasUsadas || { inicio: '', fin: '' },
+              asignado: mto.asignado || '',
+            });
+            if (mto.refacciones && Array.isArray(mto.refacciones)) {
+              // Convertir cada refacción al formato que usa el formulario
+              const mappedRefacciones = mto.refacciones.map((ref, index) => ({
+                id: index + 1,
+                isNew: false,
+                refaccionId: ref._id || '',
+                nombre: ref.nombreRefaccion || '',
+                costIndividual: ref.costIndividual ? ref.costIndividual.toString() : '0',
+                stock: ref.stock ? ref.stock.toString() : '0',
+                cantidadUsada: ref.cantidad ? ref.cantidad.toString() : '1',
+                descripcion: ref.descripcion || '',
+              }));
+              setRefaccionesList(mappedRefacciones);
+            }
+          }
+        } catch (err) {
+          console.error('Error al obtener el mantenimiento:', err);
+        }
+      };
+
+      fetchMaintenance();
+    }
+  }, [isEditing, mantenimientoId, formattedDate, formattedTime]);
+
+  // ─────────────────────────────────────────
   // Calcular total cada vez que cambian las refacciones
   // ─────────────────────────────────────────
   useEffect(() => {
     const sum = refaccionesList.reduce((acc, item) => {
       if (item.isNew) {
-        // Para refacciones nuevas usamos el costo total ingresado
         return acc + parseFloat(item.costoTotal || '0');
       } else {
-        // Para refacciones existentes: costo = cantidadUsada * costIndividual
         const usedQty = parseFloat(item.cantidadUsada || '0');
         const costInd = parseFloat(item.costIndividual || '0');
         return acc + (usedQty * costInd);
@@ -140,9 +180,9 @@ const MaintenanceForm = ({ isEditing = false, mantenimientoId = null }) => {
         isNew: false,
         refaccionId: '',
         nombre: '',
-        costIndividual: '0', // se obtendrá de la BD
-        stock: '0',          // stock actual
-        cantidadUsada: '1',  // por defecto 1 pieza
+        costIndividual: '0',
+        stock: '0',
+        cantidadUsada: '1',
         descripcion: '',
       },
     ]);
@@ -185,7 +225,7 @@ const MaintenanceForm = ({ isEditing = false, mantenimientoId = null }) => {
       {
         id: newId,
         isNew: true,
-        cantidad: '',         // stock inicial
+        cantidad: '',
         codigo: '',
         nombreRefaccion: '',
         nombreProveedor: '',
@@ -287,9 +327,7 @@ const MaintenanceForm = ({ isEditing = false, mantenimientoId = null }) => {
               );
               continue;
             }
-            // Verificar que refaccionId exista y no sea undefined
             if (item.refaccionId) {
-              // Llamamos a la función pasando un objeto con _id y los datos a actualizar
               await actualizarRefaccion({ _id: item.refaccionId, cantidad: newStock });
             } else {
               console.warn(
@@ -358,6 +396,7 @@ const MaintenanceForm = ({ isEditing = false, mantenimientoId = null }) => {
         setRefaccionesList([]);
         setTotal('0.00');
       }
+      if (onSuccess) onSuccess();
     } catch (err) {
       console.error('Error al guardar el mantenimiento:', err);
       setError('Error al guardar el registro. Por favor, intente de nuevo.');
@@ -367,7 +406,7 @@ const MaintenanceForm = ({ isEditing = false, mantenimientoId = null }) => {
   };
 
   // ─────────────────────────────────────────
-  // Cancelar
+  // Cancelar acción
   // ─────────────────────────────────────────
   const handleCancel = () => {
     if (window.confirm('¿Está seguro de cancelar? Se perderán los datos no guardados.')) {
@@ -384,6 +423,7 @@ const MaintenanceForm = ({ isEditing = false, mantenimientoId = null }) => {
       });
       setRefaccionesList([]);
       setTotal('0.00');
+      if (onCancel) onCancel();
     }
   };
 
@@ -397,14 +437,14 @@ const MaintenanceForm = ({ isEditing = false, mantenimientoId = null }) => {
 
   return (
     <div className={styles.maincontainer}>
-      {/* Menú de navegación */}
-      <div className={das.navigationMenu}>
-        {userData?.role === 'admin' && (
+      {/* Renderizar el menú solo si no se está en modo edición */}
+      {!isEditing && userData?.role === 'admin' && (
+        <div className={das.navigationMenu}>
           <div className={das.menuContainer}>
             <Menu />
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       <div className={styles.formContainer}>
         <div className={styles.formHeader}>
@@ -646,7 +686,6 @@ const MaintenanceForm = ({ isEditing = false, mantenimientoId = null }) => {
                   <div className={styles.refaccionesHeaderItem}>Acciones</div>
                 </div>
                 {refaccionesExistentes.map((ref) => {
-                  // Calculamos el costo parcial (cantidadUsada * costIndividual)
                   const usedQty = parseFloat(ref.cantidadUsada || '0');
                   const costInd = parseFloat(ref.costIndividual || '0');
                   const partialCost = (usedQty * costInd).toFixed(2);

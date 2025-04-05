@@ -1,12 +1,10 @@
-// src/pages/operadores/Operadores.js
 import React, { useEffect, useState } from 'react';
-// Remove: import axios from 'axios';   // We won't need axios directly here
-import OperadorModal from '../../components/operadores/OperadorModal ';
+import OperadorModal from '../../components/operadores/OperadorModal';
 import Menu from '../../components/header/DashboardHeader';
 import das from '../../components/header/Dashboard.module.css';
 import styles from './Operadores.module.css';
 
-// Import the methods from your service
+// Importa los métodos desde el servicio
 import {
   getOperadores,
   deleteOperador,
@@ -19,25 +17,26 @@ const Operadores = () => {
   const [error, setError] = useState(null);
   const [selectedOperador, setSelectedOperador] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [refreshKey, setRefreshKey] = useState(0); // clave para forzar re-render
 
   // Fecha actual (ejemplo: "abril 2025")
   const currentMonth = new Date().toLocaleString('es-ES', { month: 'long' });
   const currentYear = new Date().getFullYear();
 
-  // Obtener operadores al montar el componente
-  useEffect(() => {
-    const fetchAllOperadores = async () => {
-      try {
-        const data = await getOperadores();
-        setOperadores(data);
-      } catch (err) {
-        setError('Error al obtener los operadores');
-        console.error('Error al obtener operadores:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // Función para obtener y recargar la lista de operadores
+  const fetchAllOperadores = async () => {
+    try {
+      const data = await getOperadores();
+      setOperadores(data);
+    } catch (err) {
+      setError('Error al obtener los operadores');
+      console.error('Error al obtener operadores:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchAllOperadores();
   }, []);
 
@@ -49,33 +48,29 @@ const Operadores = () => {
     setSelectedOperador(null);
   };
 
-  // Eliminar operador usando la función del servicio
   const handleDelete = async (id) => {
     try {
       await deleteOperador(id);
       setOperadores((prev) => prev.filter((op) => op._id !== id));
       setSelectedOperador(null);
+      setRefreshKey(prev => prev + 1);
     } catch (err) {
       console.error('Error al eliminar operador:', err);
       setError('Error al eliminar el operador.');
     }
   };
 
-  // Actualizar operador usando la función del servicio
+  // Actualizar operador y forzar refresco
   const handleUpdate = async (operadorActualizado) => {
-    if (!operadorActualizado._id) return;
+    if (!operadorActualizado || !operadorActualizado._id) {
+      console.error('No se recibió objeto válido para actualizar');
+      return;
+    }
     try {
-      // Llamamos al servicio para actualizar
-      const updated = await updateOperador(
-        operadorActualizado._id,
-        operadorActualizado
-      );
-
-      // Actualiza el estado con los datos actualizados
-      setOperadores((prev) =>
-        prev.map((op) => (op._id === updated._id ? updated : op))
-      );
+      await updateOperador(operadorActualizado._id, operadorActualizado);
+      await fetchAllOperadores();
       setSelectedOperador(null);
+      setRefreshKey(prev => prev + 1);
     } catch (err) {
       console.error('Error al actualizar operador:', err);
       setError('Error al actualizar el operador.');
@@ -101,21 +96,16 @@ const Operadores = () => {
     return `${date.getDate()} ${date.toLocaleString('es-ES', { month: 'long' })}, ${date.getFullYear()}`;
   };
 
-  // Determina el estado (vencido, por vencer, vigente, sin datos) de un documento
+  // Determina el estado de un documento
   const checkSpecificDocumentStatus = (dateString) => {
     if (!dateString) return 'no-data';
     const currentDate = new Date();
     const expirationDate = new Date(dateString);
     if (isNaN(expirationDate)) return 'no-data';
-
     const daysRemaining = Math.ceil((expirationDate - currentDate) / (1000 * 60 * 60 * 24));
-    if (daysRemaining <= 0) {
-      return 'expired';  // rojo
-    } else if (daysRemaining <= 30) {
-      return 'warning';  // amarillo
-    } else {
-      return 'valid';    // verde
-    }
+    if (daysRemaining <= 0) return 'expired';
+    else if (daysRemaining <= 30) return 'warning';
+    else return 'valid';
   };
 
   return (
@@ -124,14 +114,12 @@ const Operadores = () => {
       <div className={das.menuContainer}>
         <Menu />
       </div>
-
       <div className={styles.operadoresPage}>
         <h1 className={styles.mainTitle}>Listado de trabajadores</h1>
         <p className={styles.currentDate}>
           {currentMonth.charAt(0).toUpperCase() + currentMonth.slice(1)} {currentYear}
         </p>
-
-        {/* Barra de búsqueda (opcional) */}
+        {/* (Opcional) Barra de búsqueda */}
         {/* 
         <div className={styles.searchContainer}>
           <input
@@ -143,8 +131,7 @@ const Operadores = () => {
           />
         </div>
         */}
-
-        <div className={styles.operadoresTableContainer}>
+        <div className={styles.operadoresTableContainer} key={refreshKey}>
           <table className={styles.operadoresTable}>
             <thead>
               <tr>
@@ -178,14 +165,10 @@ const Operadores = () => {
                   const tarjetonStatus = checkSpecificDocumentStatus(
                     operador.fechaVencimientoTarjeton
                   );
-
                   return (
                     <tr key={operador._id || operador.numeroOperador}>
                       {/* INFORMACIÓN */}
-                      <td
-                        className={styles.operadorInfoCell}
-                        data-label="Información"
-                      >
+                      <td className={styles.operadorInfoCell} data-label="Información">
                         <div className={styles.operadorInfo}>
                           <div className={styles.avatarContainer}>
                             <img
@@ -204,67 +187,40 @@ const Operadores = () => {
                           </div>
                         </div>
                       </td>
-
-                      {/* NUM OP */}
+                      {/* NÚM OPERADOR */}
                       <td data-label="Núm. operador">
                         {operador.telefono || operador.numeroOperador || 'N/A'}
                       </td>
-
                       {/* OBSERVACIONES */}
-                      <td
-                        className={styles.operadorAddress}
-                        data-label="Observaciones"
-                      >
+                      <td className={styles.operadorAddress} data-label="Observaciones">
                         {operador.observaciones || 'N/A'}
                       </td>
-
                       {/* PUESTO */}
                       <td data-label="Puesto">
                         {operador.puesto || 'N/A'}
                       </td>
-
                       {/* FECHA DE INICIO */}
                       <td data-label="Fecha de inicio">
-                        {formatDate(
-                          operador.fechaIngreso || operador.fechaContratacion
-                        )}
+                        {formatDate(operador.fechaIngreso || operador.fechaContratacion)}
                       </td>
-
                       {/* VIGENCIA DOCUMENTOS */}
-                      <td
-                        className={styles.documentStatus}
-                        data-label="Vigencia en documentos"
-                      >
+                      <td className={styles.documentStatus} data-label="Vigencia en documentos">
                         <div className={styles.documentsContainer}>
                           <div className={styles.documentItem}>
-                            <span className={styles.documentLabel}>
-                              Examen Médico:
-                            </span>
+                            <span className={styles.documentLabel}>Examen Médico:</span>
                             <div className={styles.statusContainer}>
-                              <span
-                                className={`${styles.statusIndicator} ${
-                                  styles[examenMedicoStatus]
-                                }`}
-                              ></span>
+                              <span className={`${styles.statusIndicator} ${styles[examenMedicoStatus]}`}></span>
                               <span className={styles.statusDate}>
                                 {operador.fechaVencimientoExamenMedico
-                                  ? formatDate(
-                                      operador.fechaVencimientoExamenMedico
-                                    )
+                                  ? formatDate(operador.fechaVencimientoExamenMedico)
                                   : 'N/A'}
                               </span>
                             </div>
                           </div>
                           <div className={styles.documentItem}>
-                            <span className={styles.documentLabel}>
-                              Tarjetón:
-                            </span>
+                            <span className={styles.documentLabel}>Tarjetón:</span>
                             <div className={styles.statusContainer}>
-                              <span
-                                className={`${styles.statusIndicator} ${
-                                  styles[tarjetonStatus]
-                                }`}
-                              ></span>
+                              <span className={`${styles.statusIndicator} ${styles[tarjetonStatus]}`}></span>
                               <span className={styles.statusDate}>
                                 {operador.fechaVencimientoTarjeton
                                   ? formatDate(operador.fechaVencimientoTarjeton)
@@ -274,7 +230,6 @@ const Operadores = () => {
                           </div>
                         </div>
                       </td>
-
                       {/* VER MÁS */}
                       <td data-label="Ver más">
                         <button
@@ -291,7 +246,6 @@ const Operadores = () => {
             </tbody>
           </table>
         </div>
-
         {selectedOperador && (
           <OperadorModal
             operador={selectedOperador}

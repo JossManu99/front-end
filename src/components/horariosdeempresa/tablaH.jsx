@@ -113,7 +113,7 @@ const ViajeFormT = ({ tablarolEdit, setEditTablarol }) => {
       if (typeof setEditTablarol === 'function') {
         setEditTablarol(null);
       }
-      navigate('/dashboard/tablaroles');
+      navigate('/vertablaroles');
     } catch (error) {
       console.error("❌ Error al guardar:", error);
       alert(`❌ Error al ${tablarolEdit ? 'actualizar' : 'guardar'} los datos.`);

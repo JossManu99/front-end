@@ -35,6 +35,13 @@ import VerRecargas from './components/combustible/VerRecargas';
 import TablaRolTbfComponent from './components/creacionderoles/TablaRolTbfComponent';
 import Utilidades from './components/utilidades/Utilidades';
 import Nomina from './components/Nominas/Nominas';
+import UsersList from './components/usuarios/users';
+import RefaccionesComponent from './components/mantenimiento/RefaccionesComponent';
+import MantenimientosList from './components/mantenimiento/MantenimientosList';
+import ListaPropietarios from './components/autobuses/ListaPropietarios';
+
+
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -171,6 +178,32 @@ function App() {
           path="/Nomina"
           element={<ProtectedRoute element={<Nomina />} role="admin" />}
         />
+
+        <Route
+          path="/users"
+          element={<ProtectedRoute element={<UsersList />} role="admin" />}
+        />
+
+<Route
+          path="/ListaRefacciones"
+          element={<ProtectedRoute element={<RefaccionesComponent />} role="admin" />}
+        />
+
+<Route
+          path="/ListaMantenimeintos"
+          element={<ProtectedRoute element={<MantenimientosList />} role="admin" />}
+        />
+
+<Route
+          path="/Listapropietarios"
+          element={<ProtectedRoute element={<ListaPropietarios />} role="admin" />}
+        />
+
+
+
+
+
+
 
         {/* Rutas públicas */}
         <Route path="/registrar" element={<FormRegister />} />

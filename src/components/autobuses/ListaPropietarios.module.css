@@ -1,0 +1,123 @@
+
+.mainContainer {
+  max-width: 100%;
+  width: 100%;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+.container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .tableHeader {
+    background-color: #1976d2;
+    color: #fff;
+  }
+  
+  .tableHeader th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+  
+  .tableBody tr {
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+  }
+  
+  .tableBody tr:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .tableBody td {
+    padding: 12px 15px;
+    text-align: left;
+  }
+  
+  .noData {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+  
+  .input:focus {
+    outline: none;
+    border-color: #1976d2;
+    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+  }
+  
+  .btnContainer {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+  }
+  
+  .btnEdit, .btnSave, .btnDelete {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  
+  .btnEdit {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .btnEdit:hover {
+    background-color: #3d8b40;
+  }
+  
+  .btnSave {
+    background-color: #2196f3;
+    color: white;
+  }
+  
+  .btnSave:hover {
+    background-color: #0b7dda;
+  }
+  
+  .btnDelete {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .btnDelete:hover {
+    background-color: #d32f2f;
+  }

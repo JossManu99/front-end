@@ -33,12 +33,23 @@ const Menu = () => {
       path: '/Profile',
       roles: ['admin', 'user']
     },
+    
+    {
+      label: 'Usuarios',
+      icon: '👥',
+      roles: ['admin'],
+      submenu: [
+        { label: 'Ver usuarios', path: '/users', roles: ['admin'] },
+
+      ]
+    },
     {
       label: 'Propietarios',
       icon: '👥',
       roles: ['admin'],
       submenu: [
-        { label: 'Crear propietario', path: '/propietario', roles: ['admin'] }
+        { label: 'Crear propietario', path: '/propietario', roles: ['admin'] },
+        { label: 'Listar propietarios', path: '/Listapropietarios', roles: ['admin'] }
       ]
     },
     {
@@ -84,7 +95,10 @@ const Menu = () => {
       roles: ['admin'],
       submenu: [
         { label: 'Registrar', path: '/mantenimiento', roles: ['admin'] },
-        { label: 'Refacciones', path: '/refacciones', roles: ['admin'] }
+        { label: 'ListaMantenimeintos', path: '/ListaMantenimeintos', roles: ['admin'] },
+        { label: 'Refacciones', path: '/refacciones', roles: ['admin'] },
+        { label: 'ListaRefacciones', path: '/ListaRefacciones', roles: ['admin'] }
+        
       ]
     },
     {
