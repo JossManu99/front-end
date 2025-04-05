@@ -3,7 +3,7 @@ import {
   getUsersService,
   updateUserService,
   deleteUserService,
-} from '../../services/usuariosService';
+} from '../../services/authService';
 import styles from './UsersList.module.css';
 import Menu from '../../components/header/DashboardHeader';
 import das from '../header/Dashboard.module.css';

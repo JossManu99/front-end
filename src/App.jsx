@@ -35,10 +35,11 @@ import VerRecargas from './components/combustible/VerRecargas';
 import TablaRolTbfComponent from './components/creacionderoles/TablaRolTbfComponent';
 import Utilidades from './components/utilidades/Utilidades';
 import Nomina from './components/Nominas/Nominas';
-import UsersList from './components/usuarios/users';
 import RefaccionesComponent from './components/mantenimiento/RefaccionesComponent';
 import MantenimientosList from './components/mantenimiento/MantenimientosList';
 import ListaPropietarios from './components/autobuses/ListaPropietarios';
+import UsersList from './components/usuarios/users';
+
 
 
 
@@ -87,7 +88,8 @@ function App() {
         />
         <Route
           path="/panelusuario"
-          element={<ProtectedRoute element={<Dashboard />} role="admin" />}
+          element={<ProtectedRoute element={<Dashboard />} role="admin"
+           />}
         />
         <Route
           path="/recargacombustible"
@@ -180,9 +182,11 @@ function App() {
         />
 
         <Route
-          path="/users"
-          element={<ProtectedRoute element={<UsersList />} role="admin" />}
-        />
+                  path="/users"
+                  element={<ProtectedRoute element={<UsersList />} role="user" />}
+                />
+
+       
 
 <Route
           path="/ListaRefacciones"

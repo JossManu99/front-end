@@ -37,9 +37,8 @@ const Menu = () => {
     {
       label: 'Usuarios',
       icon: '👥',
-      roles: ['admin'],
       submenu: [
-        { label: 'Ver usuarios', path: '/users', roles: ['admin'] },
+        { label: 'Ver usuarios', path: '/users'},
 
       ]
     },
