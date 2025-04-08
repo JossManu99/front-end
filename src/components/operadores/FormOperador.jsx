@@ -279,11 +279,11 @@ const OperadorForm = ({ operador = null, onSave }) => {
                 <div className={styles.fieldInput}>
                   <select name="puesto" value={formData.puesto} onChange={handleChange}>
                     <option value="">Seleccione</option>
-                    <option value="secretario">Secretario</option>
+                    <option value="secretaria">Secretaria</option>
                     <option value="operador">Operador</option>
-                    <option value="logiostaca">Logiostaca</option>
+                    <option value="logistica">Logistica</option>
                     <option value="mecánico">Mecánico</option>
-                    <option value="ojaltero">Ojaltero</option>
+                    <option value="ojalatero">Ojalatero</option>
                     <option value="otro">Otro</option>
                   </select>
                 </div>
