@@ -6,14 +6,16 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
 }
 
 /* Contenedor principal del header */
 .headerContainer {
-  width: 100vw;
+  width: 100%;
   max-width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Header con información de contacto */
@@ -21,29 +23,43 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to right, #c9a227, #8ca764, #3db8c0);
+  background: linear-gradient(120deg, #18546f, #107896, #0ca2c5);
   color: white;
-  padding: 8px 20px;
+  padding: 12px 24px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
   width: 100%;
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+}
+
 .logo img {
-  height: 40px;
+  height: 48px;
   filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.05);
 }
 
 .contactInfo {
   font-size: 13px;
-  line-height: 1.4;
-  text-align: right;
+  line-height: 1.5;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .contactInfo p {
   margin: 3px 0;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .contactInfo p:first-child::before {
@@ -56,58 +72,164 @@ body {
   margin-right: 5px;
 }
 
+/* Estilos para el avatar y user info */
+.userInfo {
+  display: flex;
+  align-items: center;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.userInfo:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  margin-right: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  position: relative;
+}
+
+.avatar::after {
+  content: "👤";
+  font-size: 20px;
+}
+
+.userInfo span {
+  font-weight: 500;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
 /* Menú de navegación */
 .navigationMenu {
-  background-color: #15617a;
-  padding: 0;
+  background-color: #107896;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .menuContainer {
   display: flex;
   justify-content: flex-start;
   width: 100%;
-  padding: 0 20px;
+  padding: 0;
 }
 
 /* Barra de búsqueda */
 .searchBar {
-  padding: 15px 20px;
-  background-color: #f0f0f0;
-  border-bottom: 1px solid #e0e0e0;
+  padding: 12px 24px;
+  background-color: #f8f9fb;
+  border-bottom: 1px solid #e6ebf5;
   display: flex;
   justify-content: center;
   width: 100%;
+  transition: all 0.3s ease;
 }
 
 .searchBar input {
   width: 100%;
-  max-width: 600px;
-  padding: 10px 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  max-width: 800px;
+  padding: 12px 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 50px;
   font-size: 14px;
   outline: none;
   transition: all 0.3s;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background-color: white;
 }
 
 .searchBar input:focus {
-  border-color: #3db8c0;
-  box-shadow: 0 0 0 3px rgba(61, 184, 192, 0.2);
+  border-color: #0ca2c5;
+  box-shadow: 0 0 0 3px rgba(12, 162, 197, 0.2);
 }
 
-/* Estilos para el avatar y user info */
-.userInfo {
-  display: flex;
-  align-items: center;
-  color: white;
+.searchBar input::placeholder {
+  color: #a0a0a0;
 }
 
-.avatar {
-  width: 40px;
-  height: 40px;
-  background-color: #ccc;
-  border-radius: 50%;
-  margin-right: 10px;
+/* Responsive styling */
+@media (max-width: 1200px) {
+  .contactInfo p {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 992px) {
+  .dashboardHeader {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+  }
+  
+  .logo {
+    order: 1;
+    margin-right: auto;
+  }
+  
+  .userInfo {
+    order: 2;
+  }
+  
+  .contactInfo {
+    order: 3;
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .contactInfo p {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboardHeader {
+    padding: 10px;
+  }
+  
+  .logo img {
+    height: 40px;
+  }
+  
+  .searchBar {
+    padding: 10px 15px;
+  }
+  
+  .searchBar input {
+    padding: 10px 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .userInfo span {
+    display: none;
+  }
+  
+  .userInfo {
+    padding: 6px;
+  }
+  
+  .avatar {
+    margin-right: 0;
+  }
+  
+  .contactInfo p {
+    font-size: 11px;
+  }
 }

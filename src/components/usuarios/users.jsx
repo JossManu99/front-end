@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
   getUsersService,
-  updateUserService,
   deleteUserService,
 } from '../../services/authService';
 import styles from './UsersList.module.css';

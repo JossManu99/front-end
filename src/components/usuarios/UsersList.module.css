@@ -260,10 +260,16 @@
   font-size: 0.8rem; /* reducido */
 }
 
-/* Responsive */
+/* ------------------------ RESPONSIVE ------------------------ */
 @media (max-width: 768px) {
   .container {
-    padding: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    min-height: 100vh;
+    padding: 1.5rem; /* reducido de 2rem a 1.5rem */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
   }
   
   .toolBar {
@@ -278,21 +284,32 @@
   
   .table th,
   .table td {
-    padding: 0.4rem 0.5rem;
-    font-size: 0.7rem;
+    padding: 0.3rem 0.3rem;
+    font-size: 0.5rem; /* Más pequeño para pantallas móviles */
   }
   
   .button {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.7rem;
+    padding: 0.1rem 0.3rem; /* Botones más compactos */
+    font-size: 0.4rem;      /* Fuente más pequeña */
   }
   
+  /* Ajustes para que el botón "Eliminar" aparezca debajo de "Editar" */
   .actions {
     display: flex;
-    flex-wrap: nowrap;
+    flex-direction: column; /* Se apilan en columna */
+    align-items: flex-start;
+    gap: 0.3rem;            /* Menor espacio entre botones */
   }
   
   .delete {
-    margin-left: 0.25rem;
+    margin-left: 0;         /* Quitar margen izquierdo */
+    min-width: 50px;        /* Asegura un ancho mínimo */
+    font-size: 0.4rem;      /* Más pequeño */
+    padding: 0.1rem 0.3rem;
+    display: inline-block;
+  }
+  
+  .delete:hover {
+    background-color: #c0392b;
   }
 }

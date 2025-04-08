@@ -146,7 +146,13 @@
 /* Responsivo */
 @media (max-width: 768px) {
   .container {
+    background-color: #fff;
+    border-radius: 8px;
+    max-width: 390px; /* Ajusta según desees */
+    width: 90%;
+    margin: 2rem auto;
     padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
   .title {
@@ -172,4 +178,27 @@
     padding: 5px 10px;
     font-size: 0.65rem;
   }
+  /* Tabla compacta */
+/* Contenedor de la tabla */
+.tableContainer {
+  max-width: 700px;
+  margin: 0 auto 1.5rem;
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+
+/* Tabla compacta */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.7rem; /* Tamaño base reducido */
+}
+
+
 }
