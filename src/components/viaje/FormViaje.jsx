@@ -205,7 +205,7 @@ const FormViaje = ({ onViajeCreated, viaje, onCancel }) => {
             </div>
             <div className={styles.formField}>
               <label className={styles.fieldLabel} htmlFor="saleDe">
-                Sale De
+                Origen
               </label>
               <input
                 type="text"
@@ -219,7 +219,7 @@ const FormViaje = ({ onViajeCreated, viaje, onCancel }) => {
             </div>
             <div className={styles.formField}>
               <label className={styles.fieldLabel} htmlFor="llegaA">
-                Llega A
+                Destino
               </label>
               <input
                 type="text"

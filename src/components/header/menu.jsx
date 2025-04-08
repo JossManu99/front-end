@@ -65,8 +65,8 @@ const Menu = () => {
       icon: '👥',
       roles: ['admin'],
       submenu: [
-        { label: 'Crear operador', path: '/crear-operador', roles: ['admin'] },
-        { label: 'Lista de operadores', path: '/lista-operadores', roles: ['admin'] }
+        { label: 'Crear trabajador', path: '/crear-operador', roles: ['admin'] },
+        { label: 'Lista de trabajores', path: '/lista-operadores', roles: ['admin'] }
       ]
     },
     {

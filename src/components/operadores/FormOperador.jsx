@@ -11,11 +11,13 @@ const OperadorForm = ({ operador = null, onSave }) => {
     fechaNacimiento: '',
     fechaIngreso: '',
     edad: '',
+    // Campos de licencias
     tipoLicencia: '',
     documentoLicenciaEstatal: null,
     fechaVencimientoLicenciaEstatal: '',
     documentoLicenciaFederal: null,
     fechaVencimientoLicenciaFederal: '',
+    // Otros campos
     puesto: '',
     fechaVencimientoExamenMedico: '',
     documentoExamenMedico: null,
@@ -25,14 +27,13 @@ const OperadorForm = ({ operador = null, onSave }) => {
     foto: null,
   });
 
-  const [userData, setUserData] = useState({ role: 'admin' });
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const formRef = useRef(null);
 
   useEffect(() => {
     if (operador) {
-      setFormData(prevData => ({
+      setFormData((prevData) => ({
         ...prevData,
         ...operador,
         fechaNacimiento: operador.fechaNacimiento
@@ -59,29 +60,29 @@ const OperadorForm = ({ operador = null, onSave }) => {
 
   const handleChange = (e) => {
     const { name, value, files, type } = e.target;
-    
+
     if (name === 'fechaNacimiento' && value) {
       const birthDate = new Date(value);
       const today = new Date();
       let age = today.getFullYear() - birthDate.getFullYear();
       const monthDiff = today.getMonth() - birthDate.getMonth();
-      
+
       if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
         age--;
       }
-      
-      setFormData(prevData => ({
+
+      setFormData((prevData) => ({
         ...prevData,
         fechaNacimiento: value,
-        edad: age.toString()
+        edad: age.toString(),
       }));
     } else if (type === 'radio') {
-      setFormData(prevData => ({
+      setFormData((prevData) => ({
         ...prevData,
         [name]: value,
       }));
     } else {
-      setFormData(prevData => ({
+      setFormData((prevData) => ({
         ...prevData,
         [name]: files ? files[0] : value,
       }));
@@ -91,19 +92,21 @@ const OperadorForm = ({ operador = null, onSave }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validación de licencias
-    if (formData.tipoLicencia === 'federal') {
-      if (!formData.documentoLicenciaFederal && !operador) {
-        setError('Debe subir la Licencia Federal');
-        return;
-      }
-      if (!formData.documentoLicenciaEstatal && !operador) {
+    // Validación de licencias solo si el puesto es "Operador"
+    if (formData.puesto.toLowerCase() === 'operador') {
+      if (formData.tipoLicencia === 'federal') {
+        if (!formData.documentoLicenciaFederal && !operador) {
+          setError('Debe subir la Licencia Federal');
+          return;
+        }
+        if (!formData.documentoLicenciaEstatal && !operador) {
+          setError('Debe subir la Licencia Estatal');
+          return;
+        }
+      } else if (formData.tipoLicencia === 'estatal' && !formData.documentoLicenciaEstatal && !operador) {
         setError('Debe subir la Licencia Estatal');
         return;
       }
-    } else if (formData.tipoLicencia === 'estatal' && !formData.documentoLicenciaEstatal && !operador) {
-      setError('Debe subir la Licencia Estatal');
-      return;
     }
 
     setError('');
@@ -130,10 +133,8 @@ const OperadorForm = ({ operador = null, onSave }) => {
     try {
       let response;
       if (operador) {
-        // Actualización
         response = await updateOperador(operador._id, form);
       } else {
-        // Creación
         response = await createOperador(form);
       }
 
@@ -160,7 +161,6 @@ const OperadorForm = ({ operador = null, onSave }) => {
           foto: null,
         });
         setIsSubmitting(false);
-        // Envía el objeto actualizado o la respuesta para que el padre lo procese
         if (onSave) onSave(response.operador || updatedFormData);
       } else {
         alert('Error: ' + (response?.message || 'Desconocido'));
@@ -247,67 +247,70 @@ const OperadorForm = ({ operador = null, onSave }) => {
               {renderDateInput("fecha-nacimiento", "fechaNacimiento", formData.fechaNacimiento, "Fecha de Nacimiento:")}
               {renderTextInput("edad", "edad", formData.edad, "Edad:", "number", true)}
             </div>
-            
-            {/* Segunda fila: Fecha de Ingreso, Tipo de Licencia */}
+
+            {/* Segunda fila: Fecha de Ingreso y Puesto */}
             <div className={styles.formRow}>
               {renderDateInput("fecha-ingreso", "fechaIngreso", formData.fechaIngreso, "Fecha de Ingreso:")}
-              
-              <div className={styles.fieldColumn}>
-                <div className={styles.fieldHeader}>Tipo de Licencia:</div>
-                <div className={styles.fieldInput}>
-                  <div className={styles.radioGroup}>
-                    <label className={styles.radioLabel}>
-                      <input
-                        type="radio"
-                        id="licencia-federal"
-                        name="tipoLicencia"
-                        value="federal"
-                        checked={formData.tipoLicencia === 'federal'}
-                        onChange={handleChange}
-                      />
-                      <span className={styles.radioText}>Federal</span>
-                    </label>
-                    <label className={styles.radioLabel}>
-                      <input
-                        type="radio"
-                        id="licencia-estatal"
-                        name="tipoLicencia"
-                        value="estatal"
-                        checked={formData.tipoLicencia === 'estatal'}
-                        onChange={handleChange}
-                      />
-                      <span className={styles.radioText}>Estatal</span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-              
               {renderTextInput("puesto", "puesto", formData.puesto, "Puesto:")}
             </div>
 
-            {/* Licencia Estatal y fecha de vencimiento */}
-            <div className={styles.formRow}>
-              {(formData.tipoLicencia === 'estatal' || formData.tipoLicencia === 'federal') && (
-                renderFileInput("documento-licencia-estatal", "documentoLicenciaEstatal", ".pdf", "Licencia Estatal:")
-              )}
-              
-              {(formData.tipoLicencia === 'estatal' || formData.tipoLicencia === 'federal') && (
-                renderDateInput("fecha-vencimiento-licencia-estatal", "fechaVencimientoLicenciaEstatal", formData.fechaVencimientoLicenciaEstatal, "Vencimiento Licencia Estatal:")
-              )}
-              
-              {formData.tipoLicencia === 'federal' && (
-                renderFileInput("documento-licencia-federal", "documentoLicenciaFederal", ".pdf", "Licencia Federal:")
-              )}
-            </div>
+            {/* Bloque de licencias: solo se muestra si el puesto es "Operador" */}
+            {formData.puesto.toLowerCase() === 'operador' && (
+              <>
+                {/* Tipo de Licencia */}
+                <div className={styles.formRow}>
+                  <div className={styles.fieldColumn}>
+                    <div className={styles.fieldHeader}>Tipo de Licencia:</div>
+                    <div className={styles.fieldInput}>
+                      <div className={styles.radioGroup}>
+                        <label className={styles.radioLabel}>
+                          <input
+                            type="radio"
+                            id="licencia-federal"
+                            name="tipoLicencia"
+                            value="federal"
+                            checked={formData.tipoLicencia === 'federal'}
+                            onChange={handleChange}
+                          />
+                          <span className={styles.radioText}>Federal</span>
+                        </label>
+                        <label className={styles.radioLabel}>
+                          <input
+                            type="radio"
+                            id="licencia-estatal"
+                            name="tipoLicencia"
+                            value="estatal"
+                            checked={formData.tipoLicencia === 'estatal'}
+                            onChange={handleChange}
+                          />
+                          <span className={styles.radioText}>Estatal</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-            {/* Vencimiento Licencia Federal - solo visible si es federal */}
-            {formData.tipoLicencia === 'federal' && (
-              <div className={styles.formRow}>
-                {renderDateInput("fecha-vencimiento-licencia-federal", "fechaVencimientoLicenciaFederal", formData.fechaVencimientoLicenciaFederal, "Vencimiento Licencia Federal:")}
-              </div>
+                {/* Licencia Estatal y, si es federal, la Licencia Federal */}
+                {(formData.tipoLicencia === 'estatal' || formData.tipoLicencia === 'federal') && (
+                  <div className={styles.formRow}>
+                    {renderFileInput("documento-licencia-estatal", "documentoLicenciaEstatal", ".pdf", "Licencia Estatal:")}
+                    {renderDateInput("fecha-vencimiento-licencia-estatal", "fechaVencimientoLicenciaEstatal", formData.fechaVencimientoLicenciaEstatal, "Vencimiento Licencia Estatal:")}
+                    {formData.tipoLicencia === 'federal' &&
+                      renderFileInput("documento-licencia-federal", "documentoLicenciaFederal", ".pdf", "Licencia Federal:")
+                    }
+                  </div>
+                )}
+
+                {/* Vencimiento Licencia Federal */}
+                {formData.tipoLicencia === 'federal' && (
+                  <div className={styles.formRow}>
+                    {renderDateInput("fecha-vencimiento-licencia-federal", "fechaVencimientoLicenciaFederal", formData.fechaVencimientoLicenciaFederal, "Vencimiento Licencia Federal:")}
+                  </div>
+                )}
+              </>
             )}
 
-            {/* Los siguientes campos siempre visibles */}
+            {/* Campos comunes (Examen Médico, Tarjetón, Foto, Observaciones) */}
             <div className={styles.formRow}>
               {renderFileInput("documento-examen-medico", "documentoExamenMedico", ".pdf", "Examen Médico:")}
               {renderDateInput("fecha-vencimiento-examen-medico", "fechaVencimientoExamenMedico", formData.fechaVencimientoExamenMedico, "Vencimiento Examen Médico:")}
@@ -319,7 +322,6 @@ const OperadorForm = ({ operador = null, onSave }) => {
               {renderFileInput("foto", "foto", "image/*", "Foto:")}
             </div>
 
-            {/* Observaciones */}
             <div className={styles.formRow}>
               <div className={styles.fieldColumn} style={{ width: '100%' }}>
                 <div className={styles.fieldHeader}>Observaciones:</div>
