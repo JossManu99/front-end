@@ -264,7 +264,7 @@ const OperadorForm = ({ operador = null, onSave }) => {
           <form onSubmit={handleSubmit} ref={formRef} className={styles.form}>
             {/* Primera fila: Datos básicos */}
             <div className={styles.formRow}>
-              {renderTextInput("numero-operador", "numeroOperador", formData.numeroOperador, "Número de Operador:")}
+              {renderTextInput("numero-operador", "numeroOperador", formData.numeroOperador, "Número de Trabajador:")}
               {renderTextInput("nombre", "nombre", formData.nombre, "Nombre:")}
               {renderDateInput("fecha-nacimiento", "fechaNacimiento", formData.fechaNacimiento, "Fecha de Nacimiento:")}
               {renderTextInput("edad", "edad", formData.edad, "Edad:", "number", true)}
