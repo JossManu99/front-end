@@ -34,7 +34,7 @@ const OperadorForm = ({ operador = null, onSave }) => {
   useEffect(() => {
     if (operador) {
       // Determinar si el puesto corresponde a alguno de los estándar
-      const standardPuestos = ['secretario', 'operador', 'logiostaca', 'mecánico', 'ojaltero'];
+      const standardPuestos = ['secretaria', 'operador', 'logistica', 'mecánico', 'ojalatero'];
       let puestoValor = operador.puesto || '';
       let otroPuesto = '';
       if (puestoValor && !standardPuestos.includes(puestoValor.toLowerCase())) {
