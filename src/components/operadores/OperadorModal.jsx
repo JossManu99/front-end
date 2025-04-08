@@ -110,11 +110,30 @@ const OperadorModal = ({ operador, onClose, onUpdate, onDelete }) => {
                       </a>
                     ) : 'N/A'}
                   </p>
+
+                  {/* Tarjetón también solo si es operador */}
+                  <p>
+                    <strong>Fecha de Vencimiento Tarjetón:</strong>{' '}
+                    {formatDate(operador.fechaVencimientoTarjeton)}
+                  </p>
+                  <p>
+                    <strong>Documento Tarjetón:</strong>{' '}
+                    {operador.documentoTarjeton ? (
+                      <a
+                        href={operador.documentoTarjeton}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Ver Documento
+                      </a>
+                    ) : (
+                      'N/A'
+                    )}
+                  </p>
                 </>
               )}
 
-              {/* Estos campos (Examen Médico y Tarjetón) se muestran siempre,
-                  independientemente de si es operador o no */}
+              {/* Examen Médico siempre visible (si así lo deseas) */}
               <p>
                 <strong>Fecha de Vencimiento Examen Médico:</strong>{' '}
                 {formatDate(operador.fechaVencimientoExamenMedico)}
@@ -124,24 +143,6 @@ const OperadorModal = ({ operador, onClose, onUpdate, onDelete }) => {
                 {operador.documentoExamenMedico ? (
                   <a
                     href={operador.documentoExamenMedico}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Ver Documento
-                  </a>
-                ) : (
-                  'N/A'
-                )}
-              </p>
-              <p>
-                <strong>Fecha de Vencimiento Tarjetón:</strong>{' '}
-                {formatDate(operador.fechaVencimientoTarjeton)}
-              </p>
-              <p>
-                <strong>Documento Tarjetón:</strong>{' '}
-                {operador.documentoTarjeton ? (
-                  <a
-                    href={operador.documentoTarjeton}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

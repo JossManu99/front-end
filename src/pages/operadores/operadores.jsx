@@ -218,11 +218,11 @@ const Operadores = () => {
                             </div>
                           </div>
                           <div className={styles.documentItem}>
-                            <span className={styles.documentLabel}>Tarjetón:</span>
+                            <span className={styles.documentLabel}>examen medico:</span>
                             <div className={styles.statusContainer}>
                               <span className={`${styles.statusIndicator} ${styles[tarjetonStatus]}`}></span>
                               <span className={styles.statusDate}>
-                                {operador.fechaVencimientoTarjeton
+                                {operador.fechaVencimientoExamenMedico
                                   ? formatDate(operador.fechaVencimientoTarjeton)
                                   : 'N/A'}
                               </span>
