@@ -92,3 +92,18 @@
 .registerButton:hover {
   background-color: #218838;
 }
+
+:root {
+  /* Indica a navegadores compatibles que este diseño se basa en modo claro */
+  color-scheme: light;
+}
+
+.inputField {
+  /* Fuerza fondo blanco y texto negro, ignorando el modo oscuro */
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+
+  /* Evita que en Windows/alto contraste u otros navegadores se fuerce a oscurecer */
+  forced-color-adjust: none;
+}
