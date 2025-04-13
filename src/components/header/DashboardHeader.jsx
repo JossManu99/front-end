@@ -13,7 +13,7 @@ const DashboardHeader = ({ userData }) => {
         </div>
         <div className={styles.contactInfo}>
           <p>Calle Primavera No.3, Loma Linda 76803, San Juan del Río, Qro.</p>
-          <p>sistemacontrolnavarrete@gmail.com</p>
+          <span>{userData?.email}</span>
         </div>
         <div className={styles.userInfo}>
           <div className={styles.avatar}></div>
@@ -27,7 +27,6 @@ const DashboardHeader = ({ userData }) => {
           <Menu />
         </div>
         <div className={styles.searchBar}>
-          <input type="text" placeholder="Buscar por nombre en SCDD | Navarrete" />
         </div>
       </div>
     </div>

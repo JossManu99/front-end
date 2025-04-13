@@ -1,4 +1,4 @@
-/* Estilos generales */
+/* Contenedor principal */
 .mainContainer {
   max-width: 100%;
   width: 100%;
@@ -10,15 +10,16 @@
   margin: 0;
 }
 
+/* Contenedor interno */
 .Container {
   background-color: #f9f9f9;
   padding: 2rem;
   font-family: Arial, sans-serif;
   color: #333;
-  height: 100vh; /* Igual que arriba, podrías remover este height para un mejor scroll en pantallas pequeñas */
+  height: 100vh; /* Quítalo si quieres scroll en pantallas pequeñas */
 }
 
-/* Encabezado y filtros */
+/* Header Container */
 .headerContainer {
   display: flex;
   justify-content: space-between;
@@ -40,7 +41,65 @@
   font-size: 0.9rem;
 }
 
-/* Estados de carga o sin datos */
+/* Toolbar (buscador + botones) */
+.toolbarBuscar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* Buscador general */
+.searchInput {
+  width: 250px;
+  max-width: 400px;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.searchInput:focus {
+  border-color: #3498db;
+  box-shadow: 0 1px 4px rgba(52,152,219,0.3);
+}
+
+.searchInput::placeholder {
+  color: #999;
+}
+
+.btnExport,
+.btnPrint {
+  background-color: #007bff; /* color de fondo */
+  color: #fff;              /* color de texto */
+  border: none;
+  border-radius: 4px;
+  
+  /* Tamaño reducido */
+  padding: 4px 8px;         /* menos padding vertical y horizontal */
+  font-size: 10px;          /* fuente más pequeña */
+  font-weight: 500;
+  width: 100px;
+  
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btnExport:hover,
+.btnPrint:hover {
+  background-color: #0069d9;
+}
+
+.btnExport:active,
+.btnPrint:active {
+  transform: translateY(1px);
+}
+
+
+/* Cargando o sin datos */
 .loading,
 .noData {
   text-align: center;
@@ -48,12 +107,7 @@
   margin-top: 2rem;
 }
 
-/* Contenido principal y contenedores */
-.contentContainer {
-  display: flex;
-  flex-direction: column;
-}
-
+/* Resumen */
 .summaryContainer {
   margin-bottom: 2rem;
 }
@@ -76,15 +130,15 @@
   margin-bottom: 0.5rem;
 }
 
-/* Sección que agrupa la lista y el detalle */
-.tablesContainer {
+/* Contenido principal */
+.contentContainer {
   display: flex;
-  gap: 2rem;
+  flex-direction: column;
 }
 
 /* Lista de recargas */
 .recargasListContainer {
-  flex: 1;
+  margin-bottom: 2rem;
 }
 
 .recargasListContainer h3 {
@@ -127,14 +181,13 @@
   border-radius: 3px;
   font-size: 0.8rem;
 }
-
 .viewButton:hover {
   background: #006db3;
 }
 
-/* Detalles de una recarga */
+/* Detalle de recarga */
 .recargaDetailContainer {
-  flex: 2;
+  /* Si quieres que lista y detalle se vean en columnas, ajusta aquí */
 }
 
 .detailCard {
@@ -184,50 +237,25 @@
   text-align: center;
 }
 
-/* =========================
-   MEDIA QUERIES RESPONSIVE
-   ========================= */
-
-/* Tablet en adelante (max-width 992px) */
-@media (max-width: 992px) {
-  .tablesContainer {
-    flex-direction: column;
-  }
-  
-  .recargasListContainer {
-    margin-bottom: 2rem;
-  }
-}
-
-/* Móviles (max-width 768px) */
+/* Responsivo */
 @media (max-width: 768px) {
   .headerContainer {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
   }
-
-  .summaryItem {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .tablesContainer {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
   .detailRow {
     flex-direction: column;
   }
+  .searchInput {
+    width: 80%;
+  }
 }
 
-/* Móviles más pequeños (max-width 480px) */
 @media (max-width: 480px) {
   .Container {
     padding: 1rem;
   }
-
   .table th,
   .table td,
   .tableDetail th,
@@ -235,13 +263,41 @@
     font-size: 0.6rem;
     padding: 0.5rem;
   }
-
   .viewButton {
     font-size: 0.7rem;
     padding: 0.4rem;
   }
-
   .detailCard {
     padding: 0.75rem;
+  }
+}
+
+/* ===================== */
+/* Estilos para impresión */
+/* ===================== */
+@media print {
+  .toolbarBuscar,
+  .searchInput,
+  .btnExport,
+  .btnPrint {
+    display: none !important;
+  }
+  .mainContainer {
+    background-color: #fff !important;
+    padding: 0 !important;
+  }
+  .Container {
+    width: 100% !important;
+    max-width: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+  .table, .tableDetail {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+  @page {
+    margin: 10mm;
   }
 }

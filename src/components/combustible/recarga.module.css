@@ -1,3 +1,16 @@
+/* =========================
+   DEFINICIÓN GLOBAL
+   ========================= */
+
+/* Indica a navegadores compatibles que utilicen esquema de color claro */
+:root {
+  color-scheme: light;
+}
+
+/* =========================
+   ESTILOS DEL LAYOUT Y FORMULARIO
+   ========================= */
+
 /* Contenedor principal */
 .mainContainer {
   max-width: 100%;
@@ -69,12 +82,20 @@
   color: #444;
 }
 
-.formControl {
+/* Estilos para inputs, selects y textareas */
+/* Estos estilos forzarán un fondo blanco y texto negro, anulando el modo oscuro del navegador */
+.formControl,
+input,
+select,
+textarea {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 16px;
+  background-color: #ffffff !important; /* Fuerza fondo blanco */
+  color: #000000 !important;            /* Fuerza texto negro */
+  -webkit-text-fill-color: #000000 !important; /* Soporte adicional en navegadores WebKit */
 }
 
 /* Encabezado de la recarga */
@@ -90,7 +111,9 @@
   color: #d9534f;
 }
 
-/* Tabla */
+/* =========================
+   ESTILOS DE LA TABLA
+   ========================= */
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -99,7 +122,8 @@
   overflow: hidden;
 }
 
-.table th, .table td {
+.table th,
+.table td {
   padding: 10px;
   border: 1px solid #ddd;
   text-align: center;
@@ -111,7 +135,9 @@
   font-weight: bold;
 }
 
-/* Botones */
+/* =========================
+   ESTILOS PARA LOS BOTONES
+   ========================= */
 .addButton,
 .removeButton,
 .submitButton {
@@ -154,7 +180,9 @@
   background: #0056b3;
 }
 
-/* Contenedor del gráfico */
+/* =========================
+   CONTENEDOR DEL GRÁFICO
+   ========================= */
 .chartContainer {
   margin-top: 20px;
   text-align: center;
@@ -214,13 +242,17 @@
   }
   
   /* Reducir padding y tamaño de fuente en los campos de formulario */
-  .formControl {
+  .formControl,
+  input,
+  select,
+  textarea {
     padding: 8px; /* Menor padding */
     font-size: 14px; /* Menor tamaño de fuente */
   }
   
   /* Ajuste en la tabla para mejorar visualización en móviles */
-  .table th, .table td {
+  .table th,
+  .table td {
     padding: 8px;
     font-size: 12px;
   }
@@ -237,4 +269,15 @@
   .chartContainer {
     padding: 10px;
   }
+}
+
+/* =========================
+   PROPIDAD PARA DESHABILITAR EL AJUSTE DE COLORES FORZADOS EN MODO OSCURO
+   (Ayuda en ciertos navegadores como los basados en Windows en modo Alto Contraste)
+   ========================= */
+.formControl,
+input,
+select,
+textarea {
+  forced-color-adjust: none;
 }

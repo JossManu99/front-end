@@ -2,18 +2,23 @@
 .mainContainer {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
   font-family: 'Segoe UI', Arial, sans-serif;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
+}
+
+/* Contenedor del menú, lo ocultamos al imprimir */
+.menuContainer {
+  /* puede estar vacío, se usa para el selector de impresión */
 }
 
 /* Contenedor central */
 .container {
   background-color: #fff;
   border-radius: 8px;
-  max-width: 800px; /* Ajusta según desees */
+  max-width: 800px; 
   width: 90%;
   margin: 2rem auto;
   padding: 1rem;
@@ -25,7 +30,7 @@
   text-align: center;
   color: #2c3e50;
   margin-bottom: 1.5rem;
-  font-size: 1.4rem; /* Se redujo un poco */
+  font-size: 1.4rem;
   font-weight: 600;
   position: relative;
   padding-bottom: 0.5rem;
@@ -41,9 +46,59 @@
   border-radius: 2px;
 }
 
+/* Barra de búsqueda y botones */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+/* Input buscador */
+.searchInput {
+  width: 180px;
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  outline: none;
+  transition: box-shadow 0.2s;
+}
+
+.searchInput:focus {
+  box-shadow: 0 0 3px rgba(52, 152, 219, 0.4);
+  border-color: #3498db;
+}
+
+/* Botones de acción: Excel, Print */
+.btnExport,
+.btnPrint {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  width: 150px;
+}
+
+.btnExport:hover,
+.btnPrint:hover {
+  background-color: #0069d9;
+}
+
+.btnExport:active,
+.btnPrint:active {
+  transform: translateY(1px);
+}
+
 /* Contenedor de la tabla */
 .tableContainer {
-  max-width: 700px; /* Ajusta según desees */
+  max-width: 700px;
   margin: 0 auto 1.5rem;
   overflow-x: auto;
   border-radius: 8px;
@@ -55,7 +110,7 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.7rem; /* Tamaño base reducido */
+  font-size: 0.7rem;
 }
 
 .tableHeader {
@@ -69,7 +124,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  font-size: 0.65rem; /* Más pequeño */
+  font-size: 0.65rem;
 }
 
 .tableBody tr {
@@ -87,14 +142,15 @@
   vertical-align: middle;
 }
 
-/* Aumentar solo la columna de FECHA (asumiendo que es la 1ª) */
+/* Aumentar la 1ª columna si lo necesitas:
 .tableHeader th:first-child,
 .tableBody td:first-child {
-  font-size: 0.8rem;    /* Se mantiene ligeramente mayor */
-  padding: 10px 14px;   /* Más espacio para la fecha */
-  min-width: 130px;     /* Ancho mínimo */
+  font-size: 0.8rem;
+  padding: 10px 14px;
+  min-width: 130px;
   white-space: nowrap;
 }
+*/
 
 /* Sin datos */
 .noData {
@@ -105,7 +161,7 @@
   background-color: #f8fafc;
 }
 
-/* Botones */
+/* Acciones */
 .btnContainer {
   display: flex;
   gap: 8px;
@@ -120,7 +176,7 @@
   cursor: pointer;
   font-weight: 500;
   transition: background-color 0.2s ease, transform 0.2s ease;
-  font-size: 0.7rem; /* Reducido */
+  font-size: 0.7rem;
 }
 
 .btnEdit {
@@ -146,17 +202,11 @@
 /* Responsivo */
 @media (max-width: 768px) {
   .container {
-    background-color: #fff;
-    border-radius: 8px;
-    max-width: 390px; /* Ajusta según desees */
-    width: 90%;
-    margin: 2rem auto;
-    padding: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 390px;
   }
 
   .title {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .tableHeader th,
@@ -165,12 +215,8 @@
     font-size: 0.65rem;
   }
 
-  /* Ajuste para la 1ª columna */
-  .tableHeader th:first-child,
-  .tableBody td:first-child {
-    font-size: 0.75rem;
-    padding: 8px 10px;
-    min-width: 100px;
+  .searchInput {
+    width: 120px;
   }
 
   .btnEdit,
@@ -178,27 +224,45 @@
     padding: 5px 10px;
     font-size: 0.65rem;
   }
-  /* Tabla compacta */
-/* Contenedor de la tabla */
-.tableContainer {
-  max-width: 700px;
-  margin: 0 auto 1.5rem;
-  overflow-x: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -o-border-radius: 8px;
 }
 
-/* Tabla compacta */
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.7rem; /* Tamaño base reducido */
-}
+/* ===================== */
+/* Estilos para impresión */
+/* ===================== */
+@media print {
+  /* Ocultar menú en impresión */
+  .menuContainer {
+    display: none !important;
+  }
 
+  /* Ocultar barra con buscador y botones */
+  .toolbar,
+  .searchInput,
+  .btnExport,
+  .btnPrint {
+    display: none !important;
+  }
 
+  .mainContainer {
+    background: #fff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .container {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  .tableContainer {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+  }
+
+  @page {
+    margin: 10mm;
+  }
 }

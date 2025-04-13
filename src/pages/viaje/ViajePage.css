@@ -10,6 +10,7 @@
   padding: 0; /* Remove any padding that might affect width */
   margin: 0; /* Remove any margin that might affect width */
 }
+/* Página de viajes */
 .viajes-page {
   display: flex;
   flex-direction: column;
@@ -28,61 +29,108 @@ h2 {
   text-align: center;
 }
 
-/* Input de búsqueda */
+/* Input de búsqueda y botones (toolbar) en una fila */
+.toolbar-buscar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+/* Input de búsqueda (más grande para poder ver lo que se escribe) */
 .search-input {
   width: 100%;
   max-width: 400px;
-  padding: 10px;
+  padding: 10px 16px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-bottom: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
 }
 
 .search-input:focus {
   border-color: #3498db;
-  outline: none;
   box-shadow: 0 2px 8px rgba(52, 152, 219, 0.4);
 }
 
-/* Mensaje de error */
-.error-message {
-  color: #e74c3c;
-  font-weight: bold;
-  margin-bottom: 20px;
+.search-input::placeholder {
+  color: #999;
 }
 
-/* Contenedor de la lista de viajes */
+/* Botones de acción: Exportar e Imprimir (más pequeños) */
+.boton.excel,
+.boton.imprimir {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.boton.excel:hover,
+.boton.imprimir:hover {
+  background-color: #0069d9;
+}
+
+.boton.excel:active,
+.boton.imprimir:active {
+  transform: translateY(1px);
+}
+
+/* Contenedor de la lista de viajes (agrupados) */
+.Container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Grupo de viajes por cliente */
+.cliente-grupo {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cliente-titulo {
+  color: #333;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #2196f3;
+}
+
+/* Lista de tarjetas de viaje */
 .viajes-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px; /* Espaciado entre las tarjetas */
+  gap: 30px;
   justify-content: center;
-  width: 100%;
-  max-width: 1200px;
-  margin-top: 20px;
 }
 
-/* Estilos para cada tarjeta de viaje */
+/* Tarjeta de viaje */
 .viaje-card {
-  flex: 1 1 calc(20% - 30px); /* Responsivo: ocupa un 20% del ancho */
-  max-width: 250px; /* Limita el tamaño máximo de las tarjetas */
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  max-width: 250px;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .viaje-card:hover {
-  transform: scale(1.05); /* Efecto de zoom */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Más sombra al hacer hover */
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Títulos dentro de las tarjetas */
 .viaje-card h3 {
   font-size: 18px;
   color: #333;
@@ -90,22 +138,21 @@ h2 {
   margin-bottom: 10px;
 }
 
-/* Textos descriptivos */
 .viaje-card p {
   font-size: 14px;
   margin: 5px 0;
   color: #555;
 }
 
-/* Botón "Ver información" */
+/* Botón "Ver información del viaje" */
 .ver-info {
-  padding: 8px 15px;
-  font-size: 14px;
+  background-color: #3498db;
+  color: #fff;
   border: none;
   border-radius: 4px;
+  padding: 8px 15px;
+  font-size: 14px;
   cursor: pointer;
-  background-color: #3498db;
-  color: white;
   transition: background-color 0.3s ease, transform 0.3s ease;
   margin-top: 10px;
 }
@@ -115,76 +162,38 @@ h2 {
   transform: translateY(-2px);
 }
 
-
-/*contenedores*/
-
-/* Estilos existentes */
-.viajes-page {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.viajes-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-top: 15px;
-}
-
-.viaje-card {
-  background-color: white;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  width: 300px;
-}
-
-.search-input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
+/* Mensaje de error */
 .error-message {
-  color: red;
-  margin-bottom: 15px;
+  color: #e74c3c;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-.ver-info {
-  background-color: #2196f3;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.ver-info:hover {
-  background-color: #0d8bf0;
-}
-
-/* Nuevos estilos para agrupar por cliente */
-.viajes-grupos {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.cliente-grupo {
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-}
-
-.cliente-titulo {
-  color: #333;
-  margin-bottom: 15px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #2196f3;
+/* ===================== */
+/* Estilos para impresión */
+/* ===================== */
+@media print {
+  .toolbar-buscar,
+  .search-input,
+  .boton.excel,
+  .boton.imprimir {
+    display: none !important;
+  }
+  .viajes-page {
+    background-color: #fff !important;
+    padding: 0 !important;
+  }
+  .Container {
+    width: 100% !important;
+    max-width: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+  .viajes-list {
+    display: block !important;
+  }
+  @page {
+    margin: 10mm;
+  }
 }

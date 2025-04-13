@@ -1,3 +1,7 @@
+/* ========================================================================== */
+/*                   ESTILOS ORIGINALES DEL COMPONENTE                        */
+/* ========================================================================== */
+
 /* Contenedor principal */
 .mainContainer {
   max-width: 100%;
@@ -40,7 +44,7 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Título */
+/* Título del formulario */
 .formTitle {
   text-align: center;
   margin-bottom: 0.8rem;
@@ -56,7 +60,7 @@
   gap: 12px; /* Menor espacio vertical */
 }
 
-/* Cada campo */
+/* Cada campo individual */
 .formField {
   display: flex;
   flex-direction: column;
@@ -115,15 +119,18 @@
   cursor: not-allowed;
 }
 
-/* Responsive */
+/* ========================================================================== */
+/*                            ESTILOS RESPONSIVE                              */
+/* ========================================================================== */
+
 @media (max-width: 480px) {
   .Container {
     margin: 0.3rem auto;
     padding: 0.8rem;
-    border: none;     
-    border-radius: 0; 
-    box-shadow: none; 
-    width: 90%;       
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    width: 90%;
   }
   
   .formTitle {
@@ -140,4 +147,22 @@
     font-size: 0.85rem;
     padding: 8px;
   }
+}
+
+/* ========================================================================== */
+/*            OVERRIDE GLOBAL PARA EVITAR QUE LOS INPUTS SE OSCURECEN         */
+/* ========================================================================== */
+
+/* Fuerza el fondo blanco y el texto negro en los campos de entrada, sin importar el modo oscuro */
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important; /* Para navegadores basados en WebKit/Blink */
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
 }

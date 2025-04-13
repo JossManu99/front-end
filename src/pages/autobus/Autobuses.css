@@ -6,7 +6,6 @@
   background-color: #f4f4f4;
   padding: 40px 20px;
   min-height: 100vh;
-  
 }
 
 .container {
@@ -16,7 +15,6 @@
   background-color: #fff;
   border-radius: 6px;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-  
 }
 
 /* Título */
@@ -25,34 +23,44 @@ h2 {
   margin-bottom: 10px;
   color: #333;
   text-align: center;
-  
 }
 
 .autobuses-page p {
   margin-bottom: 20px;
   color: #666;
   text-align: center;
-  
 }
 
-/* Cuadro de búsqueda */
-.search-input {
-  width: 80%;
-  max-width: 500px;
-  padding: 10px 16px;
+/* Barra del buscador y botones en una sola línea */
+.toolbar-buscar {
+  display: flex;
+  align-items: center;
+  gap: 15px;             /* Espacio entre el input y los botones */
+  justify-content: center;
   margin-bottom: 30px;
+}
+
+/* Input de búsqueda cómodo y legible */
+.search-input {
+  width: 80%;            /* Toma el 80% del contenedor */
+  max-width: 500px;      /* Ancho máximo de 500px */
+  padding: 10px 16px;    /* Padding razonable */
+  margin-bottom: 0;      /* Eliminamos margin-bottom extra si lo tuvieras antes */
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 14px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   outline: none;
-  
 }
 
 .search-input:focus {
   border-color: #3498db;
   box-shadow: 0 1px 4px rgba(52, 152, 219, 0.3);
-  
+}
+
+/* Placeholder del input */
+.search-input::placeholder {
+  color: #999;
 }
 
 /* Mensaje de error */
@@ -60,7 +68,6 @@ h2 {
   color: #e74c3c;
   margin: 10px 0;
   font-weight: bold;
-  
 }
 
 /* Encabezado de la lista */
@@ -74,19 +81,17 @@ h2 {
   font-weight: 500;
   color: #555;
   font-size: 14px;
-  
 }
 
 .header-item {
   padding: 0 10px;
-  
 }
 
 /* Lista de autobuses */
 .autobuses-list {
   display: flex;
   flex-direction: column;
-  
+  background-color: #f9f9f9; /* Agregar una línea sutil entre cada fila */
 }
 
 /* Fila de autobús */
@@ -99,7 +104,6 @@ h2 {
   transition: background-color 0.2s ease;
   margin-bottom: 1px;
   background-color: #fff;
-  
 }
 
 .autobus-row:hover {
@@ -146,8 +150,8 @@ h2 {
 }
 
 /* Columnas de datos */
-.autobus-serie, 
-.autobus-tipo-placa, 
+.autobus-serie,
+.autobus-tipo-placa,
 .autobus-placa {
   padding: 0 10px;
   font-size: 14px;
@@ -156,7 +160,7 @@ h2 {
   align-items: center;
 }
 
-/* Estilos para la columna de vigencia de documentos */
+/* Vigencia de documentos */
 .vigencia-docs {
   display: flex;
   flex-direction: column;
@@ -186,7 +190,7 @@ h2 {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: #ccc;
+  background-color: #ccc; /* color por defecto */
   flex-shrink: 0;
 }
 
@@ -233,27 +237,41 @@ h2 {
   color: #777;
 }
 
-/* Agregar una línea sutil entre cada fila */
-.autobuses-list {
-  background-color: #f9f9f9;
-}
-
-/* Estilos para el botón "ver más" */
-.acciones {
+/* Botones de acción (Exportar e Imprimir) - más pequeños */
+.boton.excel,
+.boton.imprimir {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;      /* Menor padding */
+  font-size: 12px;        /* Fuente más chica */
+  font-weight: 500;
+  cursor: pointer;
   text-align: center;
+  transition: background-color 0.2s, transform 0.1s;
 }
 
-/* Estilos responsivos */
+.boton.excel:hover,
+.boton.imprimir:hover {
+  background-color: #0069d9;
+}
+
+.boton.excel:active,
+.boton.imprimir:active {
+  transform: translateY(1px);
+}
+
+/* Responsivos */
 @media (max-width: 992px) {
-  .autobuses-list-header, .autobus-row {
+  .autobuses-list-header,
+  .autobus-row {
     grid-template-columns: 2fr 1.2fr 0.8fr 1.5fr 0.5fr;
   }
-  
   /* Ocultar la columna del tipo de placa en pantallas medianas */
   .autobus-tipo-placa {
     display: none;
   }
-  
   .fecha-vencimiento {
     font-size: 11px;
   }
@@ -263,16 +281,14 @@ h2 {
   .container {
     width: 95%;
   }
-  
-  .autobuses-list-header, .autobus-row {
+  .autobuses-list-header,
+  .autobus-row {
     grid-template-columns: 2fr 1.2fr 1.5fr 0.5fr;
   }
-  
-  /* Ocultar la columna del número de placa también en pantallas pequeñas */
+  /* Ocultar la columna del número de placa */
   .autobus-placa {
     display: none;
   }
-  
   .documento-label {
     min-width: 50px;
     font-size: 11px;
@@ -280,71 +296,107 @@ h2 {
 }
 
 @media (max-width: 576px) {
-  .autobuses-list-header, .autobus-row {
+  .autobuses-list-header,
+  .autobus-row {
     grid-template-columns: 2fr 1.5fr 0.5fr;
   }
-  
-  /* Ocultar la columna del número de serie en pantallas muy pequeñas */
+  /* Ocultar la columna del número de serie */
   .autobuses-list-header .header-item:nth-child(2),
   .autobus-row .autobus-serie {
     display: none;
   }
-  
   .vigencia-docs {
     gap: 4px;
   }
-  
   .documento-status {
     gap: 4px;
   }
-  
   .documento-label {
     min-width: 40px;
     font-size: 10px;
   }
-  
   .fecha-vencimiento {
-    display: none; /* Ocultar las fechas en pantallas pequeñas */
+    display: none;
   }
-  
   .autobus-info {
     padding-right: 0;
   }
-  
   .autobus-avatar {
     margin-right: 10px;
   }
-  
   .avatar-circle {
     width: 35px;
     height: 35px;
   }
-  
   .autobus-details h3 {
     font-size: 14px;
   }
-  
   .autobus-details p {
     font-size: 12px;
   }
 }
 
 @media (max-width: 480px) {
-  .autobuses-list-header, .autobus-row {
+  .autobuses-list-header,
+  .autobus-row {
     grid-template-columns: 3fr 0.5fr;
     padding: 15px 10px;
   }
-  
-  /* Ocultar la columna de vigencia en pantallas extremadamente pequeñas */
+  /* Ocultar la columna de vigencia en pantallas muy pequeñas */
   .vigencia-docs {
     display: none;
   }
-  
   .search-input {
     width: 95%;
   }
-  
   .container {
     width: 98%;
+  }
+}
+
+/* ===================== */
+/* Estilos para impresión */
+/* ===================== */
+@media print {
+  .toolbar-buscar,
+  .search-input,
+  .boton.excel,
+  .boton.imprimir {
+    display: none !important;
+  }
+  .autobuses-page {
+    background-color: #fff !important;
+    padding: 0 !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+  .autobuses-list {
+    display: table !important;
+    width: 100% !important;
+    border-collapse: collapse;
+  }
+  .autobuses-list-header,
+  .autobus-row {
+    display: table-row !important;
+  }
+  .header-item,
+  .autobus-row > div {
+    display: table-cell !important;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    padding: 8px;
+    font-size: 12px;
+  }
+  .no-results {
+    display: table-row !important;
+    text-align: center !important;
+  }
+  @page {
+    margin: 10mm;
   }
 }

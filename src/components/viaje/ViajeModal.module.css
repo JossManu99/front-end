@@ -1,0 +1,154 @@
+/* ViajeModal.module.css */
+
+/* Fondo semitransparente (overlay) que cubre toda la pantalla */
+.viajeModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con opacidad */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Contenedor principal del modal */
+.modalContent {
+  background-color: #fff;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;           /* Limita la altura máxima al 80% del viewport */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;           /* Agrega scroll vertical si el contenido supera el max-height */
+}
+
+/* Botón para cerrar el modal */
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 18px;
+  color: #555;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.closeBtn:hover {
+  color: #000;
+}
+
+/* Título del modal */
+.modalTitle {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Detalles del viaje */
+.viajeDetails p {
+  font-size: 16px;
+  margin: 10px 0;
+  line-height: 1.5;
+}
+.viajeDetails strong {
+  color: #333;
+}
+
+/* Estilo para la lista de turnos */
+.turnosList {
+  list-style: none;
+  padding: 0;
+}
+.turnoItem {
+  margin-bottom: 10px;
+}
+
+/* Contenedor de acciones (exportación + botones de editar/eliminar) */
+.modalActions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Contenedor para los botones de exportación */
+.exportButtons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Botón base para exportar */
+.exportBtn {
+  background-color: #1976d2;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.exportBtn:hover {
+  background-color: #0d47a1;
+}
+
+/* Contenedor para botones de acción (Editar / Eliminar) */
+.actionButtons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Botón de editar */
+.updateBtn {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.updateBtn:hover {
+  background-color: #45a049;
+}
+
+/* Botón de eliminar */
+.deleteBtn {
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.deleteBtn:hover {
+  background-color: #e53935;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+  .modalContent {
+    width: 100%;
+    margin: 10px;
+  }
+  
+  .modalActions {
+    flex-direction: column;
+    align-items: center;
+  }
+}

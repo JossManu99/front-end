@@ -144,7 +144,7 @@ const ViajeFormT = ({ tablarolEdit, setEditTablarol }) => {
   return (
     <div className={styles.mainContainer}>
       {/* Menú superior (opcional) */}
-      <div className={das.menuContainer}>
+      <div >
         <Menu />
       </div>
 

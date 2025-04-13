@@ -1,38 +1,84 @@
+/* Contenedor principal */
 .mainContainer {
   max-width: 100%;
   width: 100%;
   font-family: 'Segoe UI', Arial, sans-serif;
   background-color: #f5f5f5;
   min-height: 100vh;
-  height: 100vh;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
+/* Contenedor del menú (lo ocultaremos en impresión) */
+.menuContainer {
+  /* Puede quedar vacío. Usado para @media print */
+}
+
+/* Contenedor interno */
 .container {
-  /* Mantienes el 50% y centras el contenedor */
   width: 50%;
   padding: 1rem;
   background-color: #f8f9fa;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin: 2rem auto; /* <-- Asegura que la .container esté centrada */
+  margin: 2rem auto;
 }
 
-.header {
-  margin-bottom: 1.5rem;
-  border-bottom: 2px solid #dee2e6;
-  padding-bottom: 0.75rem;
-  
-  
-}
-
+/* Título */
 .title {
   font-size: 1.5rem;
   color: #3b5998;
   font-weight: 600;
-  margin: 0;
-  
+  margin-bottom: 1rem;
+}
+
+/* Barra de búsqueda y botones */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+/* Input buscador */
+.searchInput {
+  width: 150px;
+  padding: 4px 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  outline: none;
+}
+
+.searchInput:focus {
+  border-color: #3b5998;
+  box-shadow: 0 0 3px rgba(59, 89, 152, 0.3);
+}
+
+/* Botones de acción (Exportar e Imprimir) */
+.btnExport,
+.btnPrint {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  width: 150px;
+}
+
+.btnExport:hover,
+.btnPrint:hover {
+  background-color: #0069d9;
+}
+
+.btnExport:active,
+.btnPrint:active {
+  transform: translateY(1px);
 }
 
 /* Contenedor de la tabla */
@@ -41,11 +87,7 @@
   margin-bottom: 1rem;
   border-radius: 6px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-  /* Centra el contenedor de la tabla dentro de .container */
   margin: 0 auto 1rem;
-  /* Opcionalmente, puedes darle un ancho máximo para evitar que sea muy grande */
-  /* max-width: 600px; */
-  
 }
 
 /* Tabla */
@@ -56,73 +98,49 @@
   background-color: white;
 }
 
-/* Encabezados y celdas */
-.table th,
-.table td {
-  padding: 0.75rem 1rem;
+.table thead tr {
+  background-color: #4b6cb7;
+  color: white;
+}
+.table thead th {
+  padding: 6px 8px;
   text-align: left;
+  font-weight: 100;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  letter-spacing: 0.5px;
+}
+
+.table td {
+  padding: 6px 8px;
   border-bottom: 1px solid #e9ecef;
 }
 
-.table th {
-  background-color: #4b6cb7;
-  color: white;
-  font-weight: 100;
-  text-transform: uppercase;
-  font-size: 0.5rem;
-  letter-spacing: 0.5px;
-  
-}
-
-/* Quitar borde en la última fila */
-.table tr:last-child td {
-  border-bottom: none;
-}
-
 /* Filas pares con color distinto */
-.table tr:nth-child(even) {
+.table tbody tr:nth-child(even) {
   background-color: #f7f9fc;
 }
 
-/* Hover en filas */
-.table tr:hover {
+/* Hover */
+.table tbody tr:hover {
   background-color: #f1f4f9;
 }
 
-/* Inputs */
-.input {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-  font-size: 0.9rem;
-}
-
-.input:focus {
-  outline: none;
-  border-color: #4b6cb7;
-  box-shadow: 0 0 0 2px rgba(75, 108, 183, 0.25);
-}
-
-/* Contenedor de acciones */
+/* Acciones */
 .actions {
   display: flex;
   gap: 0.5rem;
   white-space: nowrap;
 }
 
-/* Botones */
 .button {
-  padding: 0.5rem .5rem;
+  padding: 4px 6px;
   border: none;
   border-radius: 4px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   cursor: pointer;
-  transition: all 0.2s ease;
-  font-weight: 50;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  font-weight: 500;
 }
 
 .editButton {
@@ -131,14 +149,7 @@
 }
 .editButton:hover {
   background-color: #3b5998;
-}
-
-.saveButton {
-  background-color: #28a745;
-  color: white;
-}
-.saveButton:hover {
-  background-color: #218838;
+  transform: translateY(-2px);
 }
 
 .deleteButton {
@@ -147,52 +158,86 @@
 }
 .deleteButton:hover {
   background-color: #c82333;
+  transform: translateY(-2px);
 }
 
 /* Mensaje vacío */
 .emptyMessage {
   text-align: center;
-  padding: 2rem;
+  padding: 1rem;
   color: #6c757d;
   font-style: italic;
 }
 
-
 /* Responsivo */
 @media (max-width: 768px) {
   .container {
+    width: 90%;
+    margin: 1rem auto;
     padding: 0.5rem;
-    /* Asegura que la .container ocupe todo el ancho en pantallas pequeñas */
-    width: 95%;
-    margin: .1rem auto;
   }
 
-
-
-  /* Permitir el quiebre de palabras */
-  .table th,
-  .table td {
-    padding: 0.1rem;
-    white-space: normal;     /* Importante */
-    word-break: break-all;    /* O bien, overflow-wrap: break-word; */
+  .title {
+    font-size: 1.2rem;
   }
 
-  .actions {
+  .toolbar {
     flex-direction: column;
-  }
-  .button {
-    padding: 0rem 0rem;
-    border: none;
-    border-radius: 4px;
-    font-size: 0.5rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-weight: 50;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    gap: 0.5rem;
   }
 
-  
-  
+  .searchInput {
+    width: 70%;
+  }
+
+  .btnExport,
+  .btnPrint {
+    font-size: 0.65rem;
+    padding: 4px 8px;
+  }
+
+  .table thead th,
+  .table tbody td {
+    padding: 4px 6px;
+    font-size: 0.6rem;
+  }
+}
+
+/* ===================== */
+/* Estilos para impresión */
+/* ===================== */
+@media print {
+  .menuContainer {
+    display: none !important;
+  }
+
+  .toolbar,
+  .searchInput,
+  .btnExport,
+  .btnPrint {
+    display: none !important;
+  }
+
+  .mainContainer {
+    background-color: #fff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .container {
+    width: 100% !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+  }
+
+  .tableContainer {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+  }
+
+  @page {
+    margin: 10mm;
+  }
 }

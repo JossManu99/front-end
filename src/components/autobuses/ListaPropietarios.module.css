@@ -13,7 +13,7 @@
 /* Contenedor central */
 .container {
   padding: 2rem;
-  max-width: 600px;
+  max-width: 800px; /* un poco más grande */
   margin: 0 auto;
 }
 
@@ -22,8 +22,64 @@
   text-align: center;
   color: #333;
   margin-bottom: 1.5rem;
-  font-size: 1.8rem;
+  font-size: 2rem; /* más grande */
   font-weight: 600;
+}
+
+/* Barra de herramientas (buscador + botones) */
+.toolBar {
+  display: flex;
+  align-items: center;
+  gap: 15px;             /* Espacio entre el input y los botones */
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+/* Input de búsqueda más grande */
+.searchInput {
+  flex: 1;
+  min-width: 250px;   /* más ancho mínimo */
+  max-width: 400px;   /* ancho máximo mayor */
+  padding: 10px 14px; /* padding mayor */
+  font-size: 1rem;    /* fuente más grande */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Botón base con mayor tamaño */
+.bigButton {
+  padding: 10px 20px;    /* más grande */
+  font-size: 1rem;       /* fuente más grande */
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;           /* texto blanco */
+  transition: background-color 0.2s, transform 0.1s;
+  min-width: 140px;      /* ancho mínimo mayor */
+  text-align: center;
+}
+
+.btnExport,
+.btnPrint {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;      /* Menor padding */
+  font-size: 12px;        /* Fuente más chica */
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btnPrint {
+  background-color: #8e44ad;
+}
+
+.btnPrint:hover {
+  background-color: #7d3c98;
 }
 
 /* Tabla */
@@ -34,7 +90,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   overflow: hidden;
-  table-layout: fixed; /* Asegura que se respeten los anchos fijos */
+  table-layout: fixed;
 }
 
 /* Encabezado de la tabla */
@@ -42,44 +98,25 @@
   background-color: #1976d2;
   color: #fff;
 }
-
 .tableHeader th {
-  width: 70px !important;      /* Ancho fijo forzado para cada columna */
-  min-width: 70px !important;  /* Forzar ancho mínimo */
-  max-width: 70px !important;  /* Forzar ancho máximo */
-  overflow: hidden;            /* Oculta contenido que exceda el ancho */
-  white-space: nowrap;         /* Evita que el texto salte de línea */
-  text-overflow: ellipsis;     /* Muestra "..." si el texto se excede */
-  padding: 4px 2px;            /* Padding reducido */
+  padding: 8px 10px;
   text-align: left;
   font-weight: 500;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
-  box-sizing: border-box;
 }
 
 /* Cuerpo de la tabla */
 .tableBody tr {
-  height: 24px;                /* Altura fija de las filas */
   border-bottom: 1px solid #eee;
   transition: background-color 0.2s;
 }
-
 .tableBody tr:hover {
   background-color: #f9f9f9;
 }
-
 .tableBody td {
-  width: 70px !important;      /* Forzar el ancho para cada celda */
-  min-width: 70px !important;
-  max-width: 70px !important;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  padding: 4px 2px;
-  text-align: left;
-  font-size: 0.8rem;
-  box-sizing: border-box;
+  padding: 8px 10px;
+  font-size: 0.9rem;
 }
 
 /* Mensaje sin datos */
@@ -90,49 +127,86 @@
   font-style: italic;
 }
 
-/* Botones de acción */
+/* Botones en la tabla (Editar, Eliminar) */
 .btnContainer {
   display: flex;
-  gap: 4px;
+  gap: 6px;
   justify-content: center;
 }
-
 .btnEdit,
-.btnSave,
 .btnDelete {
-  padding: 2px 4px;
+  padding: 5px 8px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: 500;
-  font-size: 0.7rem;
-  line-height: 1;
+  font-size: 0.8rem;
   transition: background-color 0.2s;
 }
-
 .btnEdit {
   background-color: #4caf50;
   color: white;
 }
-
 .btnEdit:hover {
   background-color: #3d8b40;
 }
-
-.btnSave {
-  background-color: #2196f3;
-  color: white;
-}
-
-.btnSave:hover {
-  background-color: #0b7dda;
-}
-
 .btnDelete {
   background-color: #f44336;
   color: white;
 }
-
 .btnDelete:hover {
   background-color: #d32f2f;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+  }
+  .toolBar {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .searchInput {
+    width: 100% !important;
+    min-width: auto !important;
+    margin-bottom: 10px;
+  }
+}
+
+/* ===================== */
+/* Estilos para impresión (opcionales) */
+/* ===================== */
+@media print {
+  .toolBar,
+  .searchInput,
+  .btnExport,
+  .btnPrint {
+    display: none !important;
+  }
+  
+  .container {
+    max-width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  
+  .table {
+    display: table !important;
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+  .tableHeader, .tableBody tr {
+    display: table-row !important;
+  }
+  .tableHeader th, .tableBody td {
+    display: table-cell !important;
+    border: 1px solid #ccc !important;
+    padding: 6px !important;
+    font-size: 0.85rem !important;
+  }
+
+  @page {
+    margin: 10mm;
+  }
 }

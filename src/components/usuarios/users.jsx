@@ -1,28 +1,46 @@
 import React, { useEffect, useState } from 'react';
-import {
-  getUsersService,
-  deleteUserService,
-} from '../../services/authService';
+import * as XLSX from 'xlsx';
+import { getUsersService, deleteUserService } from '../../services/authService';
 import styles from './UsersList.module.css';
 import Menu from '../../components/header/DashboardHeader';
 import das from '../header/Dashboard.module.css';
 import FormRegister from '../auth/FormRegister';
+
+// Importamos las librerías para PDF
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 const UsersList = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
+  
+  // Para controlar el formulario de edición
   const [editingId, setEditingId] = useState(null);
   const [showEditForm, setShowEditForm] = useState(false);
-  const [formData, setFormData] = useState({ name: '', surname: '', nick: '', email: '', password: '', role: '' });
+  const [formData, setFormData] = useState({
+    name: '',
+    surname: '',
+    nick: '',
+    email: '',
+    password: '',
+    role: ''
+  });
+
+  // Nuevo estado para deshabilitar los botones de exportación mientras se generan los archivos
+  const [isExporting, setIsExporting] = useState(false);
+
+  // Cargar la lista de usuarios al montar
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   const fetchUsers = async () => {
     try {
       setLoading(true);
       const result = await getUsersService();
       if (result.status === 'success') {
-        console.log('Usuarios cargados:', result.users);
         setUsers(result.users);
       }
     } catch (error) {
@@ -32,16 +50,12 @@ const UsersList = () => {
     }
   };
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
   const handleDelete = async (userId, userName) => {
     if (window.confirm(`¿Está seguro de eliminar al usuario ${userName}?`)) {
       try {
         const result = await deleteUserService(userId);
         if (result.status === 'success') {
-          setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
+          setUsers(prevUsers => prevUsers.filter(user => user._id !== userId));
           alert('Usuario eliminado exitosamente');
         }
       } catch (error) {
@@ -59,7 +73,7 @@ const UsersList = () => {
       nick: user.nick || '',
       email: user.email || '',
       password: '',
-      role: user.role || 'user',
+      role: user.role || 'user'
     });
     setShowEditForm(true);
   };
@@ -68,6 +82,7 @@ const UsersList = () => {
     setSearchTerm(e.target.value);
   };
 
+  // Ordenar las filas según la clave
   const requestSort = (key) => {
     let direction = 'ascending';
     if (sortConfig.key === key && sortConfig.direction === 'ascending') {
@@ -76,6 +91,13 @@ const UsersList = () => {
     setSortConfig({ key, direction });
   };
 
+  // Flechitas de orden
+  const getSortIcon = (name) => {
+    if (sortConfig.key !== name) return '↕️';
+    return sortConfig.direction === 'ascending' ? '↑' : '↓';
+  };
+
+  // Filtrado y ordenado
   const filteredUsers = users
     .filter((user) =>
       user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -93,9 +115,72 @@ const UsersList = () => {
       return 0;
     });
 
-  const getSortIcon = (name) => {
-    if (sortConfig.key !== name) return '↕️';
-    return sortConfig.direction === 'ascending' ? '↑' : '↓';
+  /**
+   * Función para exportar a Excel.
+   * Se inhabilitan los botones al iniciar y se habilitan cuando termina.
+   */
+  const exportToExcel = () => {
+    try {
+      setIsExporting(true); // Deshabilita botones
+      const wsData = filteredUsers.map((user) => ({
+        'Nombre': user.name || '',
+        'Apellido': user.surname || '',
+        'Nick': user.nick || '',
+        'Correo electrónico': user.email || '',
+        'Rol': user.role || ''
+      }));
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.json_to_sheet(wsData);
+      XLSX.utils.book_append_sheet(wb, ws, 'Usuarios');
+      XLSX.writeFile(wb, 'ListadoUsuarios.xlsx');
+    } catch (error) {
+      console.error('Error al exportar a Excel:', error);
+    } finally {
+      setIsExporting(false); // Habilita botones nuevamente
+    }
+  };
+
+  /**
+   * Función para descargar PDF usando html2canvas y jsPDF.
+   * Se inhabilitan los botones al iniciar y se habilitan cuando termina.
+   */
+  const handleDownloadPDF = () => {
+    setIsExporting(true); // Deshabilita botones
+    const input = document.getElementById('pdfContent');
+    if (!input) {
+      setIsExporting(false);
+      return;
+    }
+
+    html2canvas(input, { scale: 2 })
+      .then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+        const imgWidth = pdfWidth;
+        const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+
+        let heightLeft = imgHeight;
+        let position = 0;
+
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pdfHeight;
+
+        while (heightLeft > 0) {
+          position = heightLeft - imgHeight;
+          pdf.addPage();
+          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          heightLeft -= pdfHeight;
+        }
+        pdf.save('ListadoUsuarios.pdf');
+      })
+      .catch((error) => {
+        console.error('Error al generar el PDF:', error);
+      })
+      .finally(() => {
+        setIsExporting(false); // Habilita botones
+      });
   };
 
   if (loading) {
@@ -111,20 +196,22 @@ const UsersList = () => {
 
   return (
     <div className={styles.mainContainer}>
+      {/* Menú superior (no se capturará en el PDF) */}
       <div className={das.menuContainer}>
         <Menu />
       </div>
 
       {showEditForm ? (
-        <FormRegister 
-          initialData={formData} 
-          onCancel={() => setShowEditForm(false)} 
-          editingId={editingId} 
-          refreshUsers={fetchUsers} 
+        <FormRegister
+          initialData={formData}
+          onCancel={() => setShowEditForm(false)}
+          editingId={editingId}
+          refreshUsers={fetchUsers}
         />
       ) : (
-        <div className={styles.container}>
-          <h2 className={styles.title}>Gestión de Usuarios</h2>
+        // Este contenedor es el que se capturará en el PDF
+        <div id="pdfContent" className={styles.container}>
+          <h2 className={styles.title}>Gestión de usuarios</h2>
 
           <div className={styles.toolBar}>
             <div className={styles.searchContainer}>
@@ -136,13 +223,35 @@ const UsersList = () => {
                 className={styles.searchInput}
               />
               {searchTerm && (
-                <button className={styles.clearSearch} onClick={() => setSearchTerm('')} title="Limpiar búsqueda">
+                <button
+                  className={styles.clearSearch}
+                  onClick={() => setSearchTerm('')}
+                  title="Limpiar búsqueda"
+                >
                   ×
                 </button>
               )}
             </div>
-            <button className={`${styles.button} ${styles.refresh}`} onClick={fetchUsers} title="Actualizar lista">
-              Actualizar
+
+
+            {/* Botón Exportar a Excel */}
+            <button
+              className={`${styles.button} ${styles.exportarExcel}`}
+              onClick={exportToExcel}
+              title="Exportar a Excel"
+              disabled={isExporting}
+            >
+              Exportar a Excel
+            </button>
+
+            {/* Botón Descargar PDF */}
+            <button
+              className={`${styles.button} ${styles.imprimir}`}
+              onClick={handleDownloadPDF}
+              title="Descargar PDF del listado"
+              disabled={isExporting}
+            >
+              Descargar PDF
             </button>
           </div>
 
@@ -151,11 +260,21 @@ const UsersList = () => {
               <table className={styles.table}>
                 <thead>
                   <tr>
-                    <th onClick={() => requestSort('name')}>Nombre {getSortIcon('name')}</th>
-                    <th onClick={() => requestSort('surname')}>Apellido {getSortIcon('surname')}</th>
-                    <th onClick={() => requestSort('nick')}>Nick {getSortIcon('nick')}</th>
-                    <th onClick={() => requestSort('email')}>Email {getSortIcon('email')}</th>
-                    <th onClick={() => requestSort('role')}>Rol {getSortIcon('role')}</th>
+                    <th onClick={() => requestSort('name')}>
+                      Nombre {getSortIcon('name')}
+                    </th>
+                    <th onClick={() => requestSort('surname')}>
+                      Apellido {getSortIcon('surname')}
+                    </th>
+                    <th onClick={() => requestSort('nick')}>
+                      Nick {getSortIcon('nick')}
+                    </th>
+                    <th onClick={() => requestSort('email')}>
+                      Correo electrónico {getSortIcon('email')}
+                    </th>
+                    <th onClick={() => requestSort('role')}>
+                      Rol {getSortIcon('role')}
+                    </th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -168,10 +287,20 @@ const UsersList = () => {
                       <td>{user.email}</td>
                       <td>{user.role?.trim() || '-'}</td>
                       <td className={styles.actions}>
-                        <button className={styles.button} onClick={() => handleEdit(user)} title="Editar usuario">
+                        <button
+                          className={styles.button}
+                          onClick={() => handleEdit(user)}
+                          title="Editar usuario"
+                          disabled={isExporting}
+                        >
                           Editar
                         </button>
-                        <button className={`${styles.button} ${styles.delete}`} onClick={() => handleDelete(user._id, user.name)} title="Eliminar usuario">
+                        <button
+                          className={`${styles.button} ${styles.delete}`}
+                          onClick={() => handleDelete(user._id, user.name)}
+                          title="Eliminar usuario"
+                          disabled={isExporting}
+                        >
                           Eliminar
                         </button>
                       </td>
@@ -182,13 +311,25 @@ const UsersList = () => {
             </div>
           ) : (
             <div className={styles.noResults}>
-              <p>No se encontraron usuarios{searchTerm ? ` con la búsqueda: ${searchTerm}` : '.'}</p>
-              {searchTerm && <button className={styles.button} onClick={() => setSearchTerm('')}>Limpiar filtro</button>}
+              <p>
+                No se encontraron usuarios
+                {searchTerm ? ` con la búsqueda: ${searchTerm}` : '.'}
+              </p>
+              {searchTerm && (
+                <button
+                  className={styles.button}
+                  onClick={() => setSearchTerm('')}
+                >
+                  Limpiar filtro
+                </button>
+              )}
             </div>
           )}
 
           <div className={styles.pagination}>
-            <p className={styles.totalCount}>Total: {filteredUsers.length} usuario(s)</p>
+            <p className={styles.totalCount}>
+              Total: {filteredUsers.length} usuario(s)
+            </p>
           </div>
         </div>
       )}

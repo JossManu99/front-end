@@ -2,7 +2,7 @@
   width: 100%;
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
   background-color: #f5f7fb;
-  min-height: 100vh;
+  height: 100vh;
   margin: 0;
   padding: 0;
   display: flex;

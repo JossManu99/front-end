@@ -9,7 +9,7 @@
   padding: 0;
 }
 
-/* Página de operadores */
+/* Página interna de operadores */
 .operadoresPage {
   width: 100%;
   max-width: 1200px;
@@ -26,6 +26,7 @@
   margin-bottom: 5px;
 }
 
+/* Fecha actual (debajo del título) */
 .currentDate {
   text-align: center;
   color: #666;
@@ -34,16 +35,74 @@
   margin-bottom: 20px;
 }
 
-/* Contenedor de la tabla con scroll horizontal */
+/* Barra de búsqueda y botones en una sola fila */
+.toolbarBuscar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+/* Input de búsqueda */
+.searchInput {
+  width: 250px;
+  max-width: 400px;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.searchInput:focus {
+  border-color: #3498db;
+  box-shadow: 0 1px 4px rgba(52,152,219,0.3);
+}
+.searchInput::placeholder {
+  color: #999;
+}
+
+/* Botones de Exportar e Imprimir: tamaño extremadamente reducido */
+.btnExport,
+.btnPrint {
+  background-color: #2870bd;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;         /* Extremadamente reducido */
+  font-size: 11px;          /* Extremadamente reducido */
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  min-width: 60px;          /* Extremadamente reducido */
+  height: 28px;             /* Altura fija muy pequeña */
+  line-height: 1;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+}
+.btnExport:hover,
+.btnPrint:hover {
+  background-color: #0056b3;
+}
+.btnExport:active,
+.btnPrint:active {
+  transform: translateY(1px);
+}
+
+/* Contenedor de la tabla con scroll */
 .operadoresTableContainer {
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   overflow-x: auto;
   overflow-y: hidden;
 }
 
-/* Tabla (tal cual tu diseño actual) */
+/* Tabla de operadores */
 .operadoresTable {
   width: 100%;
   border-collapse: collapse;
@@ -76,20 +135,17 @@
   height: 34px;
 }
 
-/* Información de operador (col 1) */
+/* Primera columna: Información (foto y nombre) */
 .operadorInfoCell {
   min-width: 120px;
 }
-
 .operadorInfo {
   display: flex;
   align-items: center;
 }
-
 .avatarContainer {
   margin-right: 6px;
 }
-
 .operadorAvatar {
   width: 24px;
   height: 24px;
@@ -103,12 +159,10 @@
   justify-content: center;
   font-size: 10px;
 }
-
 .operadorDetails {
   display: flex;
   flex-direction: column;
 }
-
 .operadorName {
   font-weight: 600;
   color: #333;
@@ -116,49 +170,43 @@
   font-size: 12px;
   line-height: 1.1;
 }
-
 .operadorEmail {
   font-size: 10px;
   color: #666;
   line-height: 1.1;
 }
 
-/* Observaciones (col 3) */
+/* Observaciones */
 .operadorAddress {
   max-width: 120px;
   font-size: 11px;
 }
 
-/* Documentos (col 6) */
+/* Estado de documentos (columna 6) */
 .documentStatus {
   min-width: 120px;
 }
-
 .documentsContainer {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
-
 .documentItem {
   display: flex;
   flex-direction: column;
   gap: 0;
 }
-
 .documentLabel {
   font-size: 13px;
   font-weight: 600;
   color: #555;
   line-height: 1.1;
 }
-
 .statusContainer {
   display: flex;
   align-items: center;
   gap: 4px;
 }
-
 .statusIndicator {
   display: inline-block;
   width: 6px;
@@ -166,28 +214,26 @@
   border-radius: 50%;
   min-width: 6px;
 }
-
-/* Colores de estado */
+/* Colores según el estado */
 .valid {
-  background-color: #4CAF50; /* verde */
+  background-color: #4CAF50;
 }
 .warning {
-  background-color: #FFC107; /* amarillo */
+  background-color: #FFC107;
 }
 .expired {
-  background-color: #F44336; /* rojo */
+  background-color: #F44336;
 }
 .no-data {
-  background-color: #ccc;    /* gris */
+  background-color: #ccc;
 }
-
 .statusDate {
   font-size: 12px;
   color: #666;
   line-height: 1.1;
 }
 
-/* Botón de detalles (col 7) */
+/* Botón de "Ver más" */
 .detailsButton {
   background: none;
   border: none;
@@ -201,11 +247,9 @@
   transition: background-color 0.2s;
   padding: 0;
 }
-
 .detailsButton:hover {
   background-color: #f0f0f0;
 }
-
 .detailsIcon {
   font-size: 14px;
   color: #999;
@@ -220,45 +264,16 @@
   font-size: 12px;
 }
 
-/* Responsivo: en pantallas < 768px, OCULTA columnas 2..6, dejando 1 y 7 */
+/* Responsivos */
 @media (max-width: 768px) {
-  /* Oculta col 2: Núm. operador */
-  .operadoresTable th:nth-child(2),
-  .operadoresTable td:nth-child(2) {
-    display: none;
-  }
-  /* Oculta col 3: Observaciones */
-  .operadoresTable th:nth-child(3),
-  .operadoresTable td:nth-child(3) {
-    display: none;
-  }
-  /* Oculta col 4: Puesto */
-  .operadoresTable th:nth-child(4),
-  .operadoresTable td:nth-child(4) {
-    display: none;
-  }
-  /* Oculta col 5: Fecha de inicio */
-  .operadoresTable th:nth-child(5),
-  .operadoresTable td:nth-child(5) {
-    display: none;
-  }
-  /* Oculta col 6: Vigencia en documentos */
-  .operadoresTable th:nth-child(6),
-  .operadoresTable td:nth-child(6) {
-    display: none;
-  }
-}
-
-/* Pantallas más pequeñas (opcional) */
-@media (max-width: 480px) {
   .operadoresTable th,
   .operadoresTable td {
-    padding: 2px 4px;
+    padding: 4px 6px;
     font-size: 10px;
   }
   .operadorAvatar {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
   }
   .statusIndicator {
     width: 5px;
@@ -267,12 +282,9 @@
   .statusDate {
     font-size: 9px;
   }
-  .operadoresTable {
-    font-size: 10px;
-  }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 480px) {
   .operadorEmail {
     display: none;
   }
@@ -281,5 +293,37 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+}
+
+/* Estilos para impresión */
+@media print {
+  .toolbarBuscar,
+  .searchInput,
+  .btnExport,
+  .btnPrint {
+    display: none !important;
+  }
+  .mainContainer,
+  .operadoresPage {
+    background-color: #fff !important;
+    padding: 0 !important;
+  }
+  .operadoresTableContainer {
+    box-shadow: none !important;
+    border: none !important;
+  }
+  .operadoresTable {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+  .operadoresTable th,
+  .operadoresTable td {
+    border: 1px solid #ccc !important;
+    padding: 6px !important;
+    font-size: 0.85rem !important;
+  }
+  @page {
+    margin: 10mm;
   }
 }

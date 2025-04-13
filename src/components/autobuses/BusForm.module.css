@@ -1,3 +1,8 @@
+/* ========================================================================== */
+/*                   ESTILOS PRINCIPALES DEL COMPONENTE                     */
+/* ========================================================================== */
+
+/* Contenedor principal */
 .mainContainer {
   max-width: 100%;
   width: 100%;
@@ -9,13 +14,14 @@
   margin: 0;
 }
 
-
+/* Menú */
 .menuContainer {
   width: 100%;
   background-color: #f8f9fa;
   border-bottom: 1px solid #e0e0e0;
 }
 
+/* Título del formulario */
 .formTitle {
   color: #155e8d;
   font-weight: 500;
@@ -26,18 +32,20 @@
   text-align: center;
 }
 
+/* Contenedor del formulario */
 .formContainer {
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
+  background-color: #e6f0f8; /* Light blue background */
+  border: 1px solid #4682B4; /* Medium blue border */
   border-radius: 8px;
   padding: 25px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 10px rgba(0, 123, 255, 0.15); /* Blue shadow */
   margin: 0 auto 30px;
   max-width: 1200px;
   width: 90%;
   box-sizing: border-box;
 }
 
+/* Título de sección */
 .sectionTitle {
   border-bottom: 1px solid #dee2e6;
   color: #2a77b5;
@@ -47,6 +55,7 @@
   padding-bottom: 10px;
 }
 
+/* Estructura de filas */
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -54,6 +63,7 @@
   gap: 20px;
 }
 
+/* Contenedor de cada campo */
 .formField {
   flex: 1;
   min-width: 250px;
@@ -61,6 +71,7 @@
   flex-direction: column;
 }
 
+/* Etiqueta del campo */
 .fieldLabel {
   display: block;
   color: #155e8d;
@@ -69,17 +80,22 @@
   font-size: 14px;
 }
 
+/* Indicador de campo obligatorio */
 .required::after {
   content: "*";
   color: #dc3545;
   margin-left: 3px;
 }
 
+/* Columna de campo */
 .fieldColumn {
   width: 100%;
 }
 
-.textInput, .dateInput, .fieldInput {
+/* Inputs de texto, de fecha y campos en general */
+.textInput,
+.dateInput,
+.fieldInput {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid #ced4da;
@@ -90,18 +106,23 @@
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.textInput:focus, .dateInput:focus, .fieldInput:focus {
+/* Enfoque de los inputs */
+.textInput:focus,
+.dateInput:focus,
+.fieldInput:focus {
   border-color: #80bdff;
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
+/* Contenedor para inputs de fecha (para ícono de calendario) */
 .dateContainer {
   position: relative;
   display: flex;
   align-items: center;
 }
 
+/* Ícono de calendario */
 .calendarIcon {
   position: absolute;
   right: 10px;
@@ -110,6 +131,8 @@
   color: #6c757d;
   pointer-events: none;
 }
+
+/* Input para selección de archivos */
 /*
 .fileInputContainer {
   display: flex;
@@ -127,7 +150,7 @@
   border-radius: 4px; /* esquinas redondeadas */
 }
 
-
+/* Estatus de archivo */
 .fileStatus {
   font-size: 12px;
   color: #6c757d;
@@ -143,6 +166,7 @@
   text-decoration: underline;
 }
 
+/* Vista previa de imagen */
 .previewImage {
   max-height: 80px;
   max-width: 150px;
@@ -151,6 +175,7 @@
   border: 1px solid #e0e0e0;
 }
 
+/* Área de texto */
 .textArea {
   width: 100%;
   padding: 10px 12px;
@@ -169,14 +194,17 @@
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-.checkboxGroup, .radioGroup {
+/* Grupos de checkbox y radio */
+.checkboxGroup,
+.radioGroup {
   display: flex;
   gap: 20px;
   padding: 10px 0;
   flex-wrap: wrap;
 }
 
-.checkboxGroup label, .radioGroup label {
+.checkboxGroup label,
+.radioGroup label {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -191,12 +219,14 @@
   cursor: pointer;
 }
 
+/* Fila de botones */
 .buttonRow {
   display: flex;
   justify-content: center;
   margin-top: 35px;
 }
 
+/* Botón de envío */
 .submitButton {
   background-color: #007bff;
   color: white;
@@ -229,15 +259,17 @@
   box-shadow: none;
 }
 
-/* Add a blue highlight for active inputs */
-.textInput:focus, .dateInput:focus, .textArea:focus {
+/* Añadir realce azul a inputs activos */
+.textInput:focus,
+.dateInput:focus,
+.textArea:focus {
   border-color: #007bff;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-/* Add styling for date inputs */
+/* Estilos para inputs tipo date (ícono de calendario) */
 input[type="date"] {
-  padding-right: 30px; /* Space for calendar icon */
+  padding-right: 30px; /* Espacio para el ícono */
   position: relative;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236c757d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='18' rx='2' ry='2'></rect><line x1='16' y1='2' x2='16' y2='6'></line><line x1='8' y1='2' x2='8' y2='6'></line><line x1='3' y1='10' x2='21' y2='10'></line></svg>");
   background-repeat: no-repeat;
@@ -245,19 +277,9 @@ input[type="date"] {
   background-size: 16px;
 }
 
-.formContainer {
-  background-color: #e6f0f8; /* Light blue background */
-  border: 1px solid #4682B4; /* Medium blue border */
-  border-radius: 8px;
-  padding: 25px;
-  box-shadow: 0 2px 10px rgba(0, 123, 255, 0.15); /* Blue shadow */
-  margin: 0 auto 30px;
-  max-width: 1200px;
-  width: 90%;
-  box-sizing: border-box;
-}
-
-/* Responsive design */
+/* ========================================================================== */
+/*                           ESTILOS RESPONSIVE                               */
+/* ========================================================================== */
 @media (max-width: 768px) {
   .formTitle {
     font-size: 20px;
@@ -272,7 +294,8 @@ input[type="date"] {
     min-width: 100%;
   }
   
-  .checkboxGroup, .radioGroup {
+  .checkboxGroup,
+  .radioGroup {
     flex-direction: column;
     gap: 10px;
   }
@@ -292,4 +315,33 @@ input[type="date"] {
     width: 90%;
     box-sizing: border-box;
   }
+}
+
+/* ========================================================================== */
+/*          OVERRIDE GLOBAL: FORZAR INPUTS, CHECKBOXES Y RADIOS CON FONDO BLANCO */
+/* ========================================================================== */
+/* Para evitar que se oscurezcan en modo oscuro, forzamos los estilos claros */
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+textarea,
+select,
+.textInput,
+.dateInput,
+.fieldInput {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important; /* Para navegadores WebKit/Blink */
+  border: 1px solid #ced4da !important;
+  border-radius: 4px !important;
+}
+
+/* Forzar checkboxes y radios con fondo blanco */
+input[type="checkbox"],
+input[type="radio"] {
+  background-color: #ffffff !important;
+  border: 1px solid #ccc !important;
+  /* accent-color define el color de la marca (check) en navegadores modernos */
+  accent-color: #007bff !important;
 }

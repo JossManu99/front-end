@@ -5,7 +5,7 @@ import Menu from '../../components/header/DashboardHeader';
 
 function FormularioPropietario({ initialData, onClose }) {
   // Se define el modo edición según si se pasó información inicial
-  const isEditing = initialData ? true : false;
+  const isEditing = !!initialData;
 
   const [formData, setFormData] = useState({
     nombrePropietario: '',
@@ -52,18 +52,28 @@ function FormularioPropietario({ initialData, onClose }) {
         console.log('Propietario creado:', response);
         alert('Propietario guardado con éxito');
       }
-      
-      // Reinicia el formulario y cierra el modo edición
-      setFormData({
-        nombrePropietario: '',
-        rfc: '',
-        solicitudComentarios: '',
-      });
-      
-      if (onClose) onClose();
+
+      // Reinicia el formulario solo en caso de creación (para seguir creando varios)
+      if (!isEditing) {
+        setFormData({
+          nombrePropietario: '',
+          rfc: '',
+          solicitudComentarios: '',
+        });
+      }
+
+      // OPCIONAL: si quieres cerrar el formulario automáticamente tras guardar,
+      // descomenta la siguiente línea (pero entonces no podrás crear varios seguidos):
+      // if (onClose) onClose();
+
     } catch (error) {
-      console.error(`Error al ${isEditing ? 'actualizar' : 'guardar'} el propietario:`, error);
-      setError(error.message);
+      console.error(
+        `Error al ${isEditing ? 'actualizar' : 'guardar'} el propietario:`,
+        error
+      );
+      // Si axios o fetch devuelven un mensaje de error en .response.data, lo puedes leer aquí:
+      const msg = error.response?.data?.message || error.message || 'Error desconocido';
+      setError(msg);
     } finally {
       setLoading(false);
     }
@@ -75,18 +85,21 @@ function FormularioPropietario({ initialData, onClose }) {
 
   return (
     <div className={styles.mainContainer}>
-      {/* Se renderiza el header solo si no se está en modo edición */}
+      {/* Solo renderizamos el header si NO estamos editando */}
       {!isEditing && <Menu />}
+
       <div className={styles.Container}>
         <h2 className={styles.formTitle}>
           {isEditing ? 'Editar propietario' : 'Crear propietario'}
         </h2>
+
         <form onSubmit={manejarEnvio} className={styles.formContainer}>
           {error && (
             <div className={styles.errorMessage}>
               ⚠️ {error}
             </div>
           )}
+
           <div className={styles.formField}>
             <label htmlFor="nombrePropietario" className={styles.fieldLabel}>
               Nombre del propietario:
@@ -101,6 +114,7 @@ function FormularioPropietario({ initialData, onClose }) {
               required
             />
           </div>
+
           <div className={styles.formField}>
             <label htmlFor="rfc" className={styles.fieldLabel}>
               RFC:
@@ -115,6 +129,7 @@ function FormularioPropietario({ initialData, onClose }) {
               required
             />
           </div>
+
           <div className={styles.buttonRow}>
             <button
               type="submit"
@@ -123,6 +138,8 @@ function FormularioPropietario({ initialData, onClose }) {
             >
               {loading ? 'Guardando...' : isEditing ? 'Actualizar' : 'Guardar'}
             </button>
+
+            {/* Botón cancelar solo aparece en edición */}
             {isEditing && (
               <button
                 type="button"

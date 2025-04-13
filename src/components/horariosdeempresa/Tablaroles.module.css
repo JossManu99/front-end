@@ -148,3 +148,55 @@
 .deleteButton:hover {
   background-color: #d32f2f;
 }
+
+
+/* ------------------------------------------------------------------ */
+/* Estilos para el buscador y botones en una sola fila (nuevos estilos) */
+/* ------------------------------------------------------------------ */
+
+/* Contenedor para el buscador y los botones */
+.searchContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  justify-content: center; /* Puedes usar 'flex-start' para alinear a la izquierda */
+}
+
+/* Input del buscador */
+.searchInput {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Botones de acción (ej. Exportar a Excel, Imprimir) */
+.actionButton {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  color: #fff;
+}
+
+/* Botón para Exportar a Excel */
+.excelButton {
+  background-color: #4caf50;
+}
+
+.excelButton:hover {
+  background-color: #388e3c;
+}
+
+/* Botón para Imprimir */
+.printButton {
+  background-color: #2196f3;
+}
+
+.printButton:hover {
+  background-color: #0b79d0;
+}

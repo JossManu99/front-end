@@ -1,5 +1,9 @@
+/* ========================================================================== */
+/*                    CONTENEDOR Y ESTILOS DEL FORMULARIO                    */
+/* ========================================================================== */
+
 /* Contenedor general */
-.generalContainer {
+.generalconauner {
   max-width: 100%;
   width: 100%;
   font-family: 'Segoe UI', Arial, sans-serif;
@@ -21,7 +25,7 @@
   margin: 20px auto;
 }
 
-/* Título */
+/* Título del formulario */
 .formTitle {
   font-size: 24px;
   font-weight: bold;
@@ -30,14 +34,14 @@
   text-align: center;
 }
 
-/* Estructura general del formulario */
+/* Contenido del formulario */
 .formContent {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* Cada fila (ej. 4 inputs en la primera fila, 3 en la segunda, etc.) */
+/* Cada fila (por ejemplo, 4 inputs en la primera fila, 3 en la segunda, etc.) */
 .formRow {
   display: flex;
   flex-wrap: wrap;
@@ -54,7 +58,7 @@
   min-width: 100px; /* para que no se encoja demasiado */
 }
 
-/* Etiquetas arriba del input */
+/* Etiqueta del campo */
 .fieldLabel {
   font-size: 14px;
   font-weight: 500;
@@ -70,6 +74,8 @@
   border-radius: 4px;
   font-size: 14px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #ffffff; /* Forzamos fondo blanco */
+  color: #000000;           /* Texto en negro */
 }
 
 .formInput:hover {
@@ -82,7 +88,10 @@
   box-shadow: 0 0 0 2px rgba(56, 178, 172, 0.2);
 }
 
-/* Sección de turnos */
+/* ========================================================================== */
+/*                           SECCIÓN DE TURNOS                                */
+/* ========================================================================== */
+
 .turnoSection {
   background: #ffffff;
   border-radius: 5px;
@@ -107,7 +116,7 @@
   margin-bottom: 5px;
 }
 
-/* Columna de acciones */
+/* Columna de acciones (por ejemplo, botón eliminar turno) */
 .actionColumn {
   display: flex;
   align-items: center;
@@ -129,6 +138,7 @@
 .deleteButton:hover {
   background: #c0392b;
 }
+
 .addButton {
   background: #38b2ac;
   color: #fff;
@@ -143,7 +153,10 @@
   background: #2f928e;
 }
 
-/* Footer del formulario */
+/* ========================================================================== */
+/*                           FOOTER DEL FORMULARIO                           */
+/* ========================================================================== */
+
 .formFooter {
   display: flex;
   justify-content: center;
@@ -163,24 +176,46 @@
   background: #168cb8;
 }
 
-/* Responsivo: 
-   En pantallas pequeñas, 2 columnas por fila 
-   (en lugar de 3 o 4 que veas en desktop).
-   Así evitas hacer zoom manual. 
-*/
+/* ========================================================================== */
+/*                              RESPONSIVIDAD                               */
+/* ========================================================================== */
+
+/* En pantallas pequeñas se muestran 2 columnas por fila (puedes ajustar a 100% si prefieres) */
 @media (max-width: 600px) {
   .formRow {
     flex-wrap: wrap;
   }
-  /* Cada campo ocupa 50% del ancho */
   .formField {
     flex: 1 1 calc(50% - 10px);
   }
-  /* Si quieres forzar 1 columna, cambia a 100% en lugar de 50%. */
-  
   .actionColumn {
     flex: 1 1 calc(50% - 10px);
     display: flex;
     justify-content: flex-end;
   }
+}
+
+/* ========================================================================== */
+/*         OVERRIDE GLOBAL: FORZAR FONDO BLANCO Y TEXTO NEGRO EN ELEMENTOS      */
+/* ========================================================================== */
+
+/* Aseguramos que todos los inputs, textareas y selects tengan fondo blanco y texto negro */
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important; /* Para navegadores WebKit/Blink */
+}
+
+/* Forzar también que checkboxes y radios se muestren con fondo blanco */
+input[type="checkbox"],
+input[type="radio"] {
+  background-color: #ffffff !important;
+  border: 1px solid #ccc !important;
+  accent-color: #007bff !important; /* Color del check en navegadores modernos */
 }

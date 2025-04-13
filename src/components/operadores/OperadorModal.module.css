@@ -1,0 +1,169 @@
+/* Contenedor principal del Modal (fondo oscurecido) */
+.operador-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* Cubrimos toda la pantalla */
+  width: 100%;
+  height: 100%;
+  
+  /* Fondo semitransparente para oscurecer */
+  background-color: rgba(0, 0, 0, 0.5);
+  
+  /* Para centrar el contenido del modal */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  z-index: 1000; /* Para que quede sobre todo el contenido */
+}
+
+/* Contenedor interno (contenido del modal) */
+.modal-content {
+  background-color: #fff;
+  border-radius: 8px;
+  width: 50%;              /* Se muestra al 50% del ancho de la pantalla */
+  max-height: 80vh;        /* Límite de altura para evitar overflow */
+  padding: 20px;
+  overflow-y: auto;        /* Barra de desplazamiento vertical si se excede la altura */
+  position: relative;
+  display: flex;
+  flex-direction: column;  /* Para acomodar contenido en columna */
+}
+
+/* Botón para cerrar el modal (X) */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #aaa;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+/* Título del modal */
+.modal-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Contenedor de los datos (foto y detalles) */
+.operador-details {
+  display: flex;
+  flex-wrap: wrap;         /* Permite que los elementos se ajusten si la pantalla es pequeña */
+  gap: 20px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* Sección para la foto */
+.operador-photo {
+  flex: 1 1 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.photo-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Sección de texto (detalles) */
+.details-section {
+  flex: 1 1 200px;
+}
+
+.details-section p {
+  margin: 5px 0;
+}
+
+.details-section a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.details-section a:hover {
+  text-decoration: underline;
+}
+
+/* Contenedor de acciones (editar, eliminar, exportar, etc.) */
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Botones de exportación */
+.export-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+/* Botón base para exportar (Excel, PDF) */
+.export-btn {
+  background-color: #1976d2;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;    /* Ajusta el padding para que el botón sea más compacto */
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 200px;
+}
+
+.export-btn:hover {
+  background-color: #0d47a1;
+}
+
+/* Botones de acción (Editar, Eliminar) */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.update-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.update-btn:hover {
+  background-color: #0056b3;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+  background-color: #a71d2a;
+}
