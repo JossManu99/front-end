@@ -150,7 +150,7 @@ const ViajeFormT = ({ tablarolEdit, setEditTablarol }) => {
 
       <div className={styles.container}>
         <h2 className={styles.title}>
-          {tablarolEdit ? '📝 Editar' : '📋 Crear'} Tablarol
+          {tablarolEdit ? '📝 Editar' : '📋 Crear'} Tabla de roles
         </h2>
 
         <form onSubmit={handleSubmit}>
@@ -258,7 +258,8 @@ const ViajeFormT = ({ tablarolEdit, setEditTablarol }) => {
                   </span>
                   <p className={styles.routeDetails}>
                     <strong>Origen:</strong> {ruta.saleDe} &nbsp;|&nbsp; 
-                    <strong>Destino:</strong> {ruta.llegaA}
+                    <strong>Destino:</strong> {ruta.llegaA}&nbsp;|&nbsp; 
+                    <strong>costo:$</strong> {ruta.costo}
                   </p>
                 </div>
                 <div className={styles.routeCost}>

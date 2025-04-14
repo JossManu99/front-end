@@ -204,11 +204,6 @@ function App() {
         />
 
 
-
-
-
-
-
         {/* Rutas públicas */}
         <Route path="/registrar" element={<FormRegister />} />
         <Route path="/" element={<LoginForm />} />

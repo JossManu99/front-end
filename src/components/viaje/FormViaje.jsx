@@ -325,8 +325,8 @@ const FormViaje = ({ onViajeCreated, viaje, onDeleteViaje }) => {
             <div className={styles.formRow}>
               <div className={styles.formHeader}>Número de Ruta</div>
               <div className={styles.formHeader}>Nombre Cliente:</div>
-              <div className={styles.formHeader}>Sale De:</div>
-              <div className={styles.formHeader}>Llega A:</div>
+              <div className={styles.formHeader}>Origen:</div>
+              <div className={styles.formHeader}>Destino:</div>
             </div>
             <div className={styles.formRow}>
               <div className={styles.formField}>

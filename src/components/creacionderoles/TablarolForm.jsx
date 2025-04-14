@@ -346,7 +346,7 @@ const TablarolForm = ({ initialData, onCancel, onUpdateComplete }) => {
         <h2 className={styles.formTitle}>
           {initialData
             ? `Actualizar Tabla de Rol #${initialData.numeroCambio}`
-            : 'Tabla de Rol - Número de Cambio'}
+            : 'Distribucion de operadores - Número de Cambio'}
         </h2>
         <p className={styles.dateInfo}>Fecha: {formatDate(currentDate)}</p>
 
